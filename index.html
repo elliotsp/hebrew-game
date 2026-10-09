@@ -1,117 +1,207 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Hebrew: Doron's Unit & Omer Adam Prep</title>
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0b0d12"><meta name="apple-mobile-web-app-capable" content="yes">
+<title>Ivrit Undercover</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;600;800&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
 <style>
-body{margin:0;font-family:system-ui,sans-serif;background:#10151c;color:#e8edf2}
-header{background:#1b2633;padding:10px 14px;display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between}
-h1{font-size:18px;margin:0}main{max-width:720px;margin:auto;padding:14px}
-.card{background:#1b2633;border-radius:12px;padding:16px;margin:10px 0}
-.he{direction:rtl;unicode-bidi:isolate;font-size:28px;font-family:"Arial Hebrew","Noto Sans Hebrew",Arial,sans-serif}
-.tr{color:#9fc3ff;font-style:italic}.en{color:#b9c6d3}
-button{background:#2f6fb5;color:#fff;border:0;border-radius:10px;padding:12px 14px;margin:5px 4px;font-size:16px;cursor:pointer}
-button.opt{display:block;width:100%;text-align:center;background:#26384d}
-button.ok{background:#2e8b57!important}button.bad{background:#b33a3a!important}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:8px}
-.chip{display:inline-block;background:#26384d;padding:8px 12px;border-radius:8px;margin:4px;cursor:pointer;font-size:22px}
-#built{min-height:50px;border:1px dashed #557;border-radius:8px;padding:6px;direction:rtl}
-.bar{height:8px;background:#26384d;border-radius:4px}.bar>div{height:8px;background:#4caf50;border-radius:4px}
-.hide-tr .tr{display:none}a{color:#9fc3ff}small{color:#8a99a8}
-</style></head><body>
-<header><h1>🎧 עברית בשטח</h1><div id="stats"></div>
-<label><input type="checkbox" id="trT"> Transliteration</label></header>
-<main id="app"></main>
+:root{--bg:#0b0d12;--pn:#141821;--pn2:#1b202b;--ln:#262c3a;--tx:#e9edf3;--mu:#8a93a6;--ac:#f5a524;--ok:#3ddc97;--bad:#ff5d5d;--meh:#ffd166}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;height:100%;background:var(--bg);color:var(--tx);font-family:Inter,system-ui,sans-serif}
+body{background:radial-gradient(1200px 600px at 50% -200px,#2a1d07 0%,transparent 60%),var(--bg)}
+.he{font-family:Heebo,Arial,sans-serif;direction:rtl}
+#app{max-width:520px;margin:0 auto;height:100%;display:flex;flex-direction:column}
+.scr{flex:1;display:flex;flex-direction:column;min-height:0;animation:fade .35s ease}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+header.top{display:flex;align-items:center;gap:10px;padding:14px 16px calc(10px);padding-top:max(14px,env(safe-area-inset-top))}
+.pill{background:var(--pn);border:1px solid var(--ln);border-radius:99px;padding:6px 12px;font-size:13px;font-weight:600;white-space:nowrap}
+.btn{border:0;border-radius:14px;padding:14px 16px;font:600 15px Inter,sans-serif;background:var(--pn2);color:var(--tx);cursor:pointer;transition:transform .1s,background .2s}
+.btn:active{transform:scale(.97)}.btn.pri{background:var(--ac);color:#1a1200}
+.ib{background:none;border:0;color:var(--tx);font-size:20px;cursor:pointer;padding:6px}
+.home{padding:0 16px 30px;overflow:auto}
+.hero{padding:26px 4px 18px}.hero h1{font-size:34px;margin:0;letter-spacing:-.5px;line-height:1.05}
+.hero h1 span{color:var(--ac)}.hero p{color:var(--mu);margin:8px 0 0}
+.stats{display:flex;gap:8px;margin:6px 0 18px;flex-wrap:wrap}
+.sec{font-size:12px;letter-spacing:2px;color:var(--mu);margin:22px 4px 10px;text-transform:uppercase}
+.card{display:flex;gap:14px;align-items:center;background:linear-gradient(135deg,var(--pn),var(--pn2));border:1px solid var(--ln);border-radius:18px;padding:14px;margin-bottom:10px;cursor:pointer;transition:transform .15s,border-color .2s;width:100%;text-align:left;color:inherit;font:inherit}
+.card:active{transform:scale(.98)}.card .ic{font-size:30px;width:52px;height:52px;display:grid;place-items:center;background:#0005;border-radius:14px;flex:none}
+.card h3{margin:0;font-size:16px}.card .s{color:var(--mu);font-size:13px;margin-top:3px}.card .hh{font-family:Heebo;color:var(--ac);font-size:14px}
+.card.lock{opacity:.4;pointer-events:none}.card .chk{margin-left:auto;color:var(--ok);font-size:20px}
+.tog{display:flex;justify-content:space-between;align-items:center;background:var(--pn);border:1px solid var(--ln);border-radius:14px;padding:12px 14px;margin-top:8px}
+.sw{width:46px;height:28px;border-radius:99px;background:var(--ln);position:relative;transition:.2s;border:0;cursor:pointer}.sw::after{content:"";position:absolute;top:3px;left:3px;width:22px;height:22px;border-radius:50%;background:#fff;transition:.2s}.sw.on{background:var(--ac)}.sw.on::after{left:21px}
+/* scene */
+.prog{flex:1;height:5px;background:var(--ln);border-radius:9px;overflow:hidden}.prog i{display:block;height:100%;background:var(--ac);transition:width .4s}
+#chat{flex:1;overflow-y:auto;padding:10px 14px 20px;scroll-behavior:smooth}
+.narr{color:var(--mu);font-style:italic;text-align:center;font-size:14px;line-height:1.5;margin:14px 10px;animation:fade .5s}
+.row{display:flex;gap:8px;align-items:flex-end;margin:10px 0;animation:pop .3s ease}
+@keyframes pop{from{opacity:0;transform:translateY(10px) scale(.97)}to{opacity:1;transform:none}}
+.row.me{flex-direction:row-reverse}
+.av{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;font-size:19px;background:var(--pn2);flex:none}
+.bub{max-width:80%;background:var(--pn2);border:1px solid var(--ln);border-radius:18px 18px 18px 6px;padding:9px 13px 8px}
+.me .bub{background:#2b2210;border-color:#5a4210;border-radius:18px 18px 6px 18px}
+.who{font-size:11px;font-weight:700;margin-bottom:3px;letter-spacing:.3px}
+.txt{font-size:20px;line-height:1.55}
+.w{cursor:pointer;border-radius:5px;padding:0 1px;transition:background .15s;display:inline-block}
+.w:hover,.w.sel{background:#f5a52433}.w.lrn{border-bottom:2px dotted var(--ac)}
+.w ruby,.w rt{font-family:Inter}.w rt{font-size:10px;color:var(--mu);direction:ltr}
+.en{font-size:13px;color:var(--mu);margin-top:5px;display:none;direction:ltr;font-family:Inter}.bub.showen .en{display:block}
+.tools{display:flex;gap:4px;margin-top:4px;justify-content:flex-end}
+.tools button{background:none;border:0;color:var(--mu);font-size:12px;cursor:pointer;padding:2px 6px;border-radius:8px}.tools button:active{background:var(--ln)}
+.typing{display:inline-flex;gap:4px;padding:6px 2px}.typing i{width:7px;height:7px;border-radius:50%;background:var(--mu);animation:bl 1s infinite}.typing i:nth-child(2){animation-delay:.15s}.typing i:nth-child(3){animation-delay:.3s}
+@keyframes bl{0%,80%,100%{opacity:.25;transform:translateY(0)}40%{opacity:1;transform:translateY(-3px)}}
+.why{margin:6px 0 10px 42px;font-size:13px;background:#ffd16614;border-left:3px solid var(--meh);padding:8px 10px;border-radius:8px;color:#f3e3b5;animation:fade .3s}
+.why.bad{background:#ff5d5d14;border-color:var(--bad);color:#ffc9c9}
+#dock{padding:10px 14px max(14px,env(safe-area-inset-bottom));background:linear-gradient(transparent,var(--bg) 25%);min-height:20px}
+.prm{font-size:12px;color:var(--mu);letter-spacing:1px;text-transform:uppercase;margin:0 2px 8px;display:flex;justify-content:space-between;align-items:center}
+.opt{display:block;width:100%;text-align:right;margin:0 0 8px;background:var(--pn);border:1px solid var(--ln);border-radius:14px;padding:12px 14px;color:var(--tx);cursor:pointer;font:500 18px Heebo,sans-serif;direction:rtl;transition:transform .1s,border-color .2s,opacity .2s;animation:pop .3s backwards}
+.opt:active{transform:scale(.98)}.opt small{display:block;font:12px Inter;color:var(--mu);direction:ltr;text-align:left;margin-top:3px}
+.opt.x{opacity:.35;border-color:var(--bad);pointer-events:none;text-decoration:line-through}.opt.y{border-color:var(--ok);background:#3ddc9718}
+.timer{height:6px;background:var(--ln);border-radius:9px;overflow:hidden;margin-bottom:10px}.timer i{display:block;height:100%;background:linear-gradient(90deg,var(--bad),var(--ac));width:100%}
+.pressure{color:var(--bad);animation:pulse .8s infinite}@keyframes pulse{50%{opacity:.4}}
+.inrow{display:flex;gap:8px}.inrow input{flex:1;background:var(--pn);border:1px solid var(--ln);border-radius:14px;padding:13px 14px;color:var(--tx);font:500 19px Heebo,sans-serif;direction:rtl;outline:none}.inrow input:focus{border-color:var(--ac)}
+.listen{display:flex;align-items:center;gap:12px;background:var(--pn);border:1px dashed var(--ln);border-radius:14px;padding:10px 14px;margin-bottom:10px}
+.play{width:48px;height:48px;border-radius:50%;border:0;background:var(--ac);font-size:20px;cursor:pointer;flex:none}
+.toast{position:fixed;left:50%;top:18px;transform:translateX(-50%);background:var(--pn2);border:1px solid var(--ln);padding:8px 16px;border-radius:99px;font-weight:700;z-index:50;animation:tst 1.6s forwards;pointer-events:none}
+@keyframes tst{0%{opacity:0;transform:translate(-50%,-10px)}15%,75%{opacity:1;transform:translate(-50%,0)}100%{opacity:0}}
+.sheet{position:fixed;inset:0;background:#0008;z-index:40;display:flex;align-items:flex-end;justify-content:center;animation:fade .2s}
+.sheet .in{background:var(--pn);border:1px solid var(--ln);border-bottom:0;border-radius:22px 22px 0 0;width:100%;max-width:520px;padding:18px 20px max(22px,env(safe-area-inset-bottom));animation:up .25s ease}
+@keyframes up{from{transform:translateY(100%)}to{transform:none}}
+.sheet .big{font:800 34px Heebo;direction:rtl;text-align:right}.sheet .tl{color:var(--ac);font-weight:600;margin-top:2px}.sheet .mean{font-size:18px;margin:10px 0 4px}.sheet .note{color:var(--mu);font-size:14px}
+.sheet .ctx{margin-top:12px;padding:10px;border-radius:10px;background:#0004;font-size:14px;color:var(--mu)}
+.done{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:30px}
+.done .ic{font-size:64px;animation:pop .5s}.done h2{margin:10px 0 4px;font-size:28px}
+.nb{padding:0 16px 30px;overflow:auto}
+.ent{background:var(--pn);border:1px solid var(--ln);border-radius:14px;padding:12px 14px;margin-bottom:8px}
+.ent .k{font:700 20px Heebo;direction:rtl;display:flex;justify-content:space-between;align-items:baseline}.ent .k small{font:12px Inter;color:var(--mu)}
+.ent .s{font:16px Heebo;direction:rtl;color:#cfd5df;margin-top:6px}.ent .s b{color:var(--ac)}.ent .e{font-size:12px;color:var(--mu);margin-top:3px}
+.rv{flex:1;padding:16px;display:flex;flex-direction:column;justify-content:center}
+.rv .ctxs{font:600 24px Heebo;direction:rtl;text-align:center;line-height:1.6;background:var(--pn);border:1px solid var(--ln);border-radius:18px;padding:20px 14px;margin-bottom:8px}
+.rv .blank{display:inline-block;min-width:70px;border-bottom:3px solid var(--ac);color:var(--ac)}
+.shake{animation:sh .35s}@keyframes sh{25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+.empty{color:var(--mu);text-align:center;padding:40px 10px}
+</style></head>
+<body><div id="app"></div>
+<script src="dict.js"></script><script src="scenes.js"></script>
 <script>
-// ===== DATA =====
-// w: [hebrew, transliteration, english, note?]
-const MISSIONS=[
-{id:"m1",title:"Mission 1: Street Talk",brief:"Blend in at a Jerusalem shuk. Core slang, beyond the basics.",
-w:[["וואלה","walla","really? / I swear / wow","from Arabic; tone decides the meaning"],["תכל'ס","tachles","bottom line / let's get real","from Yiddish/Hebrew תכלית"],["כפרה עליך","kapara alekha","love you, sweetheart (to a guy)","lit. 'an atonement for you'; to a woman: kapara alayikh"],["על הפנים","al ha-panim","terrible, awful","lit. 'on the face'"],["חבל על הזמן","chaval al ha-zman","amazing! (or: waste of time)","context decides"],["אין מצב","ein matsav","no way","also 'is there any chance?' as yesh matsav?"],["סחתיין","sachten","well done, kudos","from Arabic"],["חפיף","chafif","sloppy, half-assed","la'asot chafifa = do a sloppy job"],["דאווין","da'awin","showing off","osé da'awin = shows off"],["אחי","achi","bro","lit. 'my brother'"]],
-build:[["יאללה אחי בוא נזוז","Come on bro, let's move"],["תכל'ס אין מצב שהוא בא","Bottom line, no way he's coming"]],
-dlg:[{ctx:"Your friend: 'נו, איך היה הסרט?'",opts:[["על הפנים, חבל על הכסף","Awful, waste of money",1],["כפרה עליך, תודה","Love you, thanks",0],["אין לי מושג איפה","I have no idea where",0]]}]},
-{id:"m2",title:"Mission 2: Fast Speech",brief:"Real Israelis swallow syllables. Learn to hear them.",
-w:[["אנלא יודע","anla yode'a","I dunno (אני לא יודע)","contraction"],["ת'","t'-","contracted את ה (direct object + 'the')","e.g. תביא ת'מפתח"],["מה'תה אומר","ma'ta omer","you don't say! (מה אתה אומר)",""],["כאילו","ke'ilu","like… (filler)",""],["בקיצור","be-kitsur","long story short",""],["סתם","stam","just kidding / for no reason",""],["שנייה","shniya","one sec",""],["די נו","dai, nu","come on, enough already",""],["יאללה ביי","yalla bye","OK bye (ending a call)",""],["מה קורה","ma kore","what's up",""]],
-build:[["תביא ת'מפתח שנייה","Hand me the key a sec"],["בקיצור אנלא יודע מה לעשות","Long story short, I dunno what to do"]],
-dlg:[{ctx:"Phone call ending. Friend: 'טוב, נדבר מחר'",opts:[["יאללה ביי","OK bye",1],["מה'תה אומר","You don't say!",0],["סתם","Just kidding",0]]}]},
-{id:"m3",title:"Mission 3: Verbs That Matter",brief:"Dative constructions and verbs Israelis use 100 times a day.",
-w:[["בא לי","ba li","I feel like / I want","lit. 'it comes to me'"],["נראה לי","nir'e li","I think / seems to me",""],["אכפת לי","ikhpat li","I care","lo ikhpat li = I don't care"],["יוצא לי","yotse li","I end up / get to (do something)","e.g. lo yotse li lishon"],["הולך לך","holekh lekha","it's going well for you","lo holekh li = it's not working out"],["תעשה לי טובה","ta'ase li tova","do me a favor (often sarcastic)",""],["תקשיב","takshiv","listen (m.)","f: takshivi"],["תירגע","tiraga","calm down (m.)","f: tirag'i"],["נדבר","nedaber","we'll talk","lit. 'we will speak'"],["חכה רגע","chake rega","wait a moment (m.)","f: chaki rega"]],
-build:[["נראה לי שבא לי פלאפל","I think I feel like falafel"],["תקשיב אחי לא אכפת לי","Listen bro, I don't care"]],
-dlg:[{ctx:"Your teammate panics: 'הם כבר פה! מה עושים?!'",opts:[["תירגע, תקשיב לי","Calm down, listen to me",1],["בא לי פיצה","I feel like pizza",0],["נדבר בשבוע הבא","We'll talk next week",0]]}]},
-{id:"m4",title:"Mission 4: Unit Vocabulary",brief:"Radio talk and army words every Israeli knows.",
-w:[["יחידה","yechida","unit",""],["מפקד","mefaked","commander",""],["משימה","mesima","mission, task",""],["מילואים","milu'im","reserve duty",""],["כוננות","konenut","standby, alert",""],["מחסום","machsom","checkpoint, roadblock",""],["קיבלתי","kibalti","copy / roger","lit. 'I received'"],["עבור","avor","over (radio)",""],["ציוד","tsiyud","equipment, gear",""],["תזוזה","tzuza","move out!","army command"]],
-build:[["המפקד אמר שיש כוננות","The commander said there's an alert"],["קיבלתי, אנחנו בתזוזה","Copy, we're moving"]],
-dlg:[{ctx:"Radio: 'שתיים, כאן אחת, תתקדמו למחסום. עבור.'",opts:[["קיבלתי, עבור","Copy, over",1],["וואלה? מה'תה אומר","Really? You don't say",0],["אנלא יודע","I dunno",0]]}]},
-{id:"m5",title:"Mission 5: Idioms",brief:"Sound native: the expressions behind the slang.",
-w:[["על הכיפאק","al ha-kefak","excellent, top-notch","from Arabic kefak"],["ירד לי האסימון","yarad li ha-asimon","the penny dropped (I got it)","asimon = old phone token"],["שם פס","sam pas","doesn't give a damn","sam pas al = ignores"],["חי בסרט","chai be-seret","living in a fantasy","lit. 'lives in a movie'"],["סגרנו","sagarnu","deal! / done","lit. 'we closed'"],["בלי לחץ","bli lachats","no pressure, take your time",""],["אכלתי אותה","akhalti ota","I'm screwed / I blew it","lit. 'I ate it'"],["עף על עצמו","af al atsmo","full of himself","lit. 'flies on himself'"],["לאט לאט","le'at le'at","little by little",""],["יהיה בסדר","yihye be-seder","it'll be OK","national motto"]],
-build:[["ירד לי האסימון, סגרנו","I got it, deal"],["הוא חי בסרט ועף על עצמו","He lives in a fantasy and is full of himself"]],
-dlg:[{ctx:"Friend: 'יש לי מבחן מחר ולא למדתי כלום'",opts:[["אכלת אותה אחי","You're screwed bro",1],["על הכיפאק!","Excellent!",0],["קיבלתי, עבור","Copy, over",0]]}]},
-{id:"m6",title:"Mission 6: Undercover Dialogues",brief:"Longer scenes. Pick what a local would say.",
-w:[["תגיד","tagid","tell me / say (m.)","conversation opener"],["מה הקטע","ma ha-keta","what's the deal?",""],["עזוב","azov","forget it (m.)","f: izvi"],["חלאס","khalas","enough! / done","from Arabic"],["בטוח","batu'ach","sure, of course",""],["אין בעיה","ein be'aya","no problem",""],["תן לי שנייה","ten li shniya","give me a sec (m.)",""],["למה לא","lama lo","why not",""]],
-build:[["תגיד, מה הקטע עם הבחור הזה?","Tell me, what's the deal with that guy?"]],
-dlg:[{ctx:"Café owner: 'אתה לא מפה, נכון? מאיפה אתה?'",opts:[["עזוב, מה זה משנה? תביא קפה","Forget it, what does it matter? Bring coffee",1],["קיבלתי, עבור","Copy, over",0],["מילואים","Reserve duty",0]]},
-{ctx:"Stranger: 'יש לך אש?'",opts:[["אין בעיה, שנייה","No problem, one sec",1],["אכלתי אותה","I blew it",0],["חי בסרט","Living in a fantasy",0]]},
-{ctx:"Doron-type commander: 'חלאס לדבר. תזוזה!'",opts:[["בטוח, יאללה","Sure, let's go",1],["בלי לחץ, מחר","No pressure, tomorrow",0],["מה'תה אומר","You don't say",0]]}]}
-];
-const SONGS=[
-{t:"תל אביב",tr:"Tel Aviv",en:"Tel Aviv (2013, with Arisa) — a party anthem for the city",w:[["עיר","ir","city"],["לילה","laila","night"],["מסיבה","mesiba","party"],["לרקוד","lirkod","to dance"],["ים","yam","sea"]]},
-{t:"שני משוגעים",tr:"Shnei Meshuga'im",en:"Two Crazy People (2018) — Israel's best-selling song of 2017–18",w:[["שני","shnei","two (of)"],["משוגע","meshuga","crazy (m.)"],["משוגעת","meshuga'at","crazy (f.)"],["ביחד","be-yachad","together"],["לב","lev","heart"]]},
-{t:"מלכת הדור",tr:"Malkat Ha-Dor",en:"Queen of the Generation",w:[["מלכה","malka","queen"],["דור","dor","generation"],["יפה","yafa","beautiful (f.)"],["מושלמת","mushlemet","perfect (f.)"]]},
-{t:"רק שלך",tr:"Rak Shelakh",en:"Only Yours",w:[["רק","rak","only"],["שלך","shelakh","yours (f.)"],["שלי","sheli","mine"],["לנצח","la-netsach","forever"],["נשבע","nishba","I swear (m.)"]]},
-{t:"לילות וקללות",tr:"Leilot U-Klalot",en:"Nights and Curses",w:[["לילות","leilot","nights"],["קללה","klala","curse"],["לבד","levad","alone"],["געגועים","ga'agu'im","longing, missing someone"]]},
-{t:"מודה אני",tr:"Mode Ani",en:"I Give Thanks — named after the morning prayer",w:[["מודה","mode","thankful / admit (m.)"],["תודה","toda","thanks"],["נשמה","neshama","soul (also 'sweetie')"],["חיים","chaim","life"]]},
-{t:"השיר שאת אהבת",tr:"Ha-Shir She-At Ahavt",en:"The Song You Loved",w:[["שיר","shir","song"],["אהבת","ahavt","you loved (f.)"],["לזכור","lizkor","to remember"],["פעם","pa'am","once, in the past"]]}
-];
-// ===== STATE =====
-const K="hebgame_v1";let S=JSON.parse(localStorage.getItem(K)||"null")||{xp:0,streak:0,last:"",done:{},missed:{},tr:false};
-function save(){localStorage.setItem(K,JSON.stringify(S));renderStats()}
-function touchStreak(){const d=new Date().toDateString(),y=new Date(Date.now()-864e5).toDateString();if(S.last!==d){S.streak=S.last===y?S.streak+1:1;S.last=d}}
-function renderStats(){document.getElementById("stats").textContent=`⭐ ${S.xp} XP · 🔥 ${S.streak} · 📚 review ${Object.keys(S.missed).length}`}
-const trT=document.getElementById("trT");trT.checked=S.tr;applyTr();trT.onchange=()=>{S.tr=trT.checked;save();applyTr()};
-function applyTr(){document.body.classList.toggle("hide-tr",!S.tr)}
-// ===== TTS =====
-let heVoice=null;function loadV(){if(!window.speechSynthesis)return;heVoice=speechSynthesis.getVoices().find(v=>/^he|iw/i.test(v.lang))||null}
-if(window.speechSynthesis){loadV();speechSynthesis.onvoiceschanged=loadV}
-function say(t){if(!window.speechSynthesis)return;speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t.replace(/'/g,""));u.lang="he-IL";if(heVoice)u.voice=heVoice;u.rate=.9;speechSynthesis.speak(u)}
-// ===== UI HELPERS =====
-const $=id=>document.getElementById(id),app=$("app");
+"use strict";
+const $=s=>document.querySelector(s),app=$("#app");
+const K="ivrit_undercover_v2";
+const S=Object.assign({xp:0,streak:0,last:"",done:{},nb:{},tr:false,en:false,sp:1},JSON.parse(localStorage.getItem(K)||"{}"));
+const save=()=>localStorage.setItem(K,JSON.stringify(S));
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
-const shuf=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[a[i],a[j]]=[a[j],a[i]]}return a};
-function wordHTML(w){return `<div class="he">${esc(w[0])} <button onclick='say(${JSON.stringify(w[0])})'>🔊</button></div><div class="tr">${esc(w[1])}</div><div class="en">${esc(w[2])}</div>${w[3]?`<small>${esc(w[3])}</small>`:""}`}
-function home(){touchStreak();save();
-app.innerHTML=`<div class="card"><b>Modes</b><br><button onclick="unitMenu()">🪖 Doron's Unit</button><button onclick="songMenu()">🎤 Omer Adam Concert Prep</button><button onclick="review()">📚 Review missed (${Object.keys(S.missed).length})</button>
-${heVoice?"":`<p><small>No Hebrew voice detected; 🔊 may be silent or accented. Install a Hebrew TTS voice in your OS (or use Chrome/Edge/Safari).</small></p>`}</div>
-<div class="card"><small>Inspired by Fauda's world; all lines are original. Song section teaches titles and theme vocabulary only, not lyrics.</small></div>`}
-function unitMenu(){app.innerHTML=`<button onclick="home()">← Back</button>`+MISSIONS.map((m,i)=>`<div class="card"><b>${m.title}</b> ${S.done[m.id]?"✅ "+S.done[m.id]+"%":""}<br><small>${m.brief}</small><br><button onclick="study(MISSIONS[${i}].w,'${m.id}',()=>play(${i}))">Brief (study)</button><button onclick="play(${i})">Start mission</button></div>`).join("")}
-function study(ws,id,next){let i=0;const r=()=>{app.innerHTML=`<button onclick="home()">← Home</button><div class="card">${wordHTML(ws[i])}</div><small>${i+1}/${ws.length}</small><br><button onclick="window._p()">◀</button><button onclick="window._n()">▶</button><button onclick="window._g()">Start quiz</button>`};
-window._p=()=>{i=Math.max(0,i-1);r()};window._n=()=>{if(i<ws.length-1){i++;r()}else window._g()};window._g=next;r()}
-// ===== QUIZ ENGINE =====
-function makeQs(m){const pool=MISSIONS.flatMap(x=>x.w);const qs=[];
-shuf(m.w).forEach((w,k)=>{const t=["he2en","en2he","listen"][k%3];const d=shuf(pool.filter(x=>x[0]!==w[0])).slice(0,3);qs.push({t,w,opts:shuf([w,...d])})});
-m.build.forEach(b=>qs.push({t:"build",b}));m.dlg.forEach(d=>qs.push({t:"dlg",d}));return qs}
-function play(i){runQuiz(makeQs(MISSIONS[i]),MISSIONS[i].id,MISSIONS[i].title)}
-function runQuiz(qs,id,title){let n=0,ok=0;
-const next=()=>{if(n>=qs.length){const pc=Math.round(100*ok/qs.length);if(id)S.done[id]=Math.max(S.done[id]||0,pc);save();
-app.innerHTML=`<div class="card"><h2>${esc(title)} complete</h2><p>${ok}/${qs.length} correct (${pc}%)</p><button onclick="home()">Home</button></div>`;return}
-const q=qs[n];let h=`<div class="bar"><div style="width:${100*n/qs.length}%"></div></div><div class="card">`;
-const done=(good,w)=>{if(good){ok++;S.xp+=10;if(w)delete S.missed[w[0]]}else if(w)S.missed[w[0]]=w;save();setTimeout(()=>{n++;next()},good?700:1800)};
-if(q.t==="build"){const words=q.b[0].split(" ");h+=`<small>Build the sentence:</small><div class="en"><b>${esc(q.b[1])}</b></div><div id="built"></div><div class="he" id="bank" style="font-size:20px">${shuf(words.map((x,j)=>[x,j])).map(([x,j])=>`<span class="chip" data-w="${esc(x)}">${esc(x)}</span>`).join("")}</div><button id="chk">Check</button><button id="clr">Clear</button></div>`;app.innerHTML=h;
-const built=[];document.querySelectorAll("#bank .chip").forEach(c=>c.onclick=()=>{built.push(c.dataset.w);c.style.visibility="hidden";$("built").innerHTML=built.map(x=>`<span class="chip">${esc(x)}</span>`).join("")});
-$("clr").onclick=()=>{built.length=0;$("built").innerHTML="";document.querySelectorAll("#bank .chip").forEach(c=>c.style.visibility="")};
-$("chk").onclick=()=>{const g=built.join(" ")===q.b[0];$("built").innerHTML+=`<div class="${g?"":"en"}">${g?"✅":"❌ "+esc(q.b[0])}</div>`;say(q.b[0]);done(g,g?null:[q.b[0],"",q.b[1]])};return}
-if(q.t==="dlg"){h+=`<small>Scenario — what do you say?</small><div class="he" style="font-size:22px">${esc(q.d.ctx)}</div><button onclick='say(${JSON.stringify(q.d.ctx)})'>🔊</button>`+shuf(q.d.opts).map(o=>`<button class="opt" data-c="${o[2]}"><span class="he" style="font-size:20px">${esc(o[0])}</span><br><small class="hint" style="display:none">${esc(o[1])}</small></button>`).join("")+`</div>`;app.innerHTML=h;
-document.querySelectorAll(".opt").forEach(b=>b.onclick=()=>{document.querySelectorAll(".opt").forEach(x=>{x.classList.add(x.dataset.c==="1"?"ok":"bad");x.querySelector(".hint").style.display=""});const r=q.d.opts.find(o=>o[2]);say(r[0]);done(b.dataset.c==="1",b.dataset.c==="1"?null:[r[0],"",r[1]])});return}
-const w=q.w;if(q.t==="he2en")h+=`<small>What does it mean?</small><div class="he">${esc(w[0])}</div><div class="tr">${esc(w[1])}</div>`;
-if(q.t==="en2he")h+=`<small>Pick the Hebrew:</small><div class="en" style="font-size:22px">${esc(w[2])}</div>`;
-if(q.t==="listen"){h+=`<small>Listen and pick:</small><br><button id="pl">🔊 Play</button>`;setTimeout(()=>say(w[0]),300)}
-h+=q.opts.map((o,j)=>`<button class="opt" data-j="${j}">${q.t==="he2en"?esc(o[2]):`<span class="he" style="font-size:22px">${esc(o[0])}</span> <span class="tr">${esc(o[1])}</span>`}</button>`).join("")+"</div>";app.innerHTML=h;
-if($("pl"))$("pl").onclick=()=>say(w[0]);
-document.querySelectorAll(".opt").forEach(b=>b.onclick=()=>{const g=q.opts[b.dataset.j][0]===w[0];document.querySelectorAll(".opt").forEach(x=>x.classList.add(q.opts[x.dataset.j][0]===w[0]?"ok":"bad"));if(q.t!=="listen")say(w[0]);done(g,w)})};next()}
-// ===== SONGS =====
-function songMenu(){app.innerHTML=`<button onclick="home()">← Back</button><div class="card"><button onclick="chorusDrill()">🎶 Chorus-words drill (all songs)</button></div>`+SONGS.map((s,i)=>`<div class="card"><div class="he">${esc(s.t)}</div><div class="tr">${esc(s.tr)}</div><div class="en">${esc(s.en)}</div>${S.done["s"+i]?"✅ "+S.done["s"+i]+"%":""}<br><button onclick="study(SONGS[${i}].w,'s${i}',()=>songQuiz(${i}))">Flashcards</button><button onclick="songQuiz(${i})">Quiz</button><a target="_blank" rel="noopener" href="https://www.youtube.com/results?search_query=${encodeURIComponent("עומר אדם "+s.t+" official")}">▶ YouTube</a></div>`).join("")}
-function qFor(ws,pool){return shuf(ws).map((w,k)=>({t:["he2en","listen","en2he"][k%3],w,opts:shuf([w,...shuf(pool.filter(x=>x[0]!==w[0])).slice(0,3)])}))}
-const SPOOL=()=>SONGS.flatMap(s=>s.w);
-function songQuiz(i){const s=SONGS[i];const title=[s.t,s.tr,"title: "+s.en.split(" (")[0].split(" —")[0]];runQuiz(qFor([title,...s.w],[...SPOOL(),...SONGS.map(x=>[x.t,x.tr,"title: "+x.en.split(" (")[0].split(" —")[0]])]),"s"+i,s.t)}
-function chorusDrill(){const ws=shuf(SPOOL()).slice(0,12);runQuiz(ws.map(w=>({t:"listen",w,opts:shuf([w,...shuf(SPOOL().filter(x=>x[0]!==w[0])).slice(0,3)])})),null,"Chorus-words drill")}
-function review(){const ws=Object.values(S.missed);if(!ws.length){app.innerHTML=`<div class="card">Nothing to review 🎉</div><button onclick="home()">Home</button>`;return}
-const pool=[...MISSIONS.flatMap(x=>x.w),...SPOOL()];const single=ws.filter(w=>w[1]),sent=ws.filter(w=>!w[1]);
-runQuiz([...qFor(single,pool),...sent.map(w=>({t:"build",b:[w[0],w[2]]}))],null,"Review")}
+const sleep=ms=>new Promise(r=>setTimeout(r,ms));
+const today=()=>new Date().toISOString().slice(0,10);
+function bumpStreak(){const t=today();if(S.last===t)return;const y=new Date(Date.now()-864e5).toISOString().slice(0,10);S.streak=S.last===y?S.streak+1:1;S.last=t;save()}
+function xp(n){S.xp+=n;bumpStreak();save();toast("+"+n+" XP")}
+function toast(t){const d=document.createElement("div");d.className="toast";d.textContent=t;document.body.appendChild(d);setTimeout(()=>d.remove(),1700)}
+const level=()=>Math.floor(Math.sqrt(S.xp/60))+1;
+// ---------- TTS ----------
+let VOICE=null;function pickVoice(){const v=speechSynthesis.getVoices();VOICE=v.find(x=>/^he|^iw/i.test(x.lang))||null}
+if("speechSynthesis"in window){pickVoice();speechSynthesis.onvoiceschanged=pickVoice}
+function say(text,who){if(!("speechSynthesis"in window))return false;speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(text.replace(/[-]/g,""));u.lang="he-IL";if(VOICE)u.voice=VOICE;const c=CH[who]||{};u.rate=(c.v||1)*0.92*S.sp;u.pitch=c.p||1;speechSynthesis.speak(u);return !!VOICE}
+// ---------- dictionary ----------
+const PFX={"ו":"and","ה":"the","ב":"in/at","ל":"to/for","מ":"from","ש":"that","כ":"like"};
+const PHR=Object.keys(DICT).filter(k=>k.includes(" ")).sort((a,b)=>b.split(" ").length-a.split(" ").length);
+const clean=w=>w.replace(/[.,!?:;'"()…״׳]/g,"");
+function look(w){w=clean(w);if(DICT[w])return{w,...DICT[w]};for(let i=1;i<=2&&i<w.length-1;i++){const p=w.slice(0,i);if(![...p].every(c=>PFX[c]))break;const b=w.slice(i);if(DICT[b]){const d=DICT[b];return{w,base:b,pre:[...p].map(c=>c+" = "+PFX[c]).join(", "),...d}}}return null}
+function tokens(he){const words=he.split(/\s+/),out=[];for(let i=0;i<words.length;){let hit=null;for(const p of PHR){const n=p.split(" ").length;if(i+n>words.length)continue;if(clean(words.slice(i,i+n).join(" "))===p){hit=n;break}}if(hit){out.push(words.slice(i,i+hit).join(" "));i+=hit}else out.push(words[i++])}return out}
+function richHe(he,learn=[]){return tokens(he).map(t=>{const d=look(t),c=clean(t);const lr=learn.includes(c)||(d&&d.base&&learn.includes(d.base));const inner=S.tr&&d?`<ruby>${esc(t)}<rt>${esc(d.t)}</rt></ruby>`:esc(t);return `<span class="w${lr?" lrn":""}" data-w="${esc(t)}">${inner}</span>`}).join(" ")}
+let CTX=null;
+document.addEventListener("click",e=>{const w=e.target.closest(".w");if(!w)return;e.stopPropagation();const bub=w.closest("[data-he]");gloss(w.dataset.w,bub&&{he:bub.dataset.he,en:bub.dataset.en},w)});
+function gloss(t,ctx,el){document.querySelectorAll(".w.sel").forEach(x=>x.classList.remove("sel"));el&&el.classList.add("sel");const d=look(t);const sh=document.createElement("div");sh.className="sheet";
+ sh.innerHTML=`<div class="in"><div style="display:flex;justify-content:space-between;align-items:center"><button class="ib" data-sp>🔊</button><div class="big">${esc(clean(t))}</div></div>`+(d?`<div class="tl" style="text-align:right">${esc(d.t)}</div><div class="mean">${esc(d.e)}</div>${d.pre?`<div class="note">Prefix: ${esc(d.pre)} + ${esc(d.base)}</div>`:""}${d.n?`<div class="note">💡 ${esc(d.n)}</div>`:""}`:`<div class="mean" style="color:var(--mu)">No gloss for this word yet.</div>`)+(ctx&&ctx.en?`<div class="ctx">“${esc(ctx.en)}”</div>`:"")+(d&&ctx?`<button class="btn" style="width:100%;margin-top:12px" data-add>📒 Add to Notebook</button>`:"")+`</div>`;
+ document.body.appendChild(sh);say(clean(t));sh.onclick=e=>{if(e.target.closest("[data-sp]"))return say(clean(t));if(e.target.closest("[data-add]")){addNB(d.base||clean(t),ctx);toast("Saved to Notebook");}sh.remove();el&&el.classList.remove("sel")}}
+// ---------- notebook / SRS ----------
+const IV=[0,1,2,4,8,16,32];
+function addNB(k,ctx,src){if(!DICT[k]||!ctx)return false;if(S.nb[k])return false;S.nb[k]={s:ctx.he,se:ctx.en,box:1,due:Date.now(),src:src||"",at:Date.now()};save();return true}
+const dueList=()=>Object.entries(S.nb).filter(([,v])=>v.due<=Date.now());
+// ---------- matching ----------
+const FIN={"ך":"כ","ם":"מ","ן":"נ","ף":"פ","ץ":"צ"};
+const norm=s=>s.normalize("NFC").replace(/[\u0591-\u05C7]/g,"").replace(/[^\u05D0-\u05EAa-zA-Z0-9 ]/g,"").replace(/[ךםןףץ]/g,c=>FIN[c]).toLowerCase().replace(/\s+/g," ").trim();
+function lev(a,b){const m=[...Array(b.length+1).keys()];for(let i=1;i<=a.length;i++){let p=m[0];m[0]=i;for(let j=1;j<=b.length;j++){const t=m[j];m[j]=Math.min(m[j]+1,m[j-1]+1,p+(a[i-1]===b[j-1]?0:1));p=t}}return m[b.length]}
+function match(inp,acc){const x=norm(inp);if(!x)return 0;for(const a of acc){const y=norm(a);if(x===y||x.replace(/ /g,"")===y.replace(/ /g,""))return 2;if(y.length>=4&&lev(x,y)<=1)return 1;if(y.length>=8&&lev(x,y)<=2)return 1}return 0}
+// ---------- screens ----------
+function home(){speechSynthesis&&speechSynthesis.cancel();const due=dueList().length,nbn=Object.keys(S.nb).length;
+ const list=mode=>{const sc=SCENES.filter(s=>s.mode===mode);return sc.map((s,i)=>{const lock=i>0&&!S.done[sc[i-1].id]&&!S.done[s.id];return `<button class="card${lock?" lock":""}" data-go="${s.id}"><div class="ic">${lock?"🔒":s.icon}</div><div><h3>${esc(s.title)}</h3><div class="hh">${esc(s.he)}</div><div class="s">${esc(s.sub)}</div></div>${S.done[s.id]?'<div class="chk">✓</div>':""}</button>`}).join("")};
+ app.innerHTML=`<div class="scr home"><div class="hero"><h1>Ivrit <span>Undercover</span></h1><p>Learn real Israeli Hebrew by living it — one mission at a time.</p></div>
+ <div class="stats"><span class="pill">⭐ ${S.xp} XP</span><span class="pill">🎖️ Lv ${level()}</span><span class="pill">🔥 ${S.streak} day${S.streak==1?"":"s"}</span><span class="pill">📒 ${nbn}</span></div>
+ <button class="card" data-rv style="border-color:${due?"var(--ac)":"var(--ln)"}"><div class="ic">🧠</div><div><h3>Daily Debrief</h3><div class="s">${due?due+" phrase"+(due>1?"s":"")+" due — replay them in context":nbn?"All caught up. Come back tomorrow.":"Play a mission to fill your notebook"}</div></div></button>
+ <button class="card" data-nb><div class="ic">📒</div><div><h3>Notebook</h3><div class="s">${nbn} words, each with the line you heard it in</div></div></button>
+ <div class="sec">🕶️ The Unit · main story</div>${list("unit")}
+ <div class="sec">🎤 Concert Night · Omer Adam</div>${list("concert")}
+ <div class="sec">Settings</div>
+ <div class="tog"><span>Transliteration under words</span><button class="sw${S.tr?" on":""}" data-tg="tr"></button></div>
+ <div class="tog"><span>Show English under lines</span><button class="sw${S.en?" on":""}" data-tg="en"></button></div>
+ <div class="tog"><span>Voice speed</span><span><button class="btn" data-sp="0.75" style="padding:6px 10px;${S.sp<1?"background:var(--ac);color:#000":""}">Slow</button> <button class="btn" data-sp="1" style="padding:6px 10px;${S.sp>=1?"background:var(--ac);color:#000":""}">Normal</button></span></div>
+ <p style="color:var(--mu);font-size:12px;text-align:center;margin-top:24px">Tap any Hebrew word for its meaning. Original story — inspired by, not taken from, any show.${VOICE?"":"<br>⚠️ No Hebrew voice found on this device; listening lines will offer a text fallback."}</p></div>`;
+ app.onclick=e=>{const g=e.target.closest("[data-go]");if(g)return play(g.dataset.go);if(e.target.closest("[data-nb]"))return notebook();if(e.target.closest("[data-rv]"))return review();const t=e.target.closest("[data-tg]");if(t){S[t.dataset.tg]=!S[t.dataset.tg];save();home()}const sp=e.target.closest("[data-sp]");if(sp){S.sp=+sp.dataset.sp;save();home()}}}
+// ---------- scene engine ----------
+let RUN=0;
+async function play(id){const sc=SCENES.find(s=>s.id===id);const run=++RUN;let earned=0,mist=0,learned=[];
+ app.innerHTML=`<div class="scr"><header class="top"><button class="ib" id="bk">✕</button><div class="prog"><i id="pg" style="width:0"></i></div><span class="pill">${sc.icon} ${esc(sc.title)}</span></header><div id="chat"></div><div id="dock"></div></div>`;app.onclick=null;
+ $("#bk").onclick=()=>{RUN++;home()};const chat=$("#chat"),dock=$("#dock");const alive=()=>run===RUN;
+ const scroll=()=>chat.scrollTop=chat.scrollHeight;
+ async function msg(who,he,en,learn=[],me=false){if(!alive())return;const c=me?{n:"You",a:"🫡",c:"var(--ac)"}:CH[who];const row=document.createElement("div");row.className="row"+(me?" me":"");row.innerHTML=`<div class="av">${c.a}</div><div class="bub"><div class="typing"><i></i><i></i><i></i></div></div>`;chat.appendChild(row);scroll();
+  if(!me)await sleep(Math.min(1700,450+he.length*28));if(!alive())return;const b=row.querySelector(".bub");b.dataset.he=he;b.dataset.en=en||"";if(S.en)b.classList.add("showen");
+  b.innerHTML=`<div class="who" style="color:${c.c}">${esc(c.n)}</div><div class="txt he">${richHe(he,learn)}</div><div class="en">${esc(en||"")}</div><div class="tools"><button data-a="sp">🔊</button><button data-a="en">EN</button></div>`;
+  b.querySelector('[data-a="sp"]').onclick=()=>say(he,who);b.querySelector('[data-a="en"]').onclick=()=>b.classList.toggle("showen");
+  if(!me)say(he,who);
+  learn.forEach(k=>{if(addNB(k,{he,en},sc.id))learned.push(k)});scroll();await sleep(350)}
+ function why(t,cls){const d=document.createElement("div");d.className="why "+(cls||"");d.textContent="💡 "+t;chat.appendChild(d);scroll()}
+ function narr(t){const d=document.createElement("div");d.className="narr";d.textContent=t;chat.appendChild(d);scroll()}
+ const total=sc.steps.length;
+ for(let i=0;i<total;i++){if(!alive())return;$("#pg").style.width=(i/total*100)+"%";const st=sc.steps[i];
+  if(st.n){narr(st.n);await sleep(900)}
+  else if(st.m){await msg(st.m,st.he,st.en,st.learn)}
+  else if(st.c){await choice(st)}
+  else if(st.l){await listen(st)}
+  else if(st.t){await typeQ(st)}
+ }
+ if(!alive())return;$("#pg").style.width="100%";await sleep(700);
+ const first=!S.done[sc.id];S.done[sc.id]=1;const bonus=first?50:20;S.xp+=bonus;earned+=bonus;bumpStreak();save();
+ app.innerHTML=`<div class="scr done"><div class="ic">${sc.icon}</div><h2>Mission complete</h2><div class="he" style="color:var(--ac);font-size:20px">${esc(sc.he)}</div><p style="color:var(--mu)">+${earned} XP · ${mist} slip${mist==1?"":"s"} · ${learned.length} new notebook entr${learned.length==1?"y":"ies"}</p>${learned.length?`<p class="he" style="font-size:18px">${learned.map(esc).join(" · ")}</p>`:""}<button class="btn pri" id="nx" style="width:100%;max-width:320px;margin-top:16px">Continue</button><button class="btn" id="again" style="width:100%;max-width:320px;margin-top:8px">Replay mission</button></div>`;
+ $("#nx").onclick=home;$("#again").onclick=()=>play(id);
+ // --- step handlers ---
+ function choice(st){return new Promise(async res=>{const opts=st.o.map((o,j)=>({...o,j})).sort(()=>Math.random()-.5);let timed=!!st.timer,tmr=null,tries=0;
+  const draw=()=>{dock.innerHTML=`<div class="prm"><span class="${timed?"pressure":""}">${timed?"⏱️ ":""}${esc(st.c)}</span><span>tap a reply</span></div>${timed?'<div class="timer"><i id="tb"></i></div>':""}`+opts.map(o=>`<button class="opt${o.x?" x":""}" data-j="${o.j}">${esc(o.he)}${S.en?`<small>${esc(o.en)}</small>`:""}</button>`).join("");
+   if(timed){const tb=$("#tb"),t0=performance.now(),dur=st.timer*1000;(function f(){if(!alive()||!tb.isConnected)return;const p=1-(performance.now()-t0)/dur;tb.style.width=Math.max(0,p*100)+"%";if(p<=0){onTimeout();return}tmr=requestAnimationFrame(f)})()}};
+  const onTimeout=async()=>{dock.innerHTML="";mist++;const[w,h,e]=st.timeout;await msg(w,h,e);timed=false;why("Under pressure, answer fast — no timer this time.","bad");draw()};
+  dock.onclick=async e=>{const b=e.target.closest(".opt");if(!b)return;cancelAnimationFrame(tmr);const o=opts.find(x=>x.j==b.dataset.j);dock.innerHTML="";tries++;
+   await msg(null,o.he,o.en,[],true);if(o.re)await msg(o.re[0],o.re[1],o.re[2]);
+   if(o.r==="ok"){const g=(timed?15:10)-(tries-1)*4;if(g>0){earned+=g;xp(g)}res()}
+   else if(o.r==="meh"){if(o.why)why(o.why);else why("Works, but not how a local would say it.");mist++;earned+=3;xp(3);await sleep(600);res()}
+   else{mist++;why(o.why||"Wrong move. Try another reply.","bad");o.x=1;if(navigator.vibrate)navigator.vibrate(80);timed=false;draw()}};
+  draw()})}
+ function listen(st){return new Promise(res=>{let tries=0;const hasV=!!VOICE;
+  dock.innerHTML=`<div class="prm"><span>🎧 Listen-only · ${esc(CH[st.l].n)}</span><span>what was said?</span></div><div class="listen"><button class="play" id="pl">▶</button><div style="flex:1;font-size:13px;color:var(--mu)">Tap to play. No text — just your ears.${hasV?"":`<br><a href="#" id="fb" style="color:var(--ac)">No Hebrew voice? Show the line</a>`}</div></div><div id="fbt" class="he" style="display:none;font-size:18px;margin:0 4px 10px;color:var(--mu)"></div>`+st.o.map((o,j)=>`<button class="opt" data-j="${j}">${esc(o)}</button>`).join("");
+  const pl=()=>say(st.he,st.l);$("#pl").onclick=pl;const fb=$("#fb");if(fb)fb.onclick=e=>{e.preventDefault();const t=$("#fbt");t.textContent=st.he;t.style.display="block"};setTimeout(pl,300);
+  dock.onclick=async e=>{const b=e.target.closest(".opt");if(!b)return;tries++;if(+b.dataset.j===st.a){b.classList.add("y");await sleep(350);dock.innerHTML="";await msg(st.l,st.he,st.en,st.learn);const g=tries===1?15:5;earned+=g;xp(g);res()}else{mist++;b.classList.add("x");b.classList.add("shake");pl()}}})}
+ function typeQ(st){return new Promise(res=>{let tries=0;
+  dock.innerHTML=`<div class="prm"><span>⌨️ ${esc(st.t)}</span></div><div class="inrow"><input id="ti" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="הקלד בעברית…"><button class="btn pri" id="tg">↵</button></div><div style="display:flex;justify-content:space-between;margin-top:8px;font-size:13px"><a href="#" id="hn" style="color:var(--mu)">Hint</a><a href="#" id="gv" style="color:var(--mu)">Show me</a></div>`;
+  const inp=$("#ti");setTimeout(()=>inp.focus(),100);
+  const go=async()=>{const v=inp.value;let m=match(v,st.a);if(!m&&st.alt)m=match(v,st.alt)?3:0;tries++;
+   if(m){dock.innerHTML="";await msg(null,m===3?st.a[0]:(m===2?v.trim():st.a.find(a=>match(v,[a]))||st.a[0]),"",[],true);if(m===1)why("Close enough — exact spelling: "+st.a[0]);if(m===3)why("Got it in transliteration — in Hebrew letters: "+st.a[0]);(st.learn||[]).forEach(k=>{if(addNB(k,{he:st.a[0],en:st.t},sc.id))learned.push(k)});const g=Math.max(4,(m===2?20:12)-(tries-1)*5);earned+=g;xp(g);res()}
+   else{mist++;inp.classList.add("shake");setTimeout(()=>inp.classList.remove("shake"),400);inp.select();if(tries>=2)$("#hn").click()}};
+  $("#tg").onclick=go;inp.onkeydown=e=>{if(e.key==="Enter")go()};
+  $("#hn").onclick=e=>{e.preventDefault();e.target.textContent="Hint: "+(st.hint||st.a[0][0]+"…")};
+  $("#gv").onclick=async e=>{e.preventDefault();dock.innerHTML="";await msg(null,st.a[0],"",[],true);why("Answer: "+st.a[0]+" — it'll come back in your Debrief.");mist++;res()}})}
+}
+// ---------- notebook ----------
+function notebook(){const ents=Object.entries(S.nb).sort((a,b)=>b[1].at-a[1].at);
+ app.innerHTML=`<div class="scr"><header class="top"><button class="ib" id="bk">←</button><h2 style="margin:0;font-size:20px">📒 Notebook</h2><span class="pill" style="margin-left:auto">${ents.length}</span></header><div class="nb">${ents.length?ents.map(([k,v])=>{const d=DICT[k]||{};const s=esc(v.s).replace(esc(k),`<b>${esc(k)}</b>`);return `<div class="ent"><div class="k"><span>${esc(k)}</span><small>${esc(d.t||"")} · ${"●".repeat(v.box)}${"○".repeat(Math.max(0,6-v.box))}</small></div><div style="font-size:14px;margin-top:2px">${esc(d.e||"")}</div><div class="s" data-he="${esc(v.s)}" data-en="${esc(v.se)}">${s}</div><div class="e">“${esc(v.se)}”</div></div>`}).join(""):'<div class="empty">Empty for now. Words you meet in missions land here with the exact line they came from.</div>'}</div></div>`;
+ $("#bk").onclick=home;app.onclick=e=>{const s=e.target.closest(".s[data-he]");if(s)say(s.dataset.he)}}
+// ---------- review (context cloze) ----------
+function review(){const due=dueList().sort(()=>Math.random()-.5).slice(0,10);if(!due.length){toast(Object.keys(S.nb).length?"Nothing due — see you tomorrow":"Play a mission first");return}
+ let i=0,right=0;const allK=Object.keys(DICT).filter(k=>DICT[k].e);
+ const next=()=>{if(i>=due.length){const g=right*8;S.xp+=g;bumpStreak();save();app.innerHTML=`<div class="scr done"><div class="ic">🧠</div><h2>Debrief done</h2><p style="color:var(--mu)">${right}/${due.length} correct · +${g} XP</p><button class="btn pri" style="width:100%;max-width:320px" id="nx">Back to base</button></div>`;$("#nx").onclick=home;return}
+  const[k,v]=due[i];const nbk=Object.keys(S.nb).filter(x=>x!==k);let pool=[...nbk,...allK.filter(x=>x!==k&&!nbk.includes(x))];
+  const sameLen=pool.filter(x=>Math.abs(x.split(" ").length-k.split(" ").length)===0);const ds=[];while(ds.length<3&&sameLen.length){const x=sameLen.splice(Math.floor(Math.random()*sameLen.length),1)[0];if(!ds.includes(x))ds.push(x)}
+  const opts=[k,...ds].sort(()=>Math.random()-.5);const has=v.s.includes(k);const shown=has?esc(v.s).replace(esc(k),'<span class="blank">&nbsp;?&nbsp;</span>'):esc(v.s);
+  app.innerHTML=`<div class="scr"><header class="top"><button class="ib" id="bk">✕</button><div class="prog"><i style="width:${i/due.length*100}%"></i></div><span class="pill">${i+1}/${due.length}</span></header><div class="rv"><div class="prm"><span>🧠 ${has?"Which word fits the line?":"Which word is in this line?"}</span><button class="ib" id="ps">🔊</button></div><div class="ctxs">${shown}</div><div style="text-align:center;color:var(--mu);font-size:13px;margin-bottom:16px">“${esc(v.se)}”</div>${opts.map(o=>`<button class="opt" data-o="${esc(o)}">${esc(o)}<small>${S.tr?esc(DICT[o].t):""}</small></button>`).join("")}</div></div>`;
+  $("#bk").onclick=home;$("#ps").onclick=()=>say(v.s);setTimeout(()=>say(v.s),250);
+  app.onclick=async e=>{const b=e.target.closest(".opt");if(!b)return;app.onclick=null;const ok=b.dataset.o===k;
+   if(ok){b.classList.add("y");right++;v.box=Math.min(6,v.box+1)}else{b.classList.add("x","shake");app.querySelector(`.opt[data-o="${CSS.escape(k)}"]`).classList.add("y");v.box=1}
+   v.due=Date.now()+(ok?IV[v.box]*864e5:10*60e3);save();$(".ctxs").innerHTML=esc(v.s).replace(esc(k),`<b style="color:var(--ac)">${esc(k)}</b>`)+`<div style="font:14px Inter;color:var(--mu);margin-top:8px;direction:ltr">${esc(k)} = ${esc(DICT[k].e)}</div>`;say(v.s);
+   await sleep(ok?1500:2600);i++;next()}};next()}
 home();
 </script></body></html>
