@@ -1,0 +1,117 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Hebrew: Doron's Unit & Omer Adam Prep</title>
+<style>
+body{margin:0;font-family:system-ui,sans-serif;background:#10151c;color:#e8edf2}
+header{background:#1b2633;padding:10px 14px;display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between}
+h1{font-size:18px;margin:0}main{max-width:720px;margin:auto;padding:14px}
+.card{background:#1b2633;border-radius:12px;padding:16px;margin:10px 0}
+.he{direction:rtl;unicode-bidi:isolate;font-size:28px;font-family:"Arial Hebrew","Noto Sans Hebrew",Arial,sans-serif}
+.tr{color:#9fc3ff;font-style:italic}.en{color:#b9c6d3}
+button{background:#2f6fb5;color:#fff;border:0;border-radius:10px;padding:12px 14px;margin:5px 4px;font-size:16px;cursor:pointer}
+button.opt{display:block;width:100%;text-align:center;background:#26384d}
+button.ok{background:#2e8b57!important}button.bad{background:#b33a3a!important}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:8px}
+.chip{display:inline-block;background:#26384d;padding:8px 12px;border-radius:8px;margin:4px;cursor:pointer;font-size:22px}
+#built{min-height:50px;border:1px dashed #557;border-radius:8px;padding:6px;direction:rtl}
+.bar{height:8px;background:#26384d;border-radius:4px}.bar>div{height:8px;background:#4caf50;border-radius:4px}
+.hide-tr .tr{display:none}a{color:#9fc3ff}small{color:#8a99a8}
+</style></head><body>
+<header><h1>🎧 עברית בשטח</h1><div id="stats"></div>
+<label><input type="checkbox" id="trT"> Transliteration</label></header>
+<main id="app"></main>
+<script>
+// ===== DATA =====
+// w: [hebrew, transliteration, english, note?]
+const MISSIONS=[
+{id:"m1",title:"Mission 1: Street Talk",brief:"Blend in at a Jerusalem shuk. Core slang, beyond the basics.",
+w:[["וואלה","walla","really? / I swear / wow","from Arabic; tone decides the meaning"],["תכל'ס","tachles","bottom line / let's get real","from Yiddish/Hebrew תכלית"],["כפרה עליך","kapara alekha","love you, sweetheart (to a guy)","lit. 'an atonement for you'; to a woman: kapara alayikh"],["על הפנים","al ha-panim","terrible, awful","lit. 'on the face'"],["חבל על הזמן","chaval al ha-zman","amazing! (or: waste of time)","context decides"],["אין מצב","ein matsav","no way","also 'is there any chance?' as yesh matsav?"],["סחתיין","sachten","well done, kudos","from Arabic"],["חפיף","chafif","sloppy, half-assed","la'asot chafifa = do a sloppy job"],["דאווין","da'awin","showing off","osé da'awin = shows off"],["אחי","achi","bro","lit. 'my brother'"]],
+build:[["יאללה אחי בוא נזוז","Come on bro, let's move"],["תכל'ס אין מצב שהוא בא","Bottom line, no way he's coming"]],
+dlg:[{ctx:"Your friend: 'נו, איך היה הסרט?'",opts:[["על הפנים, חבל על הכסף","Awful, waste of money",1],["כפרה עליך, תודה","Love you, thanks",0],["אין לי מושג איפה","I have no idea where",0]]}]},
+{id:"m2",title:"Mission 2: Fast Speech",brief:"Real Israelis swallow syllables. Learn to hear them.",
+w:[["אנלא יודע","anla yode'a","I dunno (אני לא יודע)","contraction"],["ת'","t'-","contracted את ה (direct object + 'the')","e.g. תביא ת'מפתח"],["מה'תה אומר","ma'ta omer","you don't say! (מה אתה אומר)",""],["כאילו","ke'ilu","like… (filler)",""],["בקיצור","be-kitsur","long story short",""],["סתם","stam","just kidding / for no reason",""],["שנייה","shniya","one sec",""],["די נו","dai, nu","come on, enough already",""],["יאללה ביי","yalla bye","OK bye (ending a call)",""],["מה קורה","ma kore","what's up",""]],
+build:[["תביא ת'מפתח שנייה","Hand me the key a sec"],["בקיצור אנלא יודע מה לעשות","Long story short, I dunno what to do"]],
+dlg:[{ctx:"Phone call ending. Friend: 'טוב, נדבר מחר'",opts:[["יאללה ביי","OK bye",1],["מה'תה אומר","You don't say!",0],["סתם","Just kidding",0]]}]},
+{id:"m3",title:"Mission 3: Verbs That Matter",brief:"Dative constructions and verbs Israelis use 100 times a day.",
+w:[["בא לי","ba li","I feel like / I want","lit. 'it comes to me'"],["נראה לי","nir'e li","I think / seems to me",""],["אכפת לי","ikhpat li","I care","lo ikhpat li = I don't care"],["יוצא לי","yotse li","I end up / get to (do something)","e.g. lo yotse li lishon"],["הולך לך","holekh lekha","it's going well for you","lo holekh li = it's not working out"],["תעשה לי טובה","ta'ase li tova","do me a favor (often sarcastic)",""],["תקשיב","takshiv","listen (m.)","f: takshivi"],["תירגע","tiraga","calm down (m.)","f: tirag'i"],["נדבר","nedaber","we'll talk","lit. 'we will speak'"],["חכה רגע","chake rega","wait a moment (m.)","f: chaki rega"]],
+build:[["נראה לי שבא לי פלאפל","I think I feel like falafel"],["תקשיב אחי לא אכפת לי","Listen bro, I don't care"]],
+dlg:[{ctx:"Your teammate panics: 'הם כבר פה! מה עושים?!'",opts:[["תירגע, תקשיב לי","Calm down, listen to me",1],["בא לי פיצה","I feel like pizza",0],["נדבר בשבוע הבא","We'll talk next week",0]]}]},
+{id:"m4",title:"Mission 4: Unit Vocabulary",brief:"Radio talk and army words every Israeli knows.",
+w:[["יחידה","yechida","unit",""],["מפקד","mefaked","commander",""],["משימה","mesima","mission, task",""],["מילואים","milu'im","reserve duty",""],["כוננות","konenut","standby, alert",""],["מחסום","machsom","checkpoint, roadblock",""],["קיבלתי","kibalti","copy / roger","lit. 'I received'"],["עבור","avor","over (radio)",""],["ציוד","tsiyud","equipment, gear",""],["תזוזה","tzuza","move out!","army command"]],
+build:[["המפקד אמר שיש כוננות","The commander said there's an alert"],["קיבלתי, אנחנו בתזוזה","Copy, we're moving"]],
+dlg:[{ctx:"Radio: 'שתיים, כאן אחת, תתקדמו למחסום. עבור.'",opts:[["קיבלתי, עבור","Copy, over",1],["וואלה? מה'תה אומר","Really? You don't say",0],["אנלא יודע","I dunno",0]]}]},
+{id:"m5",title:"Mission 5: Idioms",brief:"Sound native: the expressions behind the slang.",
+w:[["על הכיפאק","al ha-kefak","excellent, top-notch","from Arabic kefak"],["ירד לי האסימון","yarad li ha-asimon","the penny dropped (I got it)","asimon = old phone token"],["שם פס","sam pas","doesn't give a damn","sam pas al = ignores"],["חי בסרט","chai be-seret","living in a fantasy","lit. 'lives in a movie'"],["סגרנו","sagarnu","deal! / done","lit. 'we closed'"],["בלי לחץ","bli lachats","no pressure, take your time",""],["אכלתי אותה","akhalti ota","I'm screwed / I blew it","lit. 'I ate it'"],["עף על עצמו","af al atsmo","full of himself","lit. 'flies on himself'"],["לאט לאט","le'at le'at","little by little",""],["יהיה בסדר","yihye be-seder","it'll be OK","national motto"]],
+build:[["ירד לי האסימון, סגרנו","I got it, deal"],["הוא חי בסרט ועף על עצמו","He lives in a fantasy and is full of himself"]],
+dlg:[{ctx:"Friend: 'יש לי מבחן מחר ולא למדתי כלום'",opts:[["אכלת אותה אחי","You're screwed bro",1],["על הכיפאק!","Excellent!",0],["קיבלתי, עבור","Copy, over",0]]}]},
+{id:"m6",title:"Mission 6: Undercover Dialogues",brief:"Longer scenes. Pick what a local would say.",
+w:[["תגיד","tagid","tell me / say (m.)","conversation opener"],["מה הקטע","ma ha-keta","what's the deal?",""],["עזוב","azov","forget it (m.)","f: izvi"],["חלאס","khalas","enough! / done","from Arabic"],["בטוח","batu'ach","sure, of course",""],["אין בעיה","ein be'aya","no problem",""],["תן לי שנייה","ten li shniya","give me a sec (m.)",""],["למה לא","lama lo","why not",""]],
+build:[["תגיד, מה הקטע עם הבחור הזה?","Tell me, what's the deal with that guy?"]],
+dlg:[{ctx:"Café owner: 'אתה לא מפה, נכון? מאיפה אתה?'",opts:[["עזוב, מה זה משנה? תביא קפה","Forget it, what does it matter? Bring coffee",1],["קיבלתי, עבור","Copy, over",0],["מילואים","Reserve duty",0]]},
+{ctx:"Stranger: 'יש לך אש?'",opts:[["אין בעיה, שנייה","No problem, one sec",1],["אכלתי אותה","I blew it",0],["חי בסרט","Living in a fantasy",0]]},
+{ctx:"Doron-type commander: 'חלאס לדבר. תזוזה!'",opts:[["בטוח, יאללה","Sure, let's go",1],["בלי לחץ, מחר","No pressure, tomorrow",0],["מה'תה אומר","You don't say",0]]}]}
+];
+const SONGS=[
+{t:"תל אביב",tr:"Tel Aviv",en:"Tel Aviv (2013, with Arisa) — a party anthem for the city",w:[["עיר","ir","city"],["לילה","laila","night"],["מסיבה","mesiba","party"],["לרקוד","lirkod","to dance"],["ים","yam","sea"]]},
+{t:"שני משוגעים",tr:"Shnei Meshuga'im",en:"Two Crazy People (2018) — Israel's best-selling song of 2017–18",w:[["שני","shnei","two (of)"],["משוגע","meshuga","crazy (m.)"],["משוגעת","meshuga'at","crazy (f.)"],["ביחד","be-yachad","together"],["לב","lev","heart"]]},
+{t:"מלכת הדור",tr:"Malkat Ha-Dor",en:"Queen of the Generation",w:[["מלכה","malka","queen"],["דור","dor","generation"],["יפה","yafa","beautiful (f.)"],["מושלמת","mushlemet","perfect (f.)"]]},
+{t:"רק שלך",tr:"Rak Shelakh",en:"Only Yours",w:[["רק","rak","only"],["שלך","shelakh","yours (f.)"],["שלי","sheli","mine"],["לנצח","la-netsach","forever"],["נשבע","nishba","I swear (m.)"]]},
+{t:"לילות וקללות",tr:"Leilot U-Klalot",en:"Nights and Curses",w:[["לילות","leilot","nights"],["קללה","klala","curse"],["לבד","levad","alone"],["געגועים","ga'agu'im","longing, missing someone"]]},
+{t:"מודה אני",tr:"Mode Ani",en:"I Give Thanks — named after the morning prayer",w:[["מודה","mode","thankful / admit (m.)"],["תודה","toda","thanks"],["נשמה","neshama","soul (also 'sweetie')"],["חיים","chaim","life"]]},
+{t:"השיר שאת אהבת",tr:"Ha-Shir She-At Ahavt",en:"The Song You Loved",w:[["שיר","shir","song"],["אהבת","ahavt","you loved (f.)"],["לזכור","lizkor","to remember"],["פעם","pa'am","once, in the past"]]}
+];
+// ===== STATE =====
+const K="hebgame_v1";let S=JSON.parse(localStorage.getItem(K)||"null")||{xp:0,streak:0,last:"",done:{},missed:{},tr:false};
+function save(){localStorage.setItem(K,JSON.stringify(S));renderStats()}
+function touchStreak(){const d=new Date().toDateString(),y=new Date(Date.now()-864e5).toDateString();if(S.last!==d){S.streak=S.last===y?S.streak+1:1;S.last=d}}
+function renderStats(){document.getElementById("stats").textContent=`⭐ ${S.xp} XP · 🔥 ${S.streak} · 📚 review ${Object.keys(S.missed).length}`}
+const trT=document.getElementById("trT");trT.checked=S.tr;applyTr();trT.onchange=()=>{S.tr=trT.checked;save();applyTr()};
+function applyTr(){document.body.classList.toggle("hide-tr",!S.tr)}
+// ===== TTS =====
+let heVoice=null;function loadV(){if(!window.speechSynthesis)return;heVoice=speechSynthesis.getVoices().find(v=>/^he|iw/i.test(v.lang))||null}
+if(window.speechSynthesis){loadV();speechSynthesis.onvoiceschanged=loadV}
+function say(t){if(!window.speechSynthesis)return;speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t.replace(/'/g,""));u.lang="he-IL";if(heVoice)u.voice=heVoice;u.rate=.9;speechSynthesis.speak(u)}
+// ===== UI HELPERS =====
+const $=id=>document.getElementById(id),app=$("app");
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const shuf=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[a[i],a[j]]=[a[j],a[i]]}return a};
+function wordHTML(w){return `<div class="he">${esc(w[0])} <button onclick='say(${JSON.stringify(w[0])})'>🔊</button></div><div class="tr">${esc(w[1])}</div><div class="en">${esc(w[2])}</div>${w[3]?`<small>${esc(w[3])}</small>`:""}`}
+function home(){touchStreak();save();
+app.innerHTML=`<div class="card"><b>Modes</b><br><button onclick="unitMenu()">🪖 Doron's Unit</button><button onclick="songMenu()">🎤 Omer Adam Concert Prep</button><button onclick="review()">📚 Review missed (${Object.keys(S.missed).length})</button>
+${heVoice?"":`<p><small>No Hebrew voice detected; 🔊 may be silent or accented. Install a Hebrew TTS voice in your OS (or use Chrome/Edge/Safari).</small></p>`}</div>
+<div class="card"><small>Inspired by Fauda's world; all lines are original. Song section teaches titles and theme vocabulary only, not lyrics.</small></div>`}
+function unitMenu(){app.innerHTML=`<button onclick="home()">← Back</button>`+MISSIONS.map((m,i)=>`<div class="card"><b>${m.title}</b> ${S.done[m.id]?"✅ "+S.done[m.id]+"%":""}<br><small>${m.brief}</small><br><button onclick="study(MISSIONS[${i}].w,'${m.id}',()=>play(${i}))">Brief (study)</button><button onclick="play(${i})">Start mission</button></div>`).join("")}
+function study(ws,id,next){let i=0;const r=()=>{app.innerHTML=`<button onclick="home()">← Home</button><div class="card">${wordHTML(ws[i])}</div><small>${i+1}/${ws.length}</small><br><button onclick="window._p()">◀</button><button onclick="window._n()">▶</button><button onclick="window._g()">Start quiz</button>`};
+window._p=()=>{i=Math.max(0,i-1);r()};window._n=()=>{if(i<ws.length-1){i++;r()}else window._g()};window._g=next;r()}
+// ===== QUIZ ENGINE =====
+function makeQs(m){const pool=MISSIONS.flatMap(x=>x.w);const qs=[];
+shuf(m.w).forEach((w,k)=>{const t=["he2en","en2he","listen"][k%3];const d=shuf(pool.filter(x=>x[0]!==w[0])).slice(0,3);qs.push({t,w,opts:shuf([w,...d])})});
+m.build.forEach(b=>qs.push({t:"build",b}));m.dlg.forEach(d=>qs.push({t:"dlg",d}));return qs}
+function play(i){runQuiz(makeQs(MISSIONS[i]),MISSIONS[i].id,MISSIONS[i].title)}
+function runQuiz(qs,id,title){let n=0,ok=0;
+const next=()=>{if(n>=qs.length){const pc=Math.round(100*ok/qs.length);if(id)S.done[id]=Math.max(S.done[id]||0,pc);save();
+app.innerHTML=`<div class="card"><h2>${esc(title)} complete</h2><p>${ok}/${qs.length} correct (${pc}%)</p><button onclick="home()">Home</button></div>`;return}
+const q=qs[n];let h=`<div class="bar"><div style="width:${100*n/qs.length}%"></div></div><div class="card">`;
+const done=(good,w)=>{if(good){ok++;S.xp+=10;if(w)delete S.missed[w[0]]}else if(w)S.missed[w[0]]=w;save();setTimeout(()=>{n++;next()},good?700:1800)};
+if(q.t==="build"){const words=q.b[0].split(" ");h+=`<small>Build the sentence:</small><div class="en"><b>${esc(q.b[1])}</b></div><div id="built"></div><div class="he" id="bank" style="font-size:20px">${shuf(words.map((x,j)=>[x,j])).map(([x,j])=>`<span class="chip" data-w="${esc(x)}">${esc(x)}</span>`).join("")}</div><button id="chk">Check</button><button id="clr">Clear</button></div>`;app.innerHTML=h;
+const built=[];document.querySelectorAll("#bank .chip").forEach(c=>c.onclick=()=>{built.push(c.dataset.w);c.style.visibility="hidden";$("built").innerHTML=built.map(x=>`<span class="chip">${esc(x)}</span>`).join("")});
+$("clr").onclick=()=>{built.length=0;$("built").innerHTML="";document.querySelectorAll("#bank .chip").forEach(c=>c.style.visibility="")};
+$("chk").onclick=()=>{const g=built.join(" ")===q.b[0];$("built").innerHTML+=`<div class="${g?"":"en"}">${g?"✅":"❌ "+esc(q.b[0])}</div>`;say(q.b[0]);done(g,g?null:[q.b[0],"",q.b[1]])};return}
+if(q.t==="dlg"){h+=`<small>Scenario — what do you say?</small><div class="he" style="font-size:22px">${esc(q.d.ctx)}</div><button onclick='say(${JSON.stringify(q.d.ctx)})'>🔊</button>`+shuf(q.d.opts).map(o=>`<button class="opt" data-c="${o[2]}"><span class="he" style="font-size:20px">${esc(o[0])}</span><br><small class="hint" style="display:none">${esc(o[1])}</small></button>`).join("")+`</div>`;app.innerHTML=h;
+document.querySelectorAll(".opt").forEach(b=>b.onclick=()=>{document.querySelectorAll(".opt").forEach(x=>{x.classList.add(x.dataset.c==="1"?"ok":"bad");x.querySelector(".hint").style.display=""});const r=q.d.opts.find(o=>o[2]);say(r[0]);done(b.dataset.c==="1",b.dataset.c==="1"?null:[r[0],"",r[1]])});return}
+const w=q.w;if(q.t==="he2en")h+=`<small>What does it mean?</small><div class="he">${esc(w[0])}</div><div class="tr">${esc(w[1])}</div>`;
+if(q.t==="en2he")h+=`<small>Pick the Hebrew:</small><div class="en" style="font-size:22px">${esc(w[2])}</div>`;
+if(q.t==="listen"){h+=`<small>Listen and pick:</small><br><button id="pl">🔊 Play</button>`;setTimeout(()=>say(w[0]),300)}
+h+=q.opts.map((o,j)=>`<button class="opt" data-j="${j}">${q.t==="he2en"?esc(o[2]):`<span class="he" style="font-size:22px">${esc(o[0])}</span> <span class="tr">${esc(o[1])}</span>`}</button>`).join("")+"</div>";app.innerHTML=h;
+if($("pl"))$("pl").onclick=()=>say(w[0]);
+document.querySelectorAll(".opt").forEach(b=>b.onclick=()=>{const g=q.opts[b.dataset.j][0]===w[0];document.querySelectorAll(".opt").forEach(x=>x.classList.add(q.opts[x.dataset.j][0]===w[0]?"ok":"bad"));if(q.t!=="listen")say(w[0]);done(g,w)})};next()}
+// ===== SONGS =====
+function songMenu(){app.innerHTML=`<button onclick="home()">← Back</button><div class="card"><button onclick="chorusDrill()">🎶 Chorus-words drill (all songs)</button></div>`+SONGS.map((s,i)=>`<div class="card"><div class="he">${esc(s.t)}</div><div class="tr">${esc(s.tr)}</div><div class="en">${esc(s.en)}</div>${S.done["s"+i]?"✅ "+S.done["s"+i]+"%":""}<br><button onclick="study(SONGS[${i}].w,'s${i}',()=>songQuiz(${i}))">Flashcards</button><button onclick="songQuiz(${i})">Quiz</button><a target="_blank" rel="noopener" href="https://www.youtube.com/results?search_query=${encodeURIComponent("עומר אדם "+s.t+" official")}">▶ YouTube</a></div>`).join("")}
+function qFor(ws,pool){return shuf(ws).map((w,k)=>({t:["he2en","listen","en2he"][k%3],w,opts:shuf([w,...shuf(pool.filter(x=>x[0]!==w[0])).slice(0,3)])}))}
+const SPOOL=()=>SONGS.flatMap(s=>s.w);
+function songQuiz(i){const s=SONGS[i];const title=[s.t,s.tr,"title: "+s.en.split(" (")[0].split(" —")[0]];runQuiz(qFor([title,...s.w],[...SPOOL(),...SONGS.map(x=>[x.t,x.tr,"title: "+x.en.split(" (")[0].split(" —")[0]])]),"s"+i,s.t)}
+function chorusDrill(){const ws=shuf(SPOOL()).slice(0,12);runQuiz(ws.map(w=>({t:"listen",w,opts:shuf([w,...shuf(SPOOL().filter(x=>x[0]!==w[0])).slice(0,3)])})),null,"Chorus-words drill")}
+function review(){const ws=Object.values(S.missed);if(!ws.length){app.innerHTML=`<div class="card">Nothing to review 🎉</div><button onclick="home()">Home</button>`;return}
+const pool=[...MISSIONS.flatMap(x=>x.w),...SPOOL()];const single=ws.filter(w=>w[1]),sent=ws.filter(w=>!w[1]);
+runQuiz([...qFor(single,pool),...sent.map(w=>({t:"build",b:[w[0],w[2]]}))],null,"Review")}
+home();
+</script></body></html>
