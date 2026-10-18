@@ -56,7 +56,9 @@ const LESSONS=[
 {id:2,href:'lesson-2.html',title:'"They trained us like dogs"',clip:'אימנו אותנו כמו כלבים',mins:'1:28',day:'Day 2',
  review:[{he:'ככה אימנו אותנו',en:"That's how they trained us"},{he:'לא מעניין אותו כלום',en:"He couldn't care less"},{he:'הוא רץ ישר',en:'He runs straight'}]},
 {id:3,href:'lesson-3.html',title:'"Put your hands up"',clip:'תרים את הידיים',mins:'0:57',day:'Day 3',
- review:[{he:'תוריד את האקדח',en:'Put the gun down'},{he:'תני לי לטפל בזה',en:'Let me handle this (to a woman)'},{he:'הכול בסדר',en:"Everything's OK"}]}
+ review:[{he:'תוריד את האקדח',en:'Put the gun down'},{he:'תני לי לטפל בזה',en:'Let me handle this (to a woman)'},{he:'הכול בסדר',en:"Everything's OK"}]},
+{id:4,href:'lesson-4.html',title:'"Answer already!"',clip:'דורון וגלי בפיצוץ',mins:'1:03',day:'Day 4',
+ review:[{he:'נו, תעני כבר!',en:'Come on, answer already! (to a woman)'},{he:'על מה את מדברת?',en:'What are you talking about? (to a woman)'},{he:'זה נגמר מזמן',en:'It ended a long time ago'}]}
 ];
 const START='2026-10-15'; // Day 1 anchor (America/New_York calendar)
 function todayKey(){
@@ -105,7 +107,7 @@ LESSONS.forEach(L=>{
 const rev=document.getElementById('review');
 const prior=LESSONS.filter(L=>L.id<todayLesson.id);
 const pool=(prior.length?prior:LESSONS.slice(0,1)).flatMap(L=>L.review.map(r=>({...r,from:L.title,href:L.href})));
-pool.slice(0,6).forEach(r=>{
+pool.slice(-6).forEach(r=>{
   const c=document.createElement('a');c.href=r.href;c.className='card review';
   c.innerHTML=`<div class="meta">From ${r.from}</div><div class="heb he">${r.he}</div><div class="en">${r.en}</div>`;
   rev.appendChild(c);
