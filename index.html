@@ -3,115 +3,12 @@
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Ivrit × Fauda — Daily Hebrew</title>
 <meta name="theme-color" content="#0f1115">
+<link rel="icon" href="data:,">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Heebo:wght@400;600;800&display=swap" rel="stylesheet">
-<style>
-:root{--bg:#0f1115;--card:#181b22;--card2:#20242d;--line:#2a2f3a;--tx:#eef0f4;--mut:#9aa3b2;--acc:#e5a33a;--ok:#3ecf8e}
-*{box-sizing:border-box}html,body{margin:0;background:var(--bg);color:var(--tx);font-family:Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
-.he{font-family:Heebo,sans-serif;direction:rtl;unicode-bidi:isolate}
-.wrap{max-width:640px;margin:0 auto;padding:0 16px 100px}
-header{position:sticky;top:0;z-index:5;background:rgba(15,17,21,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
-header .wrap{display:flex;align-items:center;justify-content:space-between;padding:12px 16px}
-.logo{font-weight:800}.logo b{color:var(--acc)}
-.streak{font-size:13px;font-weight:700;color:var(--acc);background:var(--card2);border:1px solid var(--line);border-radius:999px;padding:6px 12px}
-h1{font-size:26px;margin:22px 0 4px}
-.sub{color:var(--mut);font-size:14px;line-height:1.5}
-.tag{display:inline-block;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:var(--acc);margin-top:18px}
-.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;margin:12px 0;display:block;color:inherit;text-decoration:none;transition:border-color .15s}
-.card:hover{border-color:var(--acc)}
-.card.today{border-color:var(--acc);box-shadow:0 0 0 1px rgba(229,163,58,.25)}
-.row{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
-.badge{flex:none;font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.6px;background:var(--acc);color:#111;border-radius:999px;padding:4px 10px}
-.badge.done{background:var(--ok)}
-.badge.locked{background:var(--card2);color:var(--mut)}
-.lesson-title{font-size:18px;font-weight:800;margin:6px 0 4px}
-.meta{font-size:13px;color:var(--mut)}
-.review .heb{font-size:20px;font-weight:800;margin-top:8px}
-.review .en{font-size:14px;color:var(--mut);margin-top:2px}
-.pill{display:inline-block;font-size:11px;padding:3px 8px;border-radius:999px;background:var(--card2);color:var(--mut);margin:8px 6px 0 0}
-.foot{color:var(--mut);font-size:12px;line-height:1.6;margin-top:36px}
-.foot a{color:var(--mut)}
-</style></head><body>
-<header><div class="wrap"><div class="logo">Ivrit <b>×</b> Fauda</div><div class="streak" id="streak">🔥 —</div></div></header>
-<main class="wrap">
-<div class="tag">Daily lessons · Intermediate</div>
-<h1>Street Hebrew from Fauda</h1>
-<div class="sub">One official yes-tv clip a day. Watch, learn the lines that came through clearly, then practice. Built for living in Israel — slang, short commands, real talk.</div>
-
-<section id="lessons"></section>
-
-<h2 style="font-size:19px;margin:30px 0 10px">Quick review</h2>
-<div class="sub">A few phrases from earlier lessons. Tap a lesson to hear them in the clip.</div>
-<section id="review"></section>
-
-<div class="foot">
-Video © yes / Fauda. Clips are embedded from the official YouTube channel and not copied here. Not affiliated with yes or Netflix.<br>
-<a href="v2/">Previous version (v2 story game)</a>
-</div>
-</main>
-<script>
-const LESSONS=[
-{id:1,href:'lesson-1.html',title:'"Hands up, Boaz"',clip:'בועז תרים ידיים',mins:'2:26',day:'Day 1',
- review:[{he:'מה עובר עליך?',en:"What's gotten into you?"},{he:'לך הביתה',en:'Go home'},{he:'סיבוב אחרון',en:'One last round'}]},
-{id:2,href:'lesson-2.html',title:'"They trained us like dogs"',clip:'אימנו אותנו כמו כלבים',mins:'1:28',day:'Day 2',
- review:[{he:'ככה אימנו אותנו',en:"That's how they trained us"},{he:'לא מעניין אותו כלום',en:"He couldn't care less"},{he:'הוא רץ ישר',en:'He runs straight'}]},
-{id:3,href:'lesson-3.html',title:'"Put your hands up"',clip:'תרים את הידיים',mins:'0:57',day:'Day 3',
- review:[{he:'תוריד את האקדח',en:'Put the gun down'},{he:'תני לי לטפל בזה',en:'Let me handle this (to a woman)'},{he:'הכול בסדר',en:"Everything's OK"}]},
-{id:4,href:'lesson-4.html',title:'"Answer already!"',clip:'דורון וגלי בפיצוץ',mins:'1:03',day:'Day 4',
- review:[{he:'נו, תעני כבר!',en:'Come on, answer already! (to a woman)'},{he:'על מה את מדברת?',en:'What are you talking about? (to a woman)'},{he:'זה נגמר מזמן',en:'It ended a long time ago'}]},
-{id:5,href:'lesson-5.html',title:'"Get on your bike and go"',clip:'דיר בלאק אתם מאחרים!',mins:'1:11',day:'Day 5',
- review:[{he:'יאללה, סע מפה',en:'Go on, get out of here'},{he:'אחי, אמרנו ריצה קלה',en:'Bro, we said an easy run (we agreed)'},{he:'שמעתי עליך כבר',en:"I've already heard about you"}]}
-];
-const START='2026-10-15'; // Day 1 anchor (America/New_York calendar)
-function todayKey(){
-  const fmt=new Intl.DateTimeFormat('en-CA',{timeZone:'America/New_York',year:'numeric',month:'2-digit',day:'2-digit'});
-  return fmt.format(new Date());
-}
-function dayIndex(){
-  const t=todayKey(),[y,m,d]=START.split('-').map(Number),[Y,M,D]=t.split('-').map(Number);
-  const a=Date.UTC(y,m-1,d),b=Date.UTC(Y,M-1,D);
-  return Math.floor((b-a)/86400000)+1; // 1-based
-}
-function loadDone(){try{return JSON.parse(localStorage.fxLessons||'{}')}catch(e){return{}}}
-function saveDone(o){localStorage.fxLessons=JSON.stringify(o)}
-function streakInfo(){
-  const done=loadDone();
-  let s=+localStorage.fxStreak||0;
-  const last=localStorage.fxLastDay||'';
-  const t=todayKey();
-  // display only; streak bumps when a lesson is completed (lessons write fxLastDay)
-  if(last===t) return s||1;
-  // if last was yesterday, show current streak; else reset display to 0 until they complete today
-  const yest=(()=>{const [Y,M,D]=t.split('-').map(Number);const dt=new Date(Date.UTC(Y,M-1,D-1));return dt.toISOString().slice(0,10)})();
-  if(last===yest) return s;
-  if(last && last!==t) { /* cold */ return 0; }
-  return s;
-}
-const idx=Math.min(Math.max(dayIndex(),1),LESSONS.length);
-const todayLesson=LESSONS[idx-1];
-const done=loadDone();
-document.getElementById('streak').textContent='🔥 '+(streakInfo()||0)+' day streak';
-const box=document.getElementById('lessons');
-LESSONS.forEach(L=>{
-  const isToday=L.id===todayLesson.id;
-  const isDone=!!done[L.id];
-  const unlocked=L.id<=idx;
-  const badge=isToday?'Today':(isDone?'Done':(unlocked?'Open':'Soon'));
-  const bclass=isToday?'':(isDone?'done':(unlocked?'':'locked'));
-  const a=document.createElement(unlocked?'a':'div');
-  if(unlocked) a.href=L.href;
-  a.className='card'+(isToday?' today':'');
-  a.innerHTML=`<div class="row"><div class="meta">${L.day} · Intermediate · ${L.mins}</div><span class="badge ${bclass}">${badge}</span></div>
-    <div class="lesson-title">${L.title}</div>
-    <div class="meta">Official yes tv clip · <span class="he">${L.clip}</span></div>`;
-  box.appendChild(a);
-});
-const rev=document.getElementById('review');
-const prior=LESSONS.filter(L=>L.id<todayLesson.id);
-const pool=(prior.length?prior:LESSONS.slice(0,1)).flatMap(L=>L.review.map(r=>({...r,from:L.title,href:L.href})));
-pool.slice(-6).forEach(r=>{
-  const c=document.createElement('a');c.href=r.href;c.className='card review';
-  c.innerHTML=`<div class="meta">From ${r.from}</div><div class="heb he">${r.he}</div><div class="en">${r.en}</div>`;
-  rev.appendChild(c);
-});
-</script></body></html>
+<link rel="stylesheet" href="assets/ivx.css?v=4">
+</head><body>
+<script src="assets/lesson.js?v=4"></script>
+<script src="data/catalog.js"></script>
+<script>IVX.home();</script>
+</body></html>

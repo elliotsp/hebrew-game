@@ -1,135 +1,14 @@
 <!doctype html>
 <html lang="en"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Ivrit × Fauda — Lesson 1: "Hands up, Boaz"</title>
+<title>Ivrit × Fauda — Lesson 1: “Hands up, Boaz”</title>
 <meta name="theme-color" content="#0f1115">
+<link rel="icon" href="data:,">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Heebo:wght@400;600;800&display=swap" rel="stylesheet">
-<style>
-:root{--bg:#0f1115;--card:#181b22;--card2:#20242d;--line:#2a2f3a;--tx:#eef0f4;--mut:#9aa3b2;--acc:#e5a33a;--ok:#3ecf8e;--bad:#ff5d5d}
-*{box-sizing:border-box}html,body{margin:0;background:var(--bg);color:var(--tx);font-family:Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
-.he{font-family:Heebo,sans-serif;direction:rtl;unicode-bidi:isolate}
-.wrap{max-width:640px;margin:0 auto;padding:0 16px 120px}
-header{position:sticky;top:0;z-index:5;background:rgba(15,17,21,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
-header .wrap{display:flex;align-items:center;gap:12px;padding:12px 16px}
-.logo{font-weight:800;letter-spacing:.3px}.logo b{color:var(--acc)}
-.bar{flex:1;height:8px;background:var(--card2);border-radius:9px;overflow:hidden}.bar i{display:block;height:100%;width:0;background:var(--acc);transition:width .4s}
-.xp{font-weight:700;color:var(--acc);font-size:14px}
-h1{font-size:26px;margin:22px 0 4px}h2{font-size:19px;margin:30px 0 10px}
-.sub{color:var(--mut);font-size:14px;line-height:1.5}
-.tag{display:inline-block;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:var(--acc);margin-top:18px}
-.video{position:relative;padding-top:56.25%;border-radius:14px;overflow:hidden;background:#000;margin-top:14px}
-.video iframe,.video #player{position:absolute;inset:0;width:100%;height:100%;border:0}
-.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;margin:12px 0}
-.note{font-size:13px;color:var(--mut);border-left:3px solid var(--acc);padding:8px 12px;background:var(--card);border-radius:8px;margin:12px 0;line-height:1.5}
-.tabs{display:flex;gap:8px;overflow-x:auto;margin:20px 0 4px;padding-bottom:4px}
-.tabs button{flex:none;background:var(--card);color:var(--mut);border:1px solid var(--line);border-radius:999px;padding:9px 14px;font:600 14px Inter;cursor:pointer}
-.tabs button.on{background:var(--acc);color:#111;border-color:var(--acc)}
-.phrase .top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
-.phrase .heb{font-size:26px;font-weight:800}
-.phrase .tr{color:var(--mut);font-size:13px;margin-top:2px}
-.phrase .en{font-size:16px;font-weight:600;margin-top:8px}
-.pill{display:inline-block;font-size:11px;padding:3px 8px;border-radius:999px;background:var(--card2);color:var(--mut);margin:8px 6px 0 0}
-.phrase p{font-size:14px;line-height:1.55;color:#cfd4dd;margin:10px 0 0}
-.play{flex:none;background:var(--card2);color:var(--tx);border:1px solid var(--line);border-radius:12px;padding:8px 10px;font:600 12px Inter;cursor:pointer;white-space:nowrap}
-.play:active{transform:scale(.97)}
-.q .prompt{font-size:16px;font-weight:600;line-height:1.45;margin-bottom:12px}
-.q .prompt .he{font-size:22px}
-.opt{display:block;width:100%;text-align:inherit;background:var(--card2);color:var(--tx);border:2px solid var(--line);border-radius:12px;padding:13px 14px;margin:8px 0;font:500 15px Inter;cursor:pointer}
-.opt.he{text-align:right;font:600 18px Heebo}
-.opt.ok{border-color:var(--ok);background:rgba(62,207,142,.12)}.opt.bad{border-color:var(--bad);background:rgba(255,93,93,.1)}
-.fb{font-size:14px;line-height:1.5;margin-top:8px;display:none}.fb.show{display:block}
-.gap{display:inline-block;min-width:70px;border-bottom:2px dashed var(--acc);text-align:center}
-.foot{color:var(--mut);font-size:12px;line-height:1.6;margin-top:36px}
-.foot a{color:var(--mut)}
-.toggle{font-size:13px;color:var(--mut);display:flex;align-items:center;gap:8px;margin-top:10px}
-.done{text-align:center;padding:24px}.done .big{font-size:44px}
-.hide-tr .tr{display:none}
-</style></head><body>
-<header><div class="wrap"><a href="index.html" class="logo" style="color:inherit;text-decoration:none">Ivrit <b>×</b> Fauda</a><div class="bar"><i id="prog"></i></div><div class="xp" id="xp">0 XP</div></div></header>
-<main class="wrap">
-<div class="tag">Lesson 1 · Intermediate</div>
-<h1>"Hands up, Boaz"</h1>
-<div class="sub">A sparring match turns into a fight. Somebody's been drinking, and somebody feels betrayed. It's full of the short, blunt Hebrew Israelis use when tempers run hot.</div>
-
-<div class="video"><div id="player"></div></div>
-<div class="sub" style="margin-top:8px">Official clip from <b>yes tv (יס)</b>, the Israeli broadcaster that made Fauda · 2:26 · <a style="color:var(--acc)" href="https://www.youtube.com/watch?v=Kadoae8XfOY" target="_blank" rel="noopener">Open on YouTube</a></div>
-<div class="note"><b>How to use this:</b> watch once with no help. Then go through the phrases, and tap <b>▶ in clip</b> to hear each line from the actors. Watch again at the end. You'll catch way more the second time. The clip has no subtitles, so turn on YouTube's CC → Hebrew (auto-generated) for help.</div>
-
-<div class="tabs" id="tabs">
-<button data-t="phrases" class="on">1 · Phrases</button><button data-t="comp">2 · What happened?</button><button data-t="gap">3 · Fill the gap</button><button data-t="respond">4 · Your move</button>
-</div>
-<label class="toggle"><input type="checkbox" id="trT" checked> Show transliteration</label>
-<section id="view"></section>
-
-<div class="foot">
-<b>About the Hebrew.</b> The lines here come from YouTube's auto-generated Hebrew captions for this clip, and I only used lines that came through clearly. They haven't been checked against an official script, so trust your ears over the text. Nikud is left out the way Israelis write; transliteration is approximate. The scene summary is my reading of the dialogue, not an official synopsis.<br>
-Video © yes / Fauda. It's embedded from the official YouTube channel and not copied here. Not affiliated with yes or Netflix.<br>
-<a href="index.html">All lessons</a> · <a href="v2/">Previous version (v2 story game)</a>
-</div>
-</main>
-<script src="https://www.youtube.com/iframe_api"></script>
-<script>
-const VID='Kadoae8XfOY';
-const P=[
-{he:'תרים ידיים',tr:'tarim yadayim',en:'Hands up! (keep your guard up)',t:13,reg:['Command','Everyday'],
- p:'In the ring, it means guard up. In the army it also means hands up / surrender. Spoken Hebrew uses the future tense (תרים) as a command. Almost nobody says the textbook imperative הרם.'},
-{he:'שמור על הפרצוף',tr:'shmor al ha-partsuf',en:'Protect your face',t:13,reg:['Sparring','Slangy'],
- p:'פרצוף is a casual, slightly rough word for face. Neutral is פנים. You hear פרצוף in phrases like עשה פרצוף, "he made a face". Here שמור is a real imperative ("guard").'},
-{he:'אחי',tr:'achi',en:'Bro',t:13,reg:['Slang','Very common'],
- p:'Literally "my brother". Guys use it all the time, even mid-fight like here, sometimes as a warning ("bro, calm down"). The tone does all the work.'},
-{he:'מה עובר עליך?',tr:'ma over alecha?',en:"What's going on with you? / What's gotten into you?",t:23,reg:['Everyday','Emotional'],
- p:'Literally "what is passing over you". You use it when someone is acting strangely, either out of concern or out of irritation. To a woman: מה עובר עלייך (alayich).'},
-{he:'לך הביתה',tr:'lech ha-bayta',en:'Go home',t:40,reg:['Blunt'],
- p:'הביתה = "to home". The ה- ending means "toward". Here it means: you are in no state to be here. Later in the scene you hear the softer version: לך הביתה ותנוח, "go home and rest".'},
-{he:'יא אפס',tr:'ya efes',en:'You zero / you loser',t:40,reg:['Insult','Street'],
- p:'יא is borrowed from Arabic and means roughly "you…!". It goes in front of an insult or a nickname (יא מניאק, יא חביבי). אפס literally means zero. It\'s a real insult, so use it with care.'},
-{he:'שתית קצת יותר מדי',tr:'shatita ktsat yoter midai',en:'You drank a bit too much',t:55,reg:['Everyday'],
- p:'יותר מדי means "too much". The קצת ("a bit") softens it. People really do talk this way to save face for someone.'},
-{he:'לעשות קומבינות מאחורי הגב',tr:'la\'asot kombinot me\'achorei ha-gav',en:'To pull schemes behind (my) back',t:62,reg:['Slang','Very Israeli'],
- p:'קומבינה is a classic Israeli word for a shady arrangement or a clever workaround. Depending on the tone it can be admiring (קומבינטור, "a fixer") or an accusation, like here. מאחורי הגב works the same as in English.'},
-{he:'זה מסוכן לא רק לך, אלא גם לצוות שלך',tr:'ze mesukan lo rak lecha, ela gam la-tsevet shelcha',en:"It's dangerous not only for you, but for your team too",t:71,reg:['Serious','Fuller sentence'],
- p:'"לא רק… אלא גם" means "not only… but also". It sounds a bit more formal and controlled, and you can hear the change of tone from the shouting.'},
-{he:'סיבוב אחרון',tr:'sivuv acharon',en:'One last round',t:75,reg:['Everyday'],
- p:'סיבוב = a round or a lap. In everyday talk it\'s also a round of drinks (סיבוב על חשבוני, "this round\'s on me") or a spin, as in בוא נעשה סיבוב, "let\'s take a drive or walk around".'}
-];
-const COMP=[
-{q:'At the start, what kind of situation is this?',o:['A sparring / boxing session','A police interrogation','A family dinner'],a:0,f:'You hear תרים ידיים and שמור על הפרצוף. That\'s sparring talk.'},
-{q:'What does one of them say is wrong with the other?',o:['He drank a bit too much','He\'s sick','He\'s late'],a:0,f:'נראה לי שתית קצת יותר מדי: "I think you drank a bit too much".'},
-{q:'What is the accusation about קומבינות מאחורי הגב?',o:['Scheming behind his back to get him kicked off the team','Stealing money','Lying to his wife'],a:0,f:'You hear "…להעיף אותי מהצוות שלי, מהיחידה שלי", "to kick me off my team, my unit".'},
-{q:'Why should he go home, according to the calmer voice?',o:['What he\'s doing is dangerous for him and for the team','The gym is closing','His mother called'],a:0,f:'מה שאתה עושה עכשיו מסוכן לא רק לך אלא גם לצוות שלך.'}
-];
-const GAP=[
-{s:'נראה לי ש___ קצת יותר מדי.',o:['שתית','אכלת','ישנת'],a:0,f:'שתית: you drank. Drinking is the problem in the scene.'},
-{s:'בוא, סיבוב ___.',o:['אחרון','ראשון','גדול'],a:0,f:'סיבוב אחרון: one last round.'},
-{s:'אחי, מה ___ עליך?',o:['עובר','הולך','בא'],a:0,f:'מה עובר עליך is the fixed expression.'},
-{s:'לך ___ ותנוח.',o:['הביתה','בבית','לבית'],a:0,f:'הביתה is "(to) home". You need the direction form after לך.'},
-{s:'הוא עשה ___ מאחורי הגב שלי.',o:['קומבינות','פרצופים','סיבובים'],a:0,f:'קומבינות: schemes.'}
-];
-const RESP=[
-{c:'Your friend is clearly drunk at a party and starts shoving people. You want to say, gently but firmly:',o:['אחי, שתית קצת יותר מדי. לך הביתה ותנוח.','יא אפס, תרים ידיים!','אני מבקש שתעזוב את המקום מיד.'],a:0,f:['Right: caring but firm. That\'s exactly the tone from the scene.','That would start a fight. יא אפס is an insult.','Grammatical, but way too formal. It sounds like a security guard reading off a sign.']},
-{c:'A coworker who\'s usually chill snaps at you for no reason. You ask:',o:['מה עובר עליך?','מה עובר אותך?','מה קורה לך עליך?'],a:0,f:['Perfect, natural.','Wrong preposition. It\'s always עובר על.','Not a real phrase.']},
-{c:'Your buddy offers to buy drinks. You say "Next round\'s on me":',o:['הסיבוב הבא עליי.','הסיבוב האחרון שלך.','אני עושה סיבוב.'],a:0,f:['Yes. Paying for something is X עליי, "X is on me".','That means "your last round". Not what you meant.','That means "I\'m taking a spin / walk".']},
-{c:'At the gym, your sparring partner keeps dropping his guard. You shout:',o:['תרים ידיים, אחי!','הרם את ידיך, אחי!','תוריד ידיים!'],a:0,f:['Exactly what you hear in the clip.','Biblical-textbook register. Nobody talks like that at the gym.','That\'s the opposite: "put your hands down".']}
-];
-let xp=+localStorage.fxp||0,done=new Set(JSON.parse(localStorage.fdone||'[]')),player,ready=false;
-const total=COMP.length+GAP.length+RESP.length;
-function save(){localStorage.fxp=xp;localStorage.fdone=JSON.stringify([...done]);document.getElementById('xp').textContent=xp+' XP';document.getElementById('prog').style.width=(done.size/total*100)+'%'}
-function onYouTubeIframeAPIReady(){player=new YT.Player('player',{videoId:VID,playerVars:{rel:0,playsinline:1,modestbranding:1,cc_lang_pref:'iw'},events:{onReady:()=>ready=true}})}
-function seek(t){const s=Math.max(0,t-1);if(ready){player.seekTo(s,true);player.playVideo();setTimeout(()=>{try{player.pauseVideo()}catch(e){}},7000)}else window.open('https://www.youtube.com/watch?v='+VID+'&t='+s+'s');document.querySelector('.video').scrollIntoView({behavior:'smooth',block:'center'})}
-const $=h=>{const d=document.createElement('div');d.innerHTML=h;return d.firstElementChild};
-function quiz(list,key,render){const v=document.getElementById('view');v.innerHTML='';list.forEach((it,i)=>{const id=key+i;const c=$(`<div class="card q"><div class="prompt">${render(it)}</div></div>`);
- const fb=$('<div class="fb"></div>');const ord=it.o.map((_,k)=>k).sort(()=>Math.random()-.5);ord.forEach(j=>{const o=it.o[j];const b=$(`<button class="opt ${/[א-ת]/.test(o)?'he':''}">${o}</button>`);b.onclick=()=>{if(c.dataset.ans)return;c.dataset.ans=1;b.classList.add(j===it.a?'ok':'bad');c.querySelectorAll('.opt')[ord.indexOf(it.a)].classList.add('ok');
- fb.innerHTML=(j===it.a?'✅ ':'❌ ')+(Array.isArray(it.f)?it.f[j]:it.f);fb.classList.add('show');if(j===it.a&&!done.has(id)){xp+=10}done.add(id);save();if([...done].length===total)finish()};c.appendChild(b)});c.appendChild(fb);v.appendChild(c)})}
-function markLesson(id){const d=JSON.parse(localStorage.fxLessons||'{}');d[id]=1;localStorage.fxLessons=JSON.stringify(d);const fmt=new Intl.DateTimeFormat('en-CA',{timeZone:'America/New_York',year:'numeric',month:'2-digit',day:'2-digit'});const t=fmt.format(new Date());const last=localStorage.fxLastDay||'';if(last!==t){const y=(()=>{const[Y,M,D]=t.split('-').map(Number);return new Date(Date.UTC(Y,M-1,D-1)).toISOString().slice(0,10)})();localStorage.fxStreak=(last===y?(+localStorage.fxStreak||0)+1:1);localStorage.fxLastDay=t}}
-function finish(){markLesson(1);document.getElementById('view').appendChild($(`<div class="card done"><div class="big">🎬</div><h2>Lesson complete</h2><div class="sub">Now watch the clip once more, this time without captions. Count how many lines you understand.</div><a class="opt" style="text-align:center;display:block;text-decoration:none" href="index.html">← Back to today's list</a><button class="opt" style="text-align:center" onclick="seek(1)">▶ Rewatch the scene</button></div>`))}
-const views={
-phrases(){const v=document.getElementById('view');v.innerHTML='';P.forEach(p=>{v.appendChild($(`<div class="card phrase"><div class="top"><div><div class="heb he">${p.he}</div><div class="tr">${p.tr}</div></div><button class="play" onclick="seek(${p.t})">▶ in clip ~${Math.floor(p.t/60)}:${String(p.t%60).padStart(2,'0')}</button></div><div class="en">${p.en}</div>${p.reg.map(r=>`<span class="pill">${r}</span>`).join('')}<p>${p.p}</p></div>`))})},
-comp(){quiz(COMP,'c',it=>it.q)},
-gap(){quiz(GAP,'g',it=>`<div class="he">${it.s.replace('___','<span class="gap">?</span>')}</div>`)},
-respond(){quiz(RESP,'r',it=>it.c)}
-};
-document.getElementById('tabs').onclick=e=>{const b=e.target.closest('button');if(!b)return;document.querySelectorAll('.tabs button').forEach(x=>x.classList.toggle('on',x===b));views[b.dataset.t]()};
-document.getElementById('trT').onchange=e=>document.body.classList.toggle('hide-tr',!e.target.checked);
-views.phrases();save();
-</script></body></html>
+<link rel="stylesheet" href="assets/ivx.css?v=4">
+</head><body>
+<script src="assets/lesson.js?v=4"></script>
+<script src="data/lesson-1.js"></script>
+<script>IVX.lessonPage(1);</script>
+</body></html>
