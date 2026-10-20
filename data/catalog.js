@@ -46,6 +46,15 @@ window.IVX_CATALOG=[
   "mins": "1:11"
  },
  {
+  "day": 6,
+  "type": "lesson",
+  "id": 6,
+  "href": "lesson-6.html",
+  "title": "“Whoever wants to, come along”",
+  "clip": "בועז, אל תדאג",
+  "mins": "2:44"
+ },
+ {
   "day": 7,
   "type": "rewatch",
   "week": 1,

@@ -11,7 +11,7 @@ const newPage=async(u)=>{const p=await ctx.newPage();p.on('pageerror',e=>errs.pu
 // home
 let p=await newPage('index.html');await p.waitForTimeout(1500);log('HOME cards:',await p.$$eval('.card',e=>e.length),'| today:',await p.$eval('.card.hl .lt',e=>e.textContent).catch(()=>null));
 await p.screenshot({path:'/tmp/ytt/home.png',fullPage:true});await p.close();
-for(const n of [1,2,3,4,5]){p=await newPage('lesson-'+n+'.html');
+for(const n of [1,2,3,4,5,6]){p=await newPage('lesson-'+n+'.html');
  await p.waitForFunction(()=>IVX._player&&IVX._player.ready,null,{timeout:25000}).catch(()=>log('L'+n,'player not ready'));
  const steps=[];for(let i=0;i<7;i++){await p.evaluate(i=>IVX._go(i),i);await p.waitForTimeout(250);steps.push(await p.evaluate(()=>{const v=document.querySelector('section');return v.querySelectorAll('.card').length+'c/'+v.querySelectorAll('button').length+'b'}))}
  log('L'+n,'steps',steps.join(' '));
