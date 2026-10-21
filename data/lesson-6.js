@@ -24,16 +24,16 @@ IVX.register({
  },
  "lines": [
   {
-   "he": "בועז, מה שאתה עושה עכשיו מסוכן, לא רק לך אלא גם לצוות שלך",
-   "tr": "Boaz, ma she-ata ose achshav mesukan, lo rak lecha ela gam la-tsevet shelcha",
+   "he": "בועז, מה שאתה עושה עכשיו מסוכן, לא רק לְךָ אלא גם לצוות שלך",
+   "tr": "Bóaz, ma she-ata ose akhshav mesukan, lo rak lekha éla gam la-tsévet shelkha",
    "en": "Boaz, what you’re doing now is dangerous, not just for you but for your team too",
-   "note": "לא רק X אלא גם Y = not only X but also Y. לא רק בשבילי, אלא גם בשבילך.",
+   "note": "לא רק… אלא גם… = not only… but also…: לא רק בשבילי, אלא גם בשבילך.",
    "start": 53.2,
    "end": 57.3
   },
   {
-   "he": "לך הביתה ותנוח",
-   "tr": "lech ha-bayta ve-tanu’ach",
+   "he": "לֵךְ הביתה ותָנוּחַ",
+   "tr": "lekh ha-báyta ve-tanúakh",
    "en": "Go home and rest (to a man)",
    "note": "To a woman: לכי הביתה ותנוחי. הביתה = (to) home.",
    "start": 57.2,
@@ -41,15 +41,15 @@ IVX.register({
   },
   {
    "he": "אנחנו יוצאים לביצוע. — אייווה עלק",
-   "tr": "anachnu yots’im le-bitsu’a. — aywa, alak",
+   "tr": "anákhnu yots’im le-bitsúa. — áywa, álak",
    "en": "We’re heading out on the op. — Yeah, right.",
-   "note": "עלק (from Arabic) = “supposedly / yeah right”: הוא עלק חולה. ביצוע = an op (unit slang).",
+   "note": "אייווה (ÁY-wa) = yeah; עלק (ÁH-lak), from Arabic = “supposedly / yeah right”: הוא עלק חולה. ביצוע = an op (unit slang).",
    "start": 69.1,
    "end": 72.8
   },
   {
    "he": "אני הולך להביא את בועז. מי שרוצה, שיבוא",
-   "tr": "ani holech lehavi et Boaz. mi she-rotse, she-yavo",
+   "tr": "ani holekh lehavi et Bóaz. mi she-rotse, she-yavo",
    "en": "I’m going to get Boaz. Whoever wants to, come along.",
    "note": "מי ש… ש… = whoever…, let them…: מי שרעב, שיאכל. מי שרוצה, שיבוא.",
    "start": 95.6,
@@ -57,7 +57,7 @@ IVX.register({
   },
   {
    "he": "תגיד, אתה השתגעת לגמרי?",
-   "tr": "tagid, ata hishtaga’ta legamrei?",
+   "tr": "tagid, ata hishtagáta legamrey?",
    "en": "Tell me, have you gone completely crazy? (to a man)",
    "note": "To a woman: תגידי, את השתגעת לגמרי? Short version: השתגעת?",
    "start": 103.1,
@@ -88,10 +88,10 @@ IVX.register({
   },
   {
    "sit": "Your friend has a fever but still showed up to work:",
-   "he": "אחי, לך הביתה ותנוח.",
+   "he": "אחי, לֵךְ הביתה ותָנוּחַ.",
    "en": "Bro, go home and rest.",
    "line": 1
   }
  ],
- "chat": "Tell Hebrew about a time a friend wanted to do something crazy, and what you said to them."
+ "chat": "Tell me about a time a friend wanted to do something crazy, and what you said to them."
 });

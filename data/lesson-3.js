@@ -23,7 +23,7 @@ IVX.register({
  "lines": [
   {
    "he": "תרים ידיים!",
-   "tr": "tarim yadayim!",
+   "tr": "tarim yadáyim!",
    "en": "Hands up!",
    "note": "Callback to Lesson 1. Fuller: תרים את הידיים.",
    "start": 12,
@@ -39,7 +39,7 @@ IVX.register({
   },
   {
    "he": "תוריד את האקדח",
-   "tr": "torid et ha-ekdach",
+   "tr": "torid et ha-ekdakh",
    "en": "Put the gun down",
    "note": "להוריד = lower / take off: תוריד את הרגליים מהשולחן.",
    "start": 35,
@@ -55,7 +55,7 @@ IVX.register({
   },
   {
    "he": "הכול בסדר",
-   "tr": "ha-kol beseder",
+   "tr": "ha-kol beséder",
    "en": "Everything’s OK",
    "note": "With a rising tone it’s a question: הכול בסדר?",
    "start": 43,
@@ -91,5 +91,5 @@ IVX.register({
    "line": 4
   }
  ],
- "chat": "Tell Hebrew how you’d calm down a friend who’s panicking about something."
+ "chat": "Tell me how you’d calm down a friend who’s panicking about something."
 });

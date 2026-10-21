@@ -23,39 +23,39 @@ IVX.register({
  "lines": [
   {
    "he": "תרים ידיים",
-   "tr": "tarim yadayim",
+   "tr": "tarim yadáyim",
    "en": "Hands up / keep your guard up",
    "note": "Future form as a command — how spoken Hebrew gives orders. To a woman: תרימי.",
    "start": 12,
    "end": 16.5
   },
   {
-   "he": "מה עובר עליך?",
-   "tr": "ma over alecha?",
+   "he": "מה עובר עָלֶיךָ?",
+   "tr": "ma over alékha?",
    "en": "What’s gotten into you?",
-   "note": "For someone acting strange. To a woman: מה עובר עלייך?",
+   "note": "For someone acting strange. To a woman: מה עובר עָלַיִךְ? (aláyikh)",
    "start": 22,
    "end": 26.5
   },
   {
-   "he": "לך הביתה",
-   "tr": "lech ha-bayta",
+   "he": "לֵךְ הביתה",
+   "tr": "lekh ha-báyta",
    "en": "Go home",
-   "note": "Softer, later in the scene: לך הביתה ותנוח (go home and rest).",
+   "note": "The softer version, לֵךְ הביתה ותָנוּחַ (go home and rest), is a key line in Lesson 6.",
    "start": 39,
    "end": 43.5
   },
   {
-   "he": "שתית קצת יותר מדי",
-   "tr": "shatita ktsat yoter midai",
+   "he": "שָׁתִיתָ קצת יותר מדי",
+   "tr": "shatíta ktsat yoter miday",
    "en": "You drank a bit too much",
-   "note": "קצת softens it — saves face.",
+   "note": "קצת softens it — saves face. To a woman: שָׁתִית (shatít).",
    "start": 54,
    "end": 58.5
   },
   {
    "he": "סיבוב אחרון",
-   "tr": "sivuv acharon",
+   "tr": "sivuv akharon",
    "en": "One last round",
    "note": "Also a round of drinks: הסיבוב הבא עליי.",
    "start": 74,
@@ -86,10 +86,10 @@ IVX.register({
   },
   {
    "sit": "Your friend is drunk at a party and shoving people. Gently but firmly:",
-   "he": "אחי, שתית קצת יותר מדי. לך הביתה ותנוח.",
+   "he": "אחי, שָׁתִיתָ קצת יותר מדי. לֵךְ הביתה ותָנוּחַ.",
    "en": "Bro, you drank a bit too much. Go home and rest.",
    "line": 3
   }
  ],
- "chat": "Tell Hebrew about a night out that went sideways (real or made up)."
+ "chat": "Tell me about a night out that went sideways (real or made up)."
 });

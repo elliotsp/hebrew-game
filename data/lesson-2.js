@@ -23,9 +23,9 @@ IVX.register({
  "lines": [
   {
    "he": "ראית פעם כלב תקיפה?",
-   "tr": "ra’ita pa’am kelev tkifa?",
+   "tr": "ra’íta pá’am kélev tkifa?",
    "en": "Have you ever seen an attack dog?",
-   "note": "ראית פעם…? = have you ever seen…? — reusable opener.",
+   "note": "ראית פעם…? = have you ever seen…? Same spelling for both genders: ra’íta to a man, ra’ít to a woman — the clip doesn’t make clear who is asked.",
    "start": 19,
    "end": 23.5
   },
@@ -48,14 +48,14 @@ IVX.register({
   {
    "he": "לא מעניין אותו כלום",
    "tr": "lo me’anyen oto klum",
-   "en": "He couldn’t care less",
+   "en": "Nothing matters to him / he couldn’t care less",
    "note": "Pattern: לא מעניין אותי = I don’t care.",
    "start": 46,
    "end": 50.5
   },
   {
-   "he": "ככה אימנו אותנו",
-   "tr": "kacha imnu otanu",
+   "he": "ככה אִימְּנוּ אותנו",
+   "tr": "kákha imnu otánu",
    "en": "That’s how they trained us",
    "note": "ככה = like this / that’s how.",
    "start": 63,
@@ -80,7 +80,7 @@ IVX.register({
   },
   {
    "sit": "Someone asks why your old unit is so tough. You say “that’s how they trained us”:",
-   "he": "ככה אימנו אותנו.",
+   "he": "ככה אִימְּנוּ אותנו.",
    "en": "That’s how they trained us.",
    "line": 4
   },

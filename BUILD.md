@@ -5,7 +5,8 @@ A daily run adds **one small data file**, one 15-line HTML shell, and one catalo
 in a daily run unless fixing a bug.
 
 ```
-assets/lesson.js     shared engine (7-step flow, player, recorder, dictation diff, spaced review, home/review/rewatch pages)
+assets/lesson.js     shared engine v5: mobile stepper (one screen per step, pinned video, bottom action bar), player, recorder,
+                     dictation diff, Scene-recall review, home/review/rewatch pages
 assets/ivx.css       shared styles
 data/catalog.js      home-page list (one entry per day)
 data/lesson-N.js     one lesson's content (calls IVX.register({...}))
@@ -13,6 +14,20 @@ lesson-N.html        shell: loads lesson.js, data/lesson-N.js, then IVX.lessonPa
 index.html  review.html  rewatch.html?week=W
 v2/                  old story game (leave alone)
 ```
+
+## 0. How the site works now (v5, Oct 21 2026)
+Elliot uses it on his iPhone every morning. Design rules — keep them when you touch anything:
+* **One step per screen.** The YouTube player is pinned under a thin progress bar; the content scrolls in between; one big primary button
+  sits in the bottom bar (with Back on the left and a small Skip/Retry on the right). The primary button's label always says what happens next
+  ("▶ Listen" → "Show the line" → "Next line"). Every tap's result is scrolled into view.
+* Lesson screens are generated from the data file — 17 screens for a 5-line lesson: Watch (intro + gist) → 5 key lines (listen 1× then 0.75×, say it back,
+  then reveal) → 2 dictation → 3 shadow (hear → record → compare) → 3 say-it situations (record answer → model answer + actor clip) → rewatch + rating →
+  chat challenge + Finish. Progress resumes where he left off.
+* **Daily review = “Scene recall”** (review.html), not flashcards: max 6 items/day (~3 min). *Catch it*: the real clip moment plays; he says what
+  was said and what it means, then checks. *Use it*: one of the lesson's `say` situations; he answers out loud, then sees the model answer + the clip.
+  He self-grades Missed / Got it / Instantly (→ the same SRS intervals). Misses come back once at the end of the round.
+* Home: greeting, streak/XP, week strip, a big **Today** card with one button (Start / Continue · step N of 7 / Do it again), the review tile, then the library.
+* No new UI chrome per lesson. If a lesson needs a heads-up, use `warnings`.
 
 ## 1. Which day is it?
 Day 1 = 2026-10-15 (America/New_York). `day = days since 2026-10-15 + 1`.
@@ -35,6 +50,16 @@ Day 1 = 2026-10-15 (America/New_York). `day = days since 2026-10-15 + 1`.
 * `start` = the line's onset **minus ~0.5–1 s**; `end` = the line's end **plus ~0.5 s**. Keep segments ≤ ~6 s. With captions, use cue start/start+dur.
   Times read off burned-in frames are approximate. Say so in `source`. Elliot has ± nudge buttons, but aim for a window he doesn't need to fix.
 * `note`: **one line**, mostly Hebrew examples, minimal English. Gender: if a line is addressed to a man or woman, say so in `en` or `note`.
+  Don't put Latin placeholders (X, Y) inside Hebrew — write `לא רק… אלא גם…`, not `לא רק X אלא גם Y` (it breaks right-to-left display).
+* **Hebrew accuracy checklist (every card, every `say` answer, every note):** spelling (full spelling: הכול, מאוד, תיזהר), gender and
+  conjugation agree with who's addressed (לך → לֵךְ / לְךָ / לָךְ), the model answers are things an Israeli would actually say (not
+  word-for-word English), Hebrew geresh ׳ not ’ (חבר׳ה). Never "fix" a quote away from what's said in the clip — if a subtitle looks wrong, keep it and say so in `source`.
+* **Nikud:** no full nikud, but add it on the one word whose reading is ambiguous or non-obvious: gendered pronoun suffixes (עָלֶיךָ, לָךְ, לְךָ, שָׁתִיתָ),
+  imperatives that look like other words (לֵךְ), and easy-to-misread verbs (אִימְּנוּ, תָנוּחַ). Wording stays verbatim. The dictation check ignores nikud.
+* **Transliteration (`tr`) convention** — real modern Israeli pronunciation: ח and fricative כ/ך = `kh`, צ = `ts`, ש = `sh`, ע/א between vowels = `’` only where
+  it separates vowels (me’od). Prefixes hyphenated (ha-, ve-, le-, be-, she-, mi-). **Stress is on the last syllable unless marked with an acute accent**:
+  `lekh ha-báyta`, `shatíta`, `kélev`, `ákhi`, `beséder`, furtive patah `tanúakh`, `lishmóa`, `bitsúa`. Arabic loans: `yálla`, `áywa`, `álak`.
+  Transliteration is hidden by default (he can toggle "Show pronunciation"), so anything about pronunciation he must see goes in `note` too.
 * Crude or sexual lines: don't make them cards. Mention them in `warnings` (see lesson 4). Mild insults are OK as cards with a warning (lesson 5).
 * Don't assign lines to characters unless the subtitle or the yes title names them.
 
@@ -56,11 +81,13 @@ IVX.register({
  "chat": "One-sentence prompt for the Hebrew chat challenge."
 });
 ```
-Don't add TTS, fill-the-gap, or more multiple choice. Transliteration is hidden by default (the user can toggle it).
+Don't add TTS, fill-the-gap, flashcards, or more multiple choice. Each `say` situation doubles as a *Use it* prompt in the daily review, so write
+situations that are fresh, concrete and from his life (Tel Aviv, roommates, gym, army friends, the shuk) — not a restatement of the clip.
 
 ## 5. Shell + catalog
-* `lesson-N.html`: copy `lesson-5.html` and change the title, `data/lesson-N.js`, and `IVX.lessonPage(N)`. Keep the `?v=` cache-buster equal to the other pages (currently `v=5`).
-* `data/catalog.js`: append `{day, type:"lesson", id:N, href:"lesson-N.html", title, clip:"<yes Hebrew title without the פאודה: prefix>", mins:duration}`.
+* `lesson-N.html`: copy `lesson-5.html` and change the title, `data/lesson-N.js`, and `IVX.lessonPage(N)`. Keep the `?v=` cache-buster equal to the other pages (currently `v=6`).
+* `data/catalog.js`: append `{day, type:"lesson", id:N, video:"<YouTube id>", href:"lesson-N.html", title, clip:"<yes Hebrew title without the פאודה: prefix>", mins:duration}`.
+  `video` is used for the home-page thumbnail (official i.ytimg.com thumbnail, links to the lesson).
   The home page puts the **Today** marker on the entry whose `day` equals today's day (otherwise the latest past entry). Entries with a future `day` show as "Soon".
 * Spaced review needs no edits: lines join the deck when he finishes the lesson.
 
@@ -74,9 +101,12 @@ Don't add TTS, fill-the-gap, or more multiple choice. Transliteration is hidden 
 ```bash
 cd /workspace/hebrew-game
 node -e "global.window={navigator:{}};global.navigator={};global.document={getElementById:()=>null};global.localStorage={getItem:()=>null,setItem:()=>{}};require('./assets/lesson.js');global.IVX=window.IVX;require('./data/lesson-N.js');const L=IVX._LESSONS[N];if(L.lines.length<4||L.lines.length>5||L.dictation.length!==2||L.shadow.length!==3||L.say.length!==3)throw 'schema';L.lines.forEach(l=>{if(!(l.end>l.start)||l.end-l.start>8)throw 'times '+l.he});console.log('ok')"
+cd /tmp/ytt && NODE_PATH=/tmp/ytt/node_modules node /workspace/hebrew-game/tools/e2e.js N     # N = the new lesson id
 ```
-Then the headless run: `cd /tmp/ytt && NODE_PATH=/tmp/ytt/node_modules node /workspace/hebrew-game/tools/e2e.js` (needs `npm i playwright-core` in /tmp/ytt and /usr/bin/google-chrome; it serves the repo on an ephemeral port and tests lessons 1–5 deeply on lesson 5. Extend the lesson loop to include N).
-Check: no page errors; player reaches ready (`IVX._player.ready`); `IVX._go(0..6)` each renders cards; one `P.seg()` stops within ~0.2 s of `end`.
+(needs `npm i playwright-core` in /tmp/ytt and /usr/bin/google-chrome.) `e2e.js` serves the repo on an ephemeral port, emulates an iPhone (390×844, touch),
+smoke-tests every lesson + speech page (player ready, every screen renders, primary button present), then **taps through lesson N end-to-end like a user**
+(listen, reveal, dictation, record with a fake mic, compare, say-it, rewatch rating, finish), runs the Scene-recall review and the rewatch page,
+and prints `ERRORS: none` when clean. Screenshots go to `/tmp/ytt/e2e/`. Look at a couple (`lesson-*.png`) — nothing should be cut off or overlapping.
 Also play every segment once and confirm it contains the line (adjust times if not).
 
 ## 8. Publish

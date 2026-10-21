@@ -27,10 +27,10 @@ IVX.register({
  "lines": [
   {
    "he": "אחיי ואחיותיי, אזרחי ישראל",
-   "tr": "achai ve-achyotai, ezrachei Yisra’el",
+   "tr": "akhay ve-akhyotay, ezrekhey Yisra’el",
    "en": "My brothers and sisters, citizens of Israel",
-   "note": "אחיי = אחים שלי, אחיותיי = אחיות שלי (possessive endings, written style). אזרחי ישראל = construct: “the citizens of Israel”.",
-   "reg": "Speech/ceremony opener. On the street you’d just say <span class=\"he\">חבר’ה</span> or <span class=\"he\">אחים שלי</span>.",
+   "note": "אחיי = אחים שלי, אחיותיי = אחיות שלי (possessive endings, written style; said akháy, akhyotáy). אזרחי ישראל = construct: “the citizens of Israel”.",
+   "reg": "Speech/ceremony opener. On the street you’d just say <span class=\"he\">חבר׳ה</span> or <span class=\"he\">אחים שלי</span>.",
    "start": 0,
    "end": 3.2
   },
@@ -39,7 +39,7 @@ IVX.register({
    "tr": "aval ha-shana, ish lo mefakpek",
    "en": "But this year, nobody doubts it",
    "note": "Just before: היו עדיין אלה שפקפקו בעוצמתה של מדינת ישראל = there were still those who doubted Israel’s strength.",
-   "reg": "<span class=\"he\">איש לא</span> = nobody (literary). Street: <span class=\"he\">אף אחד לא</span>. <span class=\"he\">מפקפק</span> → street <span class=\"he\">אף אחד כבר לא בספק</span>.",
+   "reg": "<span class=\"he\">איש לא</span> = nobody (literary). Street: <span class=\"he\">אף אחד לא</span>. Whole line, street: <span class=\"he\">לאף אחד כבר אין ספק</span>.",
    "start": 37.7,
    "end": 41.2
   },
@@ -48,13 +48,13 @@ IVX.register({
    "tr": "ani mitmale ga’ava atsuma",
    "en": "I am filled with enormous pride",
    "note": "Woman: אני מתמלאת גאווה. מתמלא = fills up (hitpa’el). Before it: כשאני פוגש אותם בשטח = when I meet them in the field.",
-   "reg": "Formal. Street: <span class=\"he\">אני כל כך גאה</span> / <span class=\"he\">אני מת מגאווה</span>.",
+   "reg": "Formal. Street: <span class=\"he\">אני כל כך גאה</span> / <span class=\"he\">אני מתפוצץ מגאווה</span>.",
    "start": 102.3,
    "end": 105.9
   },
   {
    "he": "גם כשיש בינינו מחלוקות, ברגע האמת כולנו עומדים יחד",
-   "tr": "gam kshe-yesh beineinu machlokot, be-rega ha-emet kulanu omdim yachad",
+   "tr": "gam kshe-yesh beynéynu makhlokot, be-réga ha-emet kulánu omdim yákhad",
    "en": "Even when we have disagreements, when it really counts we all stand together",
    "note": "בינינו = between us. ברגע האמת = “at the moment of truth”. כולנו = all of us.",
    "reg": "<span class=\"he\">מחלוקות</span> and <span class=\"he\">יחד</span> are formal. Street: <span class=\"he\">גם כשאנחנו רבים, כשזה באמת חשוב כולנו ביחד</span>.",
@@ -63,7 +63,7 @@ IVX.register({
   },
   {
    "he": "ולכן, נמשיך להילחם ונבטיח את חירותנו",
-   "tr": "ve-lachen, namshich lehilachem ve-navti’ach et cheruteinu",
+   "tr": "ve-lakhen, namshikh lehilakhem ve-navtíakh et kherutéynu",
    "en": "And so, we will keep fighting and secure our freedom",
    "note": "נ־ = “we will”: נמשיך, נבטיח. נמשיך + infinitive = we’ll keep (doing): נמשיך לעבוד.",
    "reg": "<span class=\"he\">ולכן</span> = therefore → street <span class=\"he\">אז</span>. <span class=\"he\">חירות</span> = liberty (lofty) vs everyday <span class=\"he\">חופש</span>.",
@@ -85,7 +85,7 @@ IVX.register({
    "sit": "You’re MC-ing your community’s Independence Day event. Open formally, addressing the members of the community:",
    "he": "אחיי ואחיותיי, חברי הקהילה היקרים",
    "en": "My brothers and sisters, dear members of the community",
-   "street": "חבר’ה, ערב טוב לכולם!",
+   "street": "חבר׳ה, ערב טוב לכולם!",
    "line": 0
   },
   {
@@ -97,8 +97,8 @@ IVX.register({
   },
   {
    "sit": "At a ceremony for your little brother finishing basic training, say formally: when I see what you’ve achieved, I’m filled with enormous pride.",
-   "he": "כשאני רואה מה השגת, אני מתמלא גאווה עצומה.",
-   "en": "When I see what you’ve achieved, I’m filled with enormous pride. (to a man: hisagta; to a woman it’s spelled the same but said hisagt)",
+   "he": "כשאני רואה מה הִשַּׂגְתָּ, אני מתמלא גאווה עצומה.",
+   "en": "When I see what you’ve achieved, I’m filled with enormous pride. (to a man, said by a man)",
    "street": "אחי, אני כל כך גאה בך!",
    "line": 2
   }

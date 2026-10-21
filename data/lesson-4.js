@@ -24,10 +24,10 @@ IVX.register({
  },
  "lines": [
   {
-   "he": "יש לך אהבה חדשה, לא?",
-   "tr": "yesh lach ahava chadasha, lo?",
-   "en": "You’ve got a new love, haven’t you?",
-   "note": "…, לא? = “…, right?” — tack it onto anything.",
+   "he": "יש לָךְ אהבה חדשה, לא?",
+   "tr": "yesh lakh ahava khadasha, lo?",
+   "en": "You’ve got a new love, haven’t you? (to a woman)",
+   "note": "…, לא? = “…, right?” — tack it onto anything. To a man: יש לְךָ (lekha).",
    "start": 9,
    "end": 13.5
   },
@@ -41,15 +41,15 @@ IVX.register({
   },
   {
    "he": "אני מת לשמוע",
-   "tr": "ani met lishmo’a",
+   "tr": "ani met lishmóa",
    "en": "I’m dying to hear (sarcastic)",
-   "note": "Sunny version: אני מת על פלאפל = I love falafel.",
+   "note": "Said by a man; a woman says אני מתה. Sunny version: אני מת על פלאפל = I love falafel.",
    "start": 26,
    "end": 30.5
   },
   {
    "he": "על מה את מדברת?",
-   "tr": "al ma at medaberet?",
+   "tr": "al ma at medabéret?",
    "en": "What are you talking about? (to a woman)",
    "note": "To a man: על מה אתה מדבר?",
    "start": 41,
@@ -93,5 +93,5 @@ IVX.register({
    "line": 4
   }
  ],
- "chat": "Tell Hebrew about an argument you had (real or invented) — who said what."
+ "chat": "Tell me about an argument you had (real or invented) — who said what."
 });

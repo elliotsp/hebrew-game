@@ -25,7 +25,7 @@ IVX.register({
  "lines": [
   {
    "he": "תגיד, יא ליצן",
-   "tr": "tagid, ya leitsan",
+   "tr": "tagid, ya leytsan",
    "en": "Say, you clown…",
    "note": "יא + insult = “hey you…” (from Arabic). תגיד = “say…”, an opener.",
    "start": 13,
@@ -33,7 +33,7 @@ IVX.register({
   },
   {
    "he": "יאללה, תעלה על האופנוע שלך וסע מפה",
-   "tr": "yalla, ta’ale al ha-ofno’a shelcha ve-sa mi-po",
+   "tr": "yálla, ta’ale al ha-ofanóa shelkha ve-sa mi-po",
    "en": "Go on, get on your bike and get out of here",
    "note": "לעלות על = get on a vehicle. סע מפה = drive off / get lost.",
    "start": 24,
@@ -41,7 +41,7 @@ IVX.register({
   },
   {
    "he": "אחי, אמרנו ריצה קלה",
-   "tr": "achi, amarnu ritsa kala",
+   "tr": "ákhi, amárnu ritsa kala",
    "en": "Bro, we said an easy run",
    "note": "אמרנו = we said → we agreed.",
    "start": 29,
@@ -51,13 +51,13 @@ IVX.register({
    "he": "מה קורה, בן אדם?",
    "tr": "ma kore, ben adam?",
    "en": "What’s up, man?",
-   "note": "בן אדם = “man / dude” when addressing someone.",
+   "note": "בן אדם = “man / dude” when addressing someone. Said fast it’s bnadam — often written בנאדם.",
    "start": 44,
    "end": 48.5
   },
   {
-   "he": "שמעתי עליך כבר",
-   "tr": "shamati alecha kvar",
+   "he": "שמעתי עָלֶיךָ כבר",
+   "tr": "shamáti alékha kvar",
    "en": "I’ve already heard about you",
    "note": "The comeback in the clip: שמעת עליי? יופי.",
    "start": 49,
@@ -75,9 +75,9 @@ IVX.register({
  ],
  "say": [
   {
-   "sit": "You and a friend agreed to keep tonight cheap. He orders the most expensive bottle:",
-   "he": "אחי, אמרנו בזול!",
-   "en": "Bro, we said cheap!",
+   "sit": "You and a friend agreed on a chill, cheap night out. He orders the most expensive bottle:",
+   "he": "אחי, אמרנו בקטנה!",
+   "en": "Bro, we said low-key!",
    "line": 2
   },
   {
@@ -93,5 +93,5 @@ IVX.register({
    "line": 4
   }
  ],
- "chat": "Tell Hebrew about the last time a friend broke a plan you’d agreed on."
+ "chat": "Tell me about the last time a friend broke a plan you’d agreed on."
 });
