@@ -126,8 +126,13 @@ function srBlock(target){
 
 /* ---------- spaced review (one deck across all lessons) ---------- */
 const LESSONS={};
+/* Speech track: ids 101, 102… live in data/speech-1.js, speech-2.js… (separate from Fauda numbering, same deck/streak/XP) */
+const SPEECH0=100;const isSpeech=L=>L&&(L.track==='speech'||L.id>SPEECH0);
+const lname=L=>isSpeech(L)?'Speech '+(L.id-SPEECH0):'Lesson '+L.id;
+const who=L=>isSpeech(L)?'Speaker':'Actor';
+const dataFile=id=>id>SPEECH0?'data/speech-'+(id-SPEECH0)+'.js':'data/lesson-'+id+'.js';
 function register(d){LESSONS[d.id]=d}
-function loadLesson(id){return new Promise(res=>{if(LESSONS[id])return res(LESSONS[id]);const s=h('script',{src:'data/lesson-'+id+'.js'});s.onload=()=>res(LESSONS[id]||null);s.onerror=()=>res(null);document.head.appendChild(s)})}
+function loadLesson(id){return new Promise(res=>{if(LESSONS[id])return res(LESSONS[id]);const s=h('script',{src:dataFile(id)});s.onload=()=>res(LESSONS[id]||null);s.onerror=()=>res(null);document.head.appendChild(s)})}
 function seg(L,i){const ln=L.lines[i],k='l'+L.id+':'+i,n=S.nudge[k]||{s:0,e:0};return{start:Math.max(0,ln.start+n.s),end:ln.end+n.e,key:k}}
 function addToDeck(L){const t=today();let added=0;L.lines.forEach((_,i)=>{const k='l'+L.id+':'+i;if(!S.srs[k]){S.srs[k]={due:addDays(t,1),ivl:0,reps:0,lapses:0};added++}});save();return added}
 function dueItems(exclude){const t=today();return Object.entries(S.srs).filter(([k,v])=>v.due<=t&&(!exclude||!k.startsWith('l'+exclude+':'))).sort((a,b)=>a[1].due<b[1].due?-1:1).map(([k])=>k)}
@@ -153,11 +158,11 @@ async function reviewSession(box,opts){opts=opts||{};box.innerHTML='';
     const[l,i]=k.split(':'),L=LESSONS[+l.slice(1)],ln=L.lines[+i],sg=seg(L,+i),it=S.srs[k];
     const mode=(it.reps+it.lapses)%2===0?'listen':'say';
     const reveal=h('div',{class:'hidden'},h('div',{class:'heb he'},ln.he),h('div',{class:'tr'},ln.tr||''),h('div',{class:'en'},ln.en),
-      h('div',{class:'row'},h('button',{class:'btn sm',onclick:()=>P.seg(L.video,sg.start,sg.end)},'▶ Actor')),
+      h('div',{class:'row'},h('button',{class:'btn sm',onclick:()=>P.seg(L.video,sg.start,sg.end)},'▶ '+who(L))),
       h('div',{class:'row'},...[['again','Missed it'],['good','Got it'],['easy','Easy']].map(([g,lab])=>h('button',{class:'btn'+(g==='good'?' pri':''),onclick:()=>{grade(k,g);doneN++;if(g==='again'&&!requeued[k]){requeued[k]=1;queue.push(k)}next()}},lab))));
-    const head=mode==='listen'?h('div',{},h('div',{class:'meta'},`Listen · ${queue.length+1} left · from Lesson ${L.id}`),h('h2',{},'What did they say? Say it back, then reveal.'),
+    const head=mode==='listen'?h('div',{},h('div',{class:'meta'},`Listen · ${queue.length+1} left · from ${lname(L)}`),h('h2',{},'What did they say? Say it back, then reveal.'),
         h('div',{class:'row'},h('button',{class:'btn pri',onclick:()=>P.seg(L.video,sg.start,sg.end)},'▶ Play line'),h('button',{class:'btn',onclick:()=>P.seg(L.video,sg.start,sg.end,{rate:.75})},'🐢 0.75×')))
-      :h('div',{},h('div',{class:'meta'},`Say it · ${queue.length+1} left · from Lesson ${L.id}`),h('h2',{},'Say this in Hebrew, out loud:'),h('div',{class:'en',style:'font-size:18px'},'“'+ln.en+'”'));
+      :h('div',{},h('div',{class:'meta'},`Say it · ${queue.length+1} left · from ${lname(L)}`),h('h2',{},'Say this in Hebrew, out loud:'),h('div',{class:'en',style:'font-size:18px'},'“'+ln.en+'”'));
     area.appendChild(h('div',{class:'card hl'},head,h('div',{class:'row'},h('button',{class:'btn',onclick:e=>{reveal.classList.remove('hidden');e.target.remove()}},'Reveal')),reveal))};
   next()}
 
@@ -166,18 +171,18 @@ function chrome(opts){document.body.classList.toggle('hide-tr',!S.tr);
   const head=h('header',{class:'top'},h('div',{class:'wrap'},h('a',{class:'logo',href:'index.html'},'Ivrit ',h('b',{},'×'),' Fauda'),
     opts&&opts.bar?h('div',{class:'bar'},h('i',{id:'ivx-bar'})):h('div',{style:'flex:1'}),h('span',{class:'chip',id:'ivx-streak'}),h('span',{class:'chip',id:'ivx-xp'})));
   document.body.prepend(head);hdr()}
-function legalFoot(){return h('div',{class:'foot'},'Videos © yes / Fauda, embedded with the official YouTube player (YouTube API Services: ',h('a',{href:'https://www.youtube.com/t/terms',target:'_blank',rel:'noopener'},'YouTube Terms'),', ',h('a',{href:'https://policies.google.com/privacy',target:'_blank',rel:'noopener'},'Google Privacy Policy'),'). By using this site you agree to YouTube’s Terms. Progress is stored only in this browser; recordings stay on your device and are never uploaded. Speech-recognition checks, if you use them, are processed by your browser’s speech service. Not affiliated with yes, Netflix or YouTube.')}
+function legalFoot(){return h('div',{class:'foot'},'Videos © their owners (yes / Fauda; Israel Prime Minister’s Office), embedded with the official YouTube player (YouTube API Services: ',h('a',{href:'https://www.youtube.com/t/terms',target:'_blank',rel:'noopener'},'YouTube Terms'),', ',h('a',{href:'https://policies.google.com/privacy',target:'_blank',rel:'noopener'},'Google Privacy Policy'),'). By using this site you agree to YouTube’s Terms. Progress is stored only in this browser; recordings stay on your device and are never uploaded. Speech-recognition checks, if you use them, are processed by your browser’s speech service. Not affiliated with yes, Netflix, YouTube or the Israeli government. Speech clips are here for the language only — no political position is taken.')}
 
 /* ---------- lesson page: the 7-step flow ---------- */
 const STEP_NAMES=['Watch','Lines','Dictation','Shadow','Say it','Rewatch','Review'];
 function lessonPage(id){const L=LESSONS[id];chrome({bar:true});const lid='l'+L.id;S.steps[lid]=S.steps[lid]||{};
   const main=h('main',{class:'wrap'});document.body.appendChild(main);
-  main.appendChild(h('div',{class:'tag'},`Lesson ${L.id} · Day ${L.day} · ~15 min`));
+  main.appendChild(h('div',{class:'tag'},isSpeech(L)?`${lname(L)} · Formal Hebrew · ~15 min`:`Lesson ${L.id} · Day ${L.day} · ~15 min`));
   main.appendChild(h('h1',{},L.title));
   main.appendChild(h('div',{class:'sub'},h('span',{html:L.blurb})));
   (L.warnings||[]).forEach(w=>main.appendChild(h('div',{class:'note warn',html:w})));
   const pv=h('div',{});main.appendChild(h('div',{class:'video'},h('div',{class:'box'},pv),
-    h('div',{class:'cap'},'Official yes tv clip · ',heSpan(L.heTitle),' · '+L.duration+' · ',h('a',{href:'https://www.youtube.com/watch?v='+L.video,target:'_blank',rel:'noopener'},'Open on YouTube'))));
+    h('div',{class:'cap'},(L.credit||'Official yes tv clip')+' · ',heSpan(L.heTitle),' · '+L.duration+' · ',h('a',{href:'https://www.youtube.com/watch?v='+L.video,target:'_blank',rel:'noopener'},'Open on YouTube'))));
   const P=Player(pv,L.video);IVX._player=P;
   const nav=h('div',{class:'steps'});main.appendChild(nav);
   const view=h('section',{});main.appendChild(view);
@@ -216,7 +221,7 @@ const STEPS=[
 /* 2 key lines: audio first */
 (L,P,done)=>{const w=h('div',{},stepHead(2,'Key lines — ears first','Each line plays at normal speed, then at 0.75×. Try to catch it and say it back before you reveal the text.'));
   if(L.burnedIn)w.appendChild(h('div',{class:'note'},'This clip has Hebrew subtitles burned into the video. For a real listening rep, look away from the screen while each line plays.'));
-  let seen=0;L.lines.forEach((_,i)=>{const c=lineCard(L,P,i);const rv=h('div',{class:'hidden'},h('div',{class:'heb he'},c.ln.he),h('div',{class:'tr'},c.ln.tr||''),h('div',{class:'en'},c.ln.en),c.ln.note?h('div',{class:'small',style:'margin-top:6px',html:c.ln.note}):null);
+  let seen=0;L.lines.forEach((_,i)=>{const c=lineCard(L,P,i);const rv=h('div',{class:'hidden'},h('div',{class:'heb he'},c.ln.he),h('div',{class:'tr'},c.ln.tr||''),h('div',{class:'en'},c.ln.en),c.ln.note?h('div',{class:'small',style:'margin-top:6px',html:c.ln.note}):null,c.ln.reg?h('div',{class:'reg',html:'<b>Register</b> '+c.ln.reg}):null);
     let loopOn=false;const loopB=h('button',{class:'btn'},'↻ Loop');
     loopB.onclick=()=>{loopOn=!loopOn;loopB.classList.toggle('pri',loopOn);if(loopOn)c.play({loops:6,onEnd:()=>{loopOn=false;loopB.classList.remove('pri')}});else P.stop()};
     const revB=h('button',{class:'btn'},'Reveal');revB.onclick=()=>{rv.classList.remove('hidden');revB.remove();if(++seen>=L.lines.length)done()};
@@ -231,14 +236,14 @@ const STEPS=[
     w.appendChild(h('div',{class:'card'},h('div',{class:'row'},h('button',{class:'btn',onclick:()=>c.play()},'▶ Play'),h('button',{class:'btn',onclick:()=>c.play({rate:.75})},'🐢 0.75×')),h('div',{style:'margin-top:10px'},ta),h('div',{class:'row'},chk),out,c.nudge))});
   return w},
 /* 4 shadow & record */
-(L,P,done)=>{const w=h('div',{},stepHead(4,'Shadow & record','Copy the actor’s rhythm and attitude, not just the words. Record yourself, then Compare plays the actor and you back-to-back.'),
+(L,P,done)=>{const w=h('div',{},stepHead(4,'Shadow & record',(isSpeech(L)?'Copy the speaker’s pace, pauses and emphasis — speeches are slow and deliberate on purpose.':'Copy the actor’s rhythm and attitude, not just the words.')+' Record yourself, then Compare plays the clip and you back-to-back.'),
     h('div',{class:'note'},'🎧 Headphones help: if the clip plays out loud while you record, the mic picks it up.'));
   let n=0;L.shadow.forEach(i=>{const c=lineCard(L,P,i),key='l'+L.id+':sh'+i;const a=audioEl();const cmp=h('button',{class:'btn',disabled:true},'⇄ Compare');const mine=h('button',{class:'btn',disabled:true},'▶ Mine');
     const onRec=url=>{a.src=url;cmp.disabled=false;mine.disabled=false;if(!w.dataset['r'+i]){w.dataset['r'+i]=1;if(++n>=L.shadow.length)done()}};
     mine.onclick=()=>{P.stop();a.currentTime=0;a.play().catch(()=>{})};
     cmp.onclick=()=>{unlock(a);c.play({onEnd:()=>setTimeout(()=>{a.currentTime=0;a.play().catch(()=>{toast('Tap ▶ Mine to hear yourself.');mine.classList.add('pri')})},350)})};
     w.appendChild(h('div',{class:'card'},h('div',{class:'heb he'},c.ln.he),h('div',{class:'tr'},c.ln.tr||''),h('div',{class:'small'},c.ln.en),
-      h('div',{class:'row'},h('button',{class:'btn pri',onclick:()=>c.play()},'▶ Actor'),h('button',{class:'btn',onclick:()=>c.play({rate:.75})},'🐢 0.75×'),recButton(key,onRec),mine,cmp),
+      h('div',{class:'row'},h('button',{class:'btn pri',onclick:()=>c.play()},'▶ '+who(L)),h('button',{class:'btn',onclick:()=>c.play({rate:.75})},'🐢 0.75×'),recButton(key,onRec),mine,cmp),
       canRec?null:h('div',{class:'row'},h('button',{class:'btn',onclick:()=>{if(!w.dataset['r'+i]){w.dataset['r'+i]=1;if(++n>=L.shadow.length)done()}}},'I shadowed it ✓')),
       srBlock(c.ln.he),a,c.nudge))});
   return w},
@@ -246,9 +251,9 @@ const STEPS=[
 (L,P,done)=>{const w=h('div',{},stepHead(5,'Say it','Read the situation, say your answer out loud first (record it if you can), then reveal what a native would say.'));
   let n=0;L.say.forEach((s,k)=>{const key='l'+L.id+':say'+k,a=audioEl();const ln=L.lines[s.line];const rv=h('div',{class:'hidden'});
     const show=()=>{if(!rv.classList.contains('hidden'))return;rv.classList.remove('hidden');if(++n>=L.say.length)done()};
-    rv.appendChild(h('div',{class:'heb he',style:'margin-top:10px'},s.he));rv.appendChild(h('div',{class:'en'},s.en));
+    rv.appendChild(h('div',{class:'heb he',style:'margin-top:10px'},s.he));rv.appendChild(h('div',{class:'en'},s.en));if(s.street)rv.appendChild(h('div',{class:'reg',html:'<b>On the street</b> <span class="he">'+s.street+'</span>'}));
     const mine=h('button',{class:'btn',disabled:true,onclick:()=>{P.stop();a.currentTime=0;a.play().catch(()=>{})}},'▶ Mine');
-    rv.appendChild(h('div',{class:'row'},h('button',{class:'btn',onclick:()=>{const sg=seg(L,s.line);P.seg(L.video,sg.start,sg.end)}},'▶ Actor: “'+ln.he+'”'),mine));
+    rv.appendChild(h('div',{class:'row'},h('button',{class:'btn',onclick:()=>{const sg=seg(L,s.line);P.seg(L.video,sg.start,sg.end)}},'▶ '+who(L)+': “'+ln.he+'”'),mine));
     rv.appendChild(srBlock(s.he));
     const rb=recButton(key,url=>{a.src=url;mine.disabled=false;show()},'● Record my answer');
     w.appendChild(h('div',{class:'card'},h('div',{class:'meta'},'Situation '+(k+1)),h('div',{style:'font-size:16px;font-weight:600;line-height:1.45'},s.sit),
@@ -257,7 +262,7 @@ const STEPS=[
 /* 6 rewatch + comprehension */
 (L,P,done)=>{const lid='l'+L.id,c=S.comp[lid]||{};const val=h('b',{},(c.post!=null?c.post:50)+'%');
   const sl=h('input',{type:'range',min:0,max:100,step:5,value:c.post!=null?c.post:50,oninput:e=>val.textContent=e.target.value+'%'});
-  const hist=Object.entries(S.comp).filter(([k])=>k!==lid).map(([k,v])=>'L'+k.slice(1)+': '+v.post+'%').join(' · ');
+  const hist=Object.entries(S.comp).filter(([k])=>k!==lid).map(([k,v])=>(+k.slice(1)>SPEECH0?'S'+(k.slice(1)-SPEECH0):'L'+k.slice(1))+': '+v.post+'%').join(' · ');
   return h('div',{},h('div',{class:'card hl'},stepHead(6,'Rewatch','Whole clip, no text. Notice how much more you catch now.'),h('div',{class:'row'},h('button',{class:'btn pri',onclick:()=>P.full()},'▶ Play whole clip'))),
     h('div',{class:'card'},h('h2',{},'How much did you understand by ear?'),h('div',{class:'row'},sl),h('div',{class:'sub'},'About ',val,' of what was said.'),
       hist?h('div',{class:'small',style:'margin-top:6px'},'Earlier lessons: '+hist):null,
@@ -283,6 +288,11 @@ function home(){chrome();const C=window.IVX_CATALOG||[];const di=dayIndex();
   const due=dueItems().length;
   main.appendChild(h('a',{class:'card'+(due?' hl':''),href:'review.html'},h('div',{style:'display:flex;justify-content:space-between'},h('div',{class:'lt'},'Review deck'),h('span',{class:'badge'+(due?'':' soon')},due?due+' due':'0 due')),
     h('div',{class:'meta'},Object.keys(S.srs).length+' lines in your deck · spaced: 2 → 5 → 13 days…')));
+  const SP=window.IVX_SPEECHES||[];
+  if(SP.length){main.appendChild(h('h2',{class:'sect'},'🎙 Speeches · formal Hebrew'));main.appendChild(h('div',{class:'small',style:'margin:-4px 0 8px'},'Official speech clips in the register of news, ceremonies and statements — next to the street Hebrew below. Not part of the daily count.'));
+    SP.forEach(e=>{const isDone=!!S.done['l'+e.id];main.appendChild(h('a',{class:'card',href:e.href},h('div',{style:'display:flex;justify-content:space-between;gap:10px'},h('div',{class:'meta'},`Speech ${e.id-SPEECH0} · ${e.mins}`),h('span',{class:'badge '+(isDone?'done':'')},isDone?'Done':'New')),
+      h('div',{class:'lt'},e.title),h('div',{class:'meta'},h('span',{},(e.credit||'Official clip')+' · '),heSpan(e.clip))))});
+    main.appendChild(h('h2',{class:'sect'},'🎬 Daily · Fauda street Hebrew'))}
   C.slice().reverse().forEach(e=>{const isToday=todayE&&e===todayE,open=e.day<=di,key=e.type==='rewatch'?'rw'+e.week:'l'+e.id,isDone=!!S.done[key];
     const badge=isToday?'Today':isDone?'Done':open?'Open':'Soon',bc=isToday?'':isDone?'done':open?'':'soon';
     const a=h(open?'a':'div',{class:'card'+(isToday?' hl':''),href:open?e.href:null},
@@ -314,5 +324,5 @@ async function rewatchPage(){chrome();const q=new URLSearchParams(location.searc
       h('div',{class:'row'},h('button',{class:'btn',onclick:e=>{S.comp[key][L.id]=+sl.value;save();e.target.textContent='Saved ✓';if(++rated===Ls.length){S.done[key]=1;save();award(key,30);markActive();toast('Rewatch week done 🔥')}}},'Save'))))});
   main.appendChild(h('div',{class:'foot'},h('a',{href:'index.html'},'← All lessons')));main.appendChild(legalFoot())}
 
-window.IVX={register,lessonPage,home,reviewPage,rewatchPage,wordDiff,normW,_state:()=>S,_grade:grade,_due:dueItems,_addToDeck:addToDeck,_today:today,_dayIndex:dayIndex,_LESSONS:LESSONS};
+window.IVX={_lname:lname,register,lessonPage,home,reviewPage,rewatchPage,wordDiff,normW,_state:()=>S,_grade:grade,_due:dueItems,_addToDeck:addToDeck,_today:today,_dayIndex:dayIndex,_LESSONS:LESSONS};
 })();

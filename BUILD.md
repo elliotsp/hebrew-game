@@ -59,7 +59,7 @@ IVX.register({
 Don't add TTS, fill-the-gap, or more multiple choice. Transliteration is hidden by default (the user can toggle it).
 
 ## 5. Shell + catalog
-* `lesson-N.html`: copy `lesson-5.html` and change the title, `data/lesson-N.js`, and `IVX.lessonPage(N)`. Keep the `?v=` cache-buster equal to the other pages.
+* `lesson-N.html`: copy `lesson-5.html` and change the title, `data/lesson-N.js`, and `IVX.lessonPage(N)`. Keep the `?v=` cache-buster equal to the other pages (currently `v=5`).
 * `data/catalog.js`: append `{day, type:"lesson", id:N, href:"lesson-N.html", title, clip:"<yes Hebrew title without the פאודה: prefix>", mins:duration}`.
   The home page puts the **Today** marker on the entry whose `day` equals today's day (otherwise the latest past entry). Entries with a future `day` show as "Soon".
 * Spaced review needs no edits: lines join the deck when he finishes the lesson.
@@ -85,3 +85,15 @@ git add -A && git commit -m "Daily Lesson N: Fauda \"…\" (yes tv)" && git push
 ```
 Wait about 1 min, then `curl -s https://elliotsp.github.io/hebrew-game/data/lesson-N.js | head` until it returns the new file.
 Message Elliot with: the clip title, 2–3 of the lines, a link to `lesson-N.html`, and honest notes (caption vs burned-in source, untested timings).
+
+## 9. Speeches track (formal Hebrew) — not part of the daily run
+Separate, on-demand track for formal / news / ceremonial Hebrew (e.g. Netanyahu speeches). **Daily runs don't touch it.**
+* Ids start at **101**: speech K = id `100+K`, data in `data/speech-K.js`, shell `speech-K.html` (copy `speech-1.html`, change title, data file, `IVX.lessonPage(100+K)`).
+  The engine maps ids > 100 to `data/speech-*.js`, labels them "Speech K", and they share XP, streak and the review deck (keys `l101:i`).
+* Home-page list: `data/speeches.js` (`window.IVX_SPEECHES`), rendered as a "Speeches" section above the daily list. Don't add speeches to `data/catalog.js`.
+* Extra fields: `"track":"speech"`, `"credit"` (shown instead of "Official yes tv clip"), per-line `"reg"` (one-line register note: formal vs street),
+  and optional per-`say` `"street"` (casual equivalent shown after the model answer).
+* Clip rules: Hebrew-language speech from an **official** channel only (PMO `@IsraeliPM`, `@Netanyahu`, GPO). Verify with oEmbed `author_url`.
+  Prefer non-partisan addresses (holiday greetings, ceremonies, national statements); keep the blurb neutral — language, not politics.
+* Getting text when yt-dlp is bot-blocked: load the video in the IFrame player in headless Chrome with `cc_load_policy:1, cc_lang_pref:'iw'` and capture the
+  `/api/timedtext` response (json3 with word offsets) — see `/tmp/ytt/cap.js` pattern; read burned-in subtitles off frames to fix ASR errors.
