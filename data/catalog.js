@@ -74,5 +74,15 @@ window.IVX_CATALOG=[
    5,
    6
   ]
+ },
+ {
+  "day": 8,
+  "type": "lesson",
+  "id": 7,
+  "video": "xAxWrmkx4vk",
+  "href": "lesson-7.html",
+  "title": "“You did your part, Doron”",
+  "clip": "דורון לך הביתה",
+  "mins": "1:27"
  }
 ];
