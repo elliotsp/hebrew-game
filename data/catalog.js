@@ -84,5 +84,15 @@ window.IVX_CATALOG=[
   "title": "“You did your part, Doron”",
   "clip": "דורון לך הביתה",
   "mins": "1:27"
+ },
+ {
+  "day": 9,
+  "type": "lesson",
+  "id": 8,
+  "video": "HIZdgilxeyY",
+  "href": "lesson-8.html",
+  "title": "“You’re calling her right now”",
+  "clip": "דורון מערבב משפחה ועבודה",
+  "mins": "0:55"
  }
 ];
