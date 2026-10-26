@@ -29,12 +29,19 @@ Elliot uses it on his iPhone every morning. Design rules — keep them when you 
 * Home: greeting, streak/XP, week strip, a big **Today** card with one button (Start / Continue · step N of 7 / Do it again), the review tile, then the library.
 * No new UI chrome per lesson. If a lesson needs a heads-up, use `warnings`.
 
-## 1. Which day is it?
-Day 1 = 2026-10-15 (America/New_York). `day = days since 2026-10-15 + 1`.
-* **day % 7 == 0 → rewatch day.** Don't add a new clip. Make sure `data/catalog.js` has
-  `{day, type:"rewatch", week: day/7, href:"rewatch.html?week=W", title:"Rewatch week W", lessons:[the ids of that week's lessons]}`
-  (week 1 = day 7, already added, lessons 1–6). Add the next one (day 14, 21, …) the same way. Then just announce it.
-* Otherwise add lesson `N = (last lesson id) + 1` with `day = today's day`. Lesson ids don't equal day numbers after day 7.
+## 1. Which day is it? What to build today?
+`day` = calendar day: Day 1 = 2026-10-15 (America/New_York), `day = days since 2026-10-15 + 1`. It is only a label (the home page's
+**Today** marker and week strip match it to the date), so days can skip — Oct 24–25 (days 10–11) had no run because the box was down.
+**Never back-fill missed days, never build more than one lesson per run.**
+
+What to build is decided by the **catalog**, not the date:
+* Count the `type:"lesson"` entries after the last `type:"rewatch"` entry in `data/catalog.js`.
+  * **6 or more → rewatch day.** Don't add a new clip. Append
+    `{day, type:"rewatch", week: W, href:"rewatch.html?week=W", title:"Rewatch week W", lessons:[those lesson ids]}` with W = last rewatch week + 1.
+    (Week 1 = day 7, lessons 1–6. Week 2 = lessons 7–12, due the run after Lesson 12 is published.) Then just announce it.
+  * **Fewer than 6 → add lesson `N = (highest lesson id) + 1`** with `day = today's day`.
+* If the catalog already has an entry with today's `day`, today's run already happened: don't build anything, just re-announce it.
+* Lesson ids don't equal day numbers.
 
 ## 2. Picking the clip (rules)
 1. **Official yes tv / Fauda uploads only** (the yes channel on YouTube). Embeddable (no error 101/150). No reuploads, fan edits or Netflix rips.
@@ -43,6 +50,11 @@ Day 1 = 2026-10-15 (America/New_York). `day = days since 2026-10-15 + 1`.
    (the engine then tells him to look away while lines play).
 3. **More dialogue is better:** at least 5 clear Hebrew lines, everyday register. Skip clips that are mostly Arabic, music, or action with no talking.
 4. Don't repeat a video already used in `data/lesson-*.js`.
+5. **Candidate pool** (official yes, Hebrew dialogue, not yet used; /tmp is wiped when the box restarts, so this list lives here). Find more with
+   `yt-dlp --flat-playlist --print "%(id)s|%(title)s|%(channel_id)s|%(duration)s" "ytsearch40:פאודה yes דורון"` (flat search still works; yes = `UCiqesVwAsxUYZx9nBYItCyQ`).
+   No auto-captions returned on Oct 26 (probably burned-in only — check frames): `4-SDJiLIi7M` דורון מאבד את העשתונות, `cQFObQ_CDOo` שיחת הטלפון שתשנה את גורלו של דורון,
+   `GwLRP2Uh5hw` הכנות אחרונות, `oqqocVtXziE` לפחות יש שלום בכל המלחמה הזאתי, `X4dHTrSWBuU` הם יורים גם במקררים!, `66VyGIZdHnc` תפילה אחרונה של דורון.
+   Skip: `UHRvXIjmrPc` (Arabic), `oWXZOFo7NGk` (mostly Kaddish), `pszLgOWThGM` (trailer monologue over music), `l4oucZa2PT4` (33 s, one long political rant).
 
 ## 3. Getting the lines and times
 * Source of truth, in order: YouTube Hebrew caption track (manual > auto) → burned-in subtitles read off frames. Record which one you used in `source`.
@@ -103,7 +115,7 @@ cd /workspace/hebrew-game
 node -e "global.window={navigator:{}};global.navigator={};global.document={getElementById:()=>null};global.localStorage={getItem:()=>null,setItem:()=>{}};require('./assets/lesson.js');global.IVX=window.IVX;require('./data/lesson-N.js');const L=IVX._LESSONS[N];if(L.lines.length<4||L.lines.length>5||L.dictation.length!==2||L.shadow.length!==3||L.say.length!==3)throw 'schema';L.lines.forEach(l=>{if(!(l.end>l.start)||l.end-l.start>8)throw 'times '+l.he});console.log('ok')"
 cd /tmp/ytt && NODE_PATH=/tmp/ytt/node_modules node /workspace/hebrew-game/tools/e2e.js N     # N = the new lesson id
 ```
-(needs `npm i playwright-core` in /tmp/ytt and /usr/bin/google-chrome.) `e2e.js` serves the repo on an ephemeral port, emulates an iPhone (390×844, touch),
+(needs `mkdir -p /tmp/ytt && cd /tmp/ytt && npm init -y && npm i playwright-core` — /tmp is wiped on box restarts — and /usr/bin/google-chrome.) `e2e.js` serves the repo on an ephemeral port, emulates an iPhone (390×844, touch),
 smoke-tests every lesson + speech page (player ready, every screen renders, primary button present), then **taps through lesson N end-to-end like a user**
 (listen, reveal, dictation, record with a fake mic, compare, say-it, rewatch rating, finish), runs the Scene-recall review and the rewatch page,
 and prints `ERRORS: none` when clean. Screenshots go to `/tmp/ytt/e2e/`. Look at a couple (`lesson-*.png`) — nothing should be cut off or overlapping.
@@ -126,4 +138,6 @@ Separate, on-demand track for formal / news / ceremonial Hebrew (e.g. Netanyahu 
 * Clip rules: Hebrew-language speech from an **official** channel only (PMO `@IsraeliPM`, `@Netanyahu`, GPO). Verify with oEmbed `author_url`.
   Prefer non-partisan addresses (holiday greetings, ceremonies, national statements); keep the blurb neutral — language, not politics.
 * Getting text when yt-dlp is bot-blocked: load the video in the IFrame player in headless Chrome with `cc_load_policy:1, cc_lang_pref:'iw'` and capture the
-  `/api/timedtext` response (json3 with word offsets) — see `/tmp/ytt/cap.js` pattern; read burned-in subtitles off frames to fix ASR errors.
+  `/api/timedtext` response (json3 with word offsets): `cd /tmp/ytt && NODE_PATH=/tmp/ytt/node_modules node /workspace/hebrew-game/tools/cap.js ID` → `ID.0.json`.
+  Read burned-in subtitles off frames: `node /workspace/hebrew-game/tools/frames.js ID 2 6.5 13 …` → `f_ID_T.png`. Same tools work for Fauda clips.
+  YouTube rate-limits timedtext after ~10 videos in a row (returns a “Sorry…” HTML page) — wait, don't hammer.
