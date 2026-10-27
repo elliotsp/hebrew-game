@@ -104,5 +104,15 @@ window.IVX_CATALOG=[
   "title": "“Good news and bad news”",
   "clip": "חדשות טובות וחדשות רעות",
   "mins": "0:37"
+ },
+ {
+  "day": 13,
+  "type": "lesson",
+  "id": 10,
+  "video": "AqgQc0Hyeww",
+  "href": "lesson-10.html",
+  "title": "“Since when do you care?”",
+  "clip": "אסור לשכוח מי החברים שלך",
+  "mins": "0:52"
  }
 ];

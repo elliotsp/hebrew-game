@@ -54,7 +54,7 @@ What to build is decided by the **catalog**, not the date:
    `yt-dlp --flat-playlist --print "%(id)s|%(title)s|%(channel_id)s|%(duration)s" "ytsearch40:פאודה yes דורון"` (flat search still works; yes = `UCiqesVwAsxUYZx9nBYItCyQ`).
    No auto-captions returned on Oct 26 (probably burned-in only — check frames): `4-SDJiLIi7M` דורון מאבד את העשתונות, `cQFObQ_CDOo` שיחת הטלפון שתשנה את גורלו של דורון,
    `GwLRP2Uh5hw` הכנות אחרונות, `oqqocVtXziE` לפחות יש שלום בכל המלחמה הזאתי, `X4dHTrSWBuU` הם יורים גם במקררים!, `66VyGIZdHnc` תפילה אחרונה של דורון.
-   Skip: `UHRvXIjmrPc` (Arabic), `oWXZOFo7NGk` (mostly Kaddish), `pszLgOWThGM` (trailer monologue over music), `l4oucZa2PT4` (33 s, one long political rant).
+   Skip: `UHRvXIjmrPc` (Arabic), `XHVvR6198Zg` (Arabic audio), `GMSUiAMFEIc` (romance scene, no captions/subs), `27vlXpKSfb0` (behind-the-scenes promo), `oWXZOFo7NGk` (mostly Kaddish), `pszLgOWThGM` (trailer monologue over music), `l4oucZa2PT4` (33 s, one long political rant).
 
 ## 3. Getting the lines and times
 * Source of truth, in order: YouTube Hebrew caption track (manual > auto) → burned-in subtitles read off frames. Record which one you used in `source`.
