@@ -52,9 +52,11 @@ What to build is decided by the **catalog**, not the date:
 4. Don't repeat a video already used in `data/lesson-*.js`.
 5. **Candidate pool** (official yes, Hebrew dialogue, not yet used; /tmp is wiped when the box restarts, so this list lives here). Find more with
    `yt-dlp --flat-playlist --print "%(id)s|%(title)s|%(channel_id)s|%(duration)s" "ytsearch40:פאודה yes דורון"` (flat search still works; yes = `UCiqesVwAsxUYZx9nBYItCyQ`).
-   No auto-captions returned on Oct 26 (probably burned-in only — check frames): `4-SDJiLIi7M` דורון מאבד את העשתונות, `cQFObQ_CDOo` שיחת הטלפון שתשנה את גורלו של דורון,
-   `GwLRP2Uh5hw` הכנות אחרונות, `oqqocVtXziE` לפחות יש שלום בכל המלחמה הזאתי, `X4dHTrSWBuU` הם יורים גם במקררים!, `66VyGIZdHnc` תפילה אחרונה של דורון.
-   Skip: `UHRvXIjmrPc` (Arabic), `XHVvR6198Zg` (Arabic audio), `GMSUiAMFEIc` (romance scene, no captions/subs), `27vlXpKSfb0` (behind-the-scenes promo), `oWXZOFo7NGk` (mostly Kaddish), `pszLgOWThGM` (trailer monologue over music), `l4oucZa2PT4` (33 s, one long political rant).
+   No caption track (Oct 28 check via tools/cap.js; burned-in Hebrew subs only — check audio language before using): `-QkGLhLN_LE` שירין דואגת לבועז (Shirin on the phone, may be Arabic audio),
+   `5RpppLC1rwc` דורון מקבל סיוע בדרכים, `HfKdeyU0uDI` דורון בחיפוש אחר הפנתר, `1fAJNvf8Htc` "ככה הוא לא יוכל לנשום", `66VyGIZdHnc` תפילה אחרונה של דורון.
+   Unchecked yes uploads from the Oct 28 search: `xSbyaxUe1H0`, `1V1fMx3_jxo`, `mLxZ-GWS7rU`, `9DeNm_JFNfo`, `MZJ20IPHpjU`, `ysMPopAJGi4`, `OjkTBNFfhl0` (sitcom parody), `pvIIskH-Fek` (דורון בדקה).
+   With 1280×720 frames (`sed 's/width:854,height:480/width:1280,height:720/g' tools/frames.js`) the “More videos” overlay no longer covers paused subtitles.
+   Skip: `UHRvXIjmrPc` (Arabic), `4-SDJiLIi7M` (no speech), `cQFObQ_CDOo` (Arabic), `GwLRP2Uh5hw` (montage, almost no dialogue), `oqqocVtXziE` (Marwa/Samir, likely Arabic audio), `XHVvR6198Zg` (Arabic audio), `GMSUiAMFEIc` (romance scene, no captions/subs), `27vlXpKSfb0` (behind-the-scenes promo), `oWXZOFo7NGk` (mostly Kaddish), `pszLgOWThGM` (trailer monologue over music), `l4oucZa2PT4` (33 s, one long political rant).
 
 ## 3. Getting the lines and times
 * Source of truth, in order: YouTube Hebrew caption track (manual > auto) → burned-in subtitles read off frames. Record which one you used in `source`.

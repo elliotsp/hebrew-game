@@ -114,5 +114,15 @@ window.IVX_CATALOG=[
   "title": "“Since when do you care?”",
   "clip": "אסור לשכוח מי החברים שלך",
   "mins": "0:52"
+ },
+ {
+  "day": 14,
+  "type": "lesson",
+  "id": 11,
+  "video": "X4dHTrSWBuU",
+  "href": "lesson-11.html",
+  "title": "“A few words for the fridge”",
+  "clip": "הם יורים גם במקררים!",
+  "mins": "1:28"
  }
 ];
