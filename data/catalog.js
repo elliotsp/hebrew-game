@@ -124,5 +124,15 @@ window.IVX_CATALOG=[
   "title": "“A few words for the fridge”",
   "clip": "הם יורים גם במקררים!",
   "mins": "1:28"
+ },
+ {
+  "day": 15,
+  "type": "lesson",
+  "id": 12,
+  "video": "uUzrMw6zBAk",
+  "href": "lesson-12.html",
+  "title": "“Bear with me a second”",
+  "clip": "אבו אחמד הוא לא הטאליבן",
+  "mins": "0:49"
  }
 ];

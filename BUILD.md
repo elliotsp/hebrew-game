@@ -55,6 +55,8 @@ What to build is decided by the **catalog**, not the date:
    No caption track (Oct 28 check via tools/cap.js; burned-in Hebrew subs only — check audio language before using): `-QkGLhLN_LE` שירין דואגת לבועז (Shirin on the phone, may be Arabic audio),
    `5RpppLC1rwc` דורון מקבל סיוע בדרכים, `HfKdeyU0uDI` דורון בחיפוש אחר הפנתר, `1fAJNvf8Htc` "ככה הוא לא יוכל לנשום", `66VyGIZdHnc` תפילה אחרונה של דורון.
    Unchecked yes uploads from the Oct 28 search: `xSbyaxUe1H0`, `1V1fMx3_jxo`, `mLxZ-GWS7rU`, `9DeNm_JFNfo`, `MZJ20IPHpjU`, `ysMPopAJGi4`, `OjkTBNFfhl0` (sitcom parody), `pvIIskH-Fek` (דורון בדקה).
+   Also yes uploads with Hebrew dialogue seen Oct 29 (unchecked): `mezJiOlEMn8` מה זה פאודה?, `D-yhEgweMlk` סופרים את הימים (no caption track), `ciXyjft2QHo` מתכוננים למשימה (31 s), `iUQIUi4z2ok`, `1niSbwMQ8BQ`, `1V0dPm4BP-s`. Used Oct 29: `uUzrMw6zBAk` (Lesson 12).
+   If paused frames come out black, play ~1.8 s after `seekTo` before pausing (the paused seek doesn't always render a frame).
    With 1280×720 frames (`sed 's/width:854,height:480/width:1280,height:720/g' tools/frames.js`) the “More videos” overlay no longer covers paused subtitles.
    Skip: `UHRvXIjmrPc` (Arabic), `4-SDJiLIi7M` (no speech), `cQFObQ_CDOo` (Arabic), `GwLRP2Uh5hw` (montage, almost no dialogue), `oqqocVtXziE` (Marwa/Samir, likely Arabic audio), `XHVvR6198Zg` (Arabic audio), `GMSUiAMFEIc` (romance scene, no captions/subs), `27vlXpKSfb0` (behind-the-scenes promo), `oWXZOFo7NGk` (mostly Kaddish), `pszLgOWThGM` (trailer monologue over music), `l4oucZa2PT4` (33 s, one long political rant).
 
