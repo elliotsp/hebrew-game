@@ -134,5 +134,20 @@ window.IVX_CATALOG=[
   "title": "“Bear with me a second”",
   "clip": "אבו אחמד הוא לא הטאליבן",
   "mins": "0:49"
+ },
+ {
+  "day": 16,
+  "type": "rewatch",
+  "week": 2,
+  "href": "rewatch.html?week=2",
+  "title": "Rewatch week 2",
+  "lessons": [
+   7,
+   8,
+   9,
+   10,
+   11,
+   12
+  ]
  }
 ];
