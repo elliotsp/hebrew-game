@@ -149,5 +149,15 @@ window.IVX_CATALOG=[
    11,
    12
   ]
+ },
+ {
+  "day": 17,
+  "type": "lesson",
+  "id": 13,
+  "video": "kWH1x5tYFHM",
+  "href": "lesson-13.html",
+  "title": "“Let’s get out of here”",
+  "clip": "גלי ודורון",
+  "mins": "1:19"
  }
 ];
