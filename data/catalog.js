@@ -159,5 +159,15 @@ window.IVX_CATALOG=[
   "title": "“Let’s get out of here”",
   "clip": "גלי ודורון",
   "mins": "1:19"
+ },
+ {
+  "day": 19,
+  "type": "lesson",
+  "id": 14,
+  "video": "ML7kEq1vJBM",
+  "href": "lesson-14.html",
+  "title": "“That’s the situation”",
+  "clip": "הצצה לפרק 8",
+  "mins": "2:49"
  }
 ];
