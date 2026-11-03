@@ -169,5 +169,15 @@ window.IVX_CATALOG=[
   "title": "“That’s the situation”",
   "clip": "הצצה לפרק 8",
   "mins": "2:49"
+ },
+ {
+  "day": 20,
+  "type": "lesson",
+  "id": 15,
+  "video": "DzM7likc1wk",
+  "href": "lesson-15.html",
+  "title": "“That’s all we need right now”",
+  "clip": "הצצה לפרק 5",
+  "mins": "2:06"
  }
 ];
