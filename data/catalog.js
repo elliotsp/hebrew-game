@@ -179,5 +179,15 @@ window.IVX_CATALOG=[
   "title": "“That’s all we need right now”",
   "clip": "הצצה לפרק 5",
   "mins": "2:06"
+ },
+ {
+  "day": 21,
+  "type": "lesson",
+  "id": 16,
+  "video": "yvzxKztD09Y",
+  "href": "lesson-16.html",
+  "title": "“It’s stronger than me”",
+  "clip": "בתחבולות תעשה לך מלחמה",
+  "mins": "1:00"
  }
 ];
