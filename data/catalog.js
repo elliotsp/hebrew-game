@@ -189,5 +189,15 @@ window.IVX_CATALOG=[
   "title": "“It’s stronger than me”",
   "clip": "בתחבולות תעשה לך מלחמה",
   "mins": "1:00"
+ },
+ {
+  "day": 22,
+  "type": "lesson",
+  "id": 17,
+  "video": "gCb-DY2osyE",
+  "href": "lesson-17.html",
+  "title": "“Come sharp”",
+  "clip": "רוצים לדעת מתי?",
+  "mins": "0:40"
  }
 ];
