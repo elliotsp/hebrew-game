@@ -199,5 +199,16 @@ window.IVX_CATALOG=[
   "title": "“Come sharp”",
   "clip": "רוצים לדעת מתי?",
   "mins": "0:40"
+ },
+ {
+  "day": 24,
+  "type": "lesson",
+  "id": 18,
+  "video": "OjkTBNFfhl0",
+  "href": "lesson-18.html",
+  "title": "“What’s up?”",
+  "clip": "אם פאודה היתה... סיטקום",
+  "mins": "1:57"
  }
 ];
+
