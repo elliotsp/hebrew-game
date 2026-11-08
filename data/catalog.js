@@ -1,4 +1,4 @@
-/* Home-page list. One entry per day. A rewatch entry comes after every 6 lessons (week 1 = lessons 1–6, week 2 = lessons 7–12). Days are calendar days and may skip (Oct 24–25 had no run). See BUILD.md. */
+/* Home-page list. One entry per day. A rewatch entry comes after every 6 lessons (week 1 = lessons 1–6, week 2 = lessons 7–12, week 3 = lessons 13–18). Days are calendar days and may skip (Oct 24–25 had no run). See BUILD.md. */
 window.IVX_CATALOG=[
  {
   "day": 1,
@@ -209,6 +209,20 @@ window.IVX_CATALOG=[
   "title": "“What’s up?”",
   "clip": "אם פאודה היתה... סיטקום",
   "mins": "1:57"
+ },
+ {
+  "day": 25,
+  "type": "rewatch",
+  "week": 3,
+  "href": "rewatch.html?week=3",
+  "title": "Rewatch week 3",
+  "lessons": [
+   13,
+   14,
+   15,
+   16,
+   17,
+   18
+  ]
  }
 ];
-

@@ -38,7 +38,7 @@ What to build is decided by the **catalog**, not the date:
 * Count the `type:"lesson"` entries after the last `type:"rewatch"` entry in `data/catalog.js`.
   * **6 or more → rewatch day.** Don't add a new clip. Append
     `{day, type:"rewatch", week: W, href:"rewatch.html?week=W", title:"Rewatch week W", lessons:[those lesson ids]}` with W = last rewatch week + 1.
-    (Week 1 = day 7, lessons 1–6. Week 2 = lessons 7–12, due the run after Lesson 12 is published.) Then just announce it.
+    (Week 1 = day 7, lessons 1–6. Week 2 = lessons 7–12, due the run after Lesson 12 is published. Week 3 = lessons 13–18, day 25, Nov 8. Next: Lesson 19, then week 4 after Lesson 24.) Then just announce it.
   * **Fewer than 6 → add lesson `N = (highest lesson id) + 1`** with `day = today's day`.
 * If the catalog already has an entry with today's `day`, today's run already happened: don't build anything, just re-announce it.
 * Lesson ids don't equal day numbers.
