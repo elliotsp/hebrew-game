@@ -224,5 +224,6 @@ window.IVX_CATALOG=[
    17,
    18
   ]
- }
+ },
+ {"day":26,"type":"lesson","id":19,"video":"lKwrcd_Mv5I","href":"lesson-19.html","title":"“We don’t trust anyone”","clip":"פאודה!","mins":"0:30"}
 ];
