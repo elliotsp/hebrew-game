@@ -226,5 +226,6 @@ window.IVX_CATALOG=[
   ]
  },
  {"day":26,"type":"lesson","id":19,"video":"lKwrcd_Mv5I","href":"lesson-19.html","title":"“We don’t trust anyone”","clip":"פאודה!","mins":"0:30"},
- {"day":27,"type":"lesson","id":20,"video":"DameGQplunw","href":"lesson-20.html","title":"“Stop being paranoid”","clip":"למקומות, היכון, אש! פאודה, עונה 2","mins":"1:14"}
+ {"day":27,"type":"lesson","id":20,"video":"DameGQplunw","href":"lesson-20.html","title":"“Stop being paranoid”","clip":"למקומות, היכון, אש! פאודה, עונה 2","mins":"1:14"},
+ {"day":28,"type":"lesson","id":21,"video":"v4cq1X05i-o","href":"lesson-21.html","title":"“A suicide mission”","clip":"תקציר פרק 6","mins":"1:50"}
 ];
