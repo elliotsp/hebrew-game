@@ -228,5 +228,6 @@ window.IVX_CATALOG=[
  {"day":26,"type":"lesson","id":19,"video":"lKwrcd_Mv5I","href":"lesson-19.html","title":"“We don’t trust anyone”","clip":"פאודה!","mins":"0:30"},
  {"day":27,"type":"lesson","id":20,"video":"DameGQplunw","href":"lesson-20.html","title":"“Stop being paranoid”","clip":"למקומות, היכון, אש! פאודה, עונה 2","mins":"1:14"},
  {"day":28,"type":"lesson","id":21,"video":"v4cq1X05i-o","href":"lesson-21.html","title":"“A suicide mission”","clip":"תקציר פרק 6","mins":"1:50"},
- {"day":29,"type":"lesson","id":22,"video":"sH1W3RYuV9E","href":"lesson-22.html","title":"“I came for a fun day”","clip":"כפרה על שירין!","mins":"2:12"}
+ {"day":29,"type":"lesson","id":22,"video":"sH1W3RYuV9E","href":"lesson-22.html","title":"“I came for a fun day”","clip":"כפרה על שירין!","mins":"2:12"},
+ {"day":30,"type":"lesson","id":23,"video":"7D6VrW2ZLiQ","href":"lesson-23.html","title":"“Right under our nose”","clip":"תקציר פרק 2","mins":"1:40"}
 ];
