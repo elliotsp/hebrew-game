@@ -1,4 +1,4 @@
-/* Home-page list. One entry per day. A rewatch entry comes after every 6 lessons (week 1 = lessons 1–6, week 2 = lessons 7–12, week 3 = lessons 13–18). Days are calendar days and may skip (Oct 24–25 had no run). See BUILD.md. */
+/* Home-page list. One entry per day. A rewatch entry comes after every 6 lessons (week 1 = lessons 1–6, week 2 = lessons 7–12, week 3 = lessons 13–18, week 4 = lessons 19–24). Days are calendar days and may skip (Oct 24–25 had no run). See BUILD.md. */
 window.IVX_CATALOG=[
  {
   "day": 1,
@@ -230,5 +230,6 @@ window.IVX_CATALOG=[
  {"day":28,"type":"lesson","id":21,"video":"v4cq1X05i-o","href":"lesson-21.html","title":"“A suicide mission”","clip":"תקציר פרק 6","mins":"1:50"},
  {"day":29,"type":"lesson","id":22,"video":"sH1W3RYuV9E","href":"lesson-22.html","title":"“I came for a fun day”","clip":"כפרה על שירין!","mins":"2:12"},
  {"day":30,"type":"lesson","id":23,"video":"7D6VrW2ZLiQ","href":"lesson-23.html","title":"“Right under our nose”","clip":"תקציר פרק 2","mins":"1:40"},
- {"day":31,"type":"lesson","id":24,"video":"KK4xeh1tZCI","href":"lesson-24.html","title":"“He didn’t want to, or you didn’t?”","clip":"תקציר פרק 1","mins":"2:10"}
+ {"day":31,"type":"lesson","id":24,"video":"KK4xeh1tZCI","href":"lesson-24.html","title":"“He didn’t want to, or you didn’t?”","clip":"תקציר פרק 1","mins":"2:10"},
+ {"day":32,"type":"rewatch","week":4,"href":"rewatch.html?week=4","title":"Rewatch week 4","lessons":[19,20,21,22,23,24]}
 ];
