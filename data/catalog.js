@@ -233,5 +233,6 @@ window.IVX_CATALOG=[
  {"day":31,"type":"lesson","id":24,"video":"KK4xeh1tZCI","href":"lesson-24.html","title":"“He didn’t want to, or you didn’t?”","clip":"תקציר פרק 1","mins":"2:10"},
  {"day":32,"type":"rewatch","week":4,"href":"rewatch.html?week=4","title":"Rewatch week 4","lessons":[19,20,21,22,23,24]},
  {"day":33,"type":"lesson","id":25,"video":"bwceW_66UPc","href":"lesson-25.html","title":"“Don’t take it personally”","clip":"תקציר פרק 5","mins":"1:19"},
- {"day":34,"type":"lesson","id":26,"video":"tAO2WLzcR0I","href":"lesson-26.html","title":"“We owe it to ourselves”","clip":"הולכים להרוג בן-אדם מת?","mins":"2:39"}
+ {"day":34,"type":"lesson","id":26,"video":"tAO2WLzcR0I","href":"lesson-26.html","title":"“We owe it to ourselves”","clip":"הולכים להרוג בן-אדם מת?","mins":"2:39"},
+ {"day":35,"type":"lesson","id":27,"video":"TfAxh8eMD1o","href":"lesson-27.html","title":"“Enough crying”","clip":"ליסה מגיעה לפאודה","mins":"1:24"}
 ];
