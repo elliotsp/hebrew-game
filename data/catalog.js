@@ -1,4 +1,6 @@
-/* Home-page list. One entry per day. A rewatch entry comes after every 6 lessons (week 1 = lessons 1–6, week 2 = lessons 7–12, week 3 = lessons 13–18, week 4 = lessons 19–24). Days are calendar days and may skip (Oct 24–25 had no run). See BUILD.md. */
+/* The one content list for every track (see BUILD.md §1). Fauda: type "lesson"/"rewatch"; Netanyahu: type "speech" (ids 101+); Omer Adam: type "song" (ids 201+).
+   day = calendar day it was published (Day 1 = 2026-10-15); day 0 = library item that was never a daily item.
+   Old note: One entry per day. A rewatch entry comes after every 6 lessons (week 1 = lessons 1–6, week 2 = lessons 7–12, week 3 = lessons 13–18, week 4 = lessons 19–24). Days are calendar days and may skip (Oct 24–25 had no run). See BUILD.md. */
 window.IVX_CATALOG=[
  {
   "day": 1,
@@ -234,5 +236,10 @@ window.IVX_CATALOG=[
  {"day":32,"type":"rewatch","week":4,"href":"rewatch.html?week=4","title":"Rewatch week 4","lessons":[19,20,21,22,23,24]},
  {"day":33,"type":"lesson","id":25,"video":"bwceW_66UPc","href":"lesson-25.html","title":"“Don’t take it personally”","clip":"תקציר פרק 5","mins":"1:19"},
  {"day":34,"type":"lesson","id":26,"video":"tAO2WLzcR0I","href":"lesson-26.html","title":"“We owe it to ourselves”","clip":"הולכים להרוג בן-אדם מת?","mins":"2:39"},
- {"day":35,"type":"lesson","id":27,"video":"TfAxh8eMD1o","href":"lesson-27.html","title":"“Enough crying”","clip":"ליסה מגיעה לפאודה","mins":"1:24"}
+ {"day":35,"type":"lesson","id":27,"video":"TfAxh8eMD1o","href":"lesson-27.html","title":"“Enough crying”","clip":"ליסה מגיעה לפאודה","mins":"1:24"},
+ {"day":0,"type":"speech","track":"speech","id":101,"video":"14n0-TbZQnM","href":"speech-1.html","title":"“My brothers and sisters, citizens of Israel”","clip":"ברכת ראש הממשלה ליום העצמאות","credit":"Prime Minister’s Office","mins":"3:13"},
+ {"day":0,"type":"speech","track":"speech","id":102,"video":"eNbtl_0Q6Rg","href":"speech-2.html","title":"“Citizens of Israel, we are at war”","clip":"הצהרה מהקריה, 7 באוקטובר 2023","credit":"Prime Minister’s Office","mins":"0:49"},
+ {"day":0,"type":"speech","track":"speech","id":103,"video":"y2IgggCbx-o","href":"speech-3.html","title":"“Until total victory”","clip":"הצהרת ראש הממשלה, דצמבר 2023","credit":"Prime Minister’s Office","mins":"0:47"},
+ {"day":0,"type":"song","track":"song","id":202,"video":"nMQw29nfzpg","href":"song-2.html","title":"“A real man’s man”","clip":"תל אביב","credit":"Omer Adam (official)","mins":"3:41"},
+ {"day":36,"type":"song","track":"song","id":201,"video":"dFqAtitDNvs","href":"song-1.html","title":"“It’s gonna be a blast”","clip":"צמוד צמוד","credit":"Omer Adam (official)","mins":"2:43"}
 ];

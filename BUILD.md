@@ -1,50 +1,70 @@
-# Ivrit × Fauda — how a daily run adds a lesson
+# Ivrit — three tracks, 2-minute sessions. How the site works and how a daily run adds one item
 
 Static site on GitHub Pages (`https://elliotsp.github.io/hebrew-game/`, repo `elliotsp/hebrew-game`, branch `main`).
-A daily run adds **one small data file**, one 15-line HTML shell, and one catalog entry. Never edit `assets/lesson.js`
+A daily run adds **one small data file**, one 15-line HTML shell, and one catalog entry. Never edit `assets/app.js` / `assets/app.css`
 in a daily run unless fixing a bug.
 
 ```
-assets/lesson.js     shared engine v5: mobile stepper (one screen per step, pinned video, bottom action bar), player, recorder,
-                     dictation diff, Scene-recall review, home/review/rewatch pages
-assets/ivx.css       shared styles
-data/catalog.js      home-page list (one entry per day)
-data/lesson-N.js     one lesson's content (calls IVX.register({...}))
-lesson-N.html        shell: loads lesson.js, data/lesson-N.js, then IVX.lessonPage(N)
-index.html  review.html  rewatch.html?week=W
-v2/                  old story game (leave alone)
+assets/app.js        engine v7: home, track pages, sessions, speech recognition + record fallback, Quick replay, rewatch
+assets/app.css       styles (dark, iPhone-first; track accent via body class t-fauda / t-speech / t-song)
+data/catalog.js      THE content list for every track (window.IVX_CATALOG) — home, track pages, Today, rewatch all read it
+data/lesson-N.js     Fauda lesson N   (id N)          → shell lesson-N.html   → IVX.lessonPage(N)
+data/speech-K.js     Netanyahu speech K (id 100+K)   → shell speech-K.html   → IVX.lessonPage(100+K)
+data/song-K.js       Omer Adam song K (id 200+K)     → shell song-K.html     → IVX.lessonPage(200+K)
+index.html (home)  track.html?t=fauda|speech|song  review.html (Quick replay)  rewatch.html?week=W
+tools/e2e.js         headless iPhone test (fake he-IL recognizer + fake mic), screenshots
+v2/                  old story game (leave alone; no longer linked)
 ```
 
-## 0. How the site works now (v5, Oct 21 2026)
-Elliot uses it on his iPhone every morning. Design rules — keep them when you touch anything:
-* **One step per screen.** The YouTube player is pinned under a thin progress bar; the content scrolls in between; one big primary button
-  sits in the bottom bar (with Back on the left and a small Skip/Retry on the right). The primary button's label always says what happens next
-  ("▶ Listen" → "Show the line" → "Next line"). Every tap's result is scrolled into view.
-* Lesson screens are generated from the data file — 17 screens for a 5-line lesson: Watch (intro + gist) → 5 key lines (listen 1× then 0.75×, say it back,
-  then reveal) → 2 dictation → 3 shadow (hear → record → compare) → 3 say-it situations (record answer → model answer + actor clip) → rewatch + rating →
-  chat challenge + Finish. Progress resumes where he left off.
-* **Daily review = “Scene recall”** (review.html), not flashcards: max 6 items/day (~3 min). *Catch it*: the real clip moment plays; he says what
-  was said and what it means, then checks. *Use it*: one of the lesson's `say` situations; he answers out loud, then sees the model answer + the clip.
-  He self-grades Missed / Got it / Instantly (→ the same SRS intervals). Misses come back once at the end of the round.
-* Home: greeting, streak/XP, week strip, a big **Today** card with one button (Start / Continue · step N of 7 / Do it again), the review tile, then the library.
-* No new UI chrome per lesson. If a lesson needs a heads-up, use `warnings`.
+## 0. Design note — v7 redesign (Nov 19 2026) and why
+Elliot (Nov 18): the v5 site wasn't intuitive and didn't make him want to come back. He's busy and gives it a couple of minutes;
+he wants the speaking and the quiz to be much better, and three sections: **Fauda** (TV / street Hebrew), **Netanyahu** (key speeches, formal
+and political Hebrew for following the news), **Omer Adam** (songs, young people's language).
 
-## 1. Which day is it? What to build today?
-`day` = calendar day: Day 1 = 2026-10-15 (America/New_York), `day = days since 2026-10-15 + 1`. It is only a label (the home page's
-**Today** marker and week strip match it to the date), so days can skip — Oct 24–25 (days 10–11) had no run because the box was down.
-**Never back-fill missed days, never build more than one lesson per run.**
+What changed:
+* **Home = one decision.** Brand + streak, one big **Today** card (thumbnail, track, title, one Start button), a 7-day streak strip,
+  an optional *Quick replay* row when lines are due, then three track cards with progress. Library lists moved to `track.html?t=…`.
+  Settings were cut (transliteration is always shown under the Hebrew; the v2 link is gone).
+* **A session is 9 short screens, ~2–3 min**, same for every track: Intro → for 3 focus lines: **Hear it** (the real clip segment auto-plays,
+  then a comprehension question; answering reveals the line, transliteration, meaning and a one-line why) → **Say it** (tap the mic, say the line;
+  the browser's he-IL speech recognition transcribes it, the line is shown with matched / almost / missed words and a % score; Try again / Next)
+  → **Real life** (an English situation; he answers out loud and is scored against the model answer *and* accepted variants, then sees a natural
+  answer, the casual version for speeches, and can replay the original) → **Done** (streak, XP, the 3 lines, the chat challenge, optional full clip).
+  Cut from v5 as busywork: the separate gist question, dictation typing, 0.75× auto-loop, rewatch-and-rate inside each lesson, self-grading.
+  Watching the whole clip is now an optional chip (intro and done screens), not a mandatory 1–3 minute step.
+* **Speaking:** `webkitSpeechRecognition` / `SpeechRecognition`, `lang:'he-IL'`, `interimResults`, `maxAlternatives:5`. Comparison ignores nikud,
+  punctuation, final-letter forms and ו/י plene spelling, tolerates one-letter slips, and takes the best score over every target × recognizer
+  alternative. ≥85 % = Nailed it, ≥60 % = Close, else Not yet. If recognition is missing or permission is denied it falls back for the session to
+  record-and-compare (MediaRecorder: ▶ You / ▶ Original). No TTS anywhere.
+* **Quiz:** no fill-in-the-blank, no flashcards. Each focus line gets one listening question: authored in `quiz` (types `meaning`, `implies`,
+  `vibe`, `reply`, `casual`, `when`) with plausible distractors and an explanation; if a line has no authored question the engine generates
+  “What did you just hear?” from the lesson's other lines' meanings (good enough for old Fauda lessons, but new items must author `quiz`).
+* **Review is light:** *Quick replay* = max 5 due lines; the real moment plays, he says it, it's graded automatically from the score (same SRS
+  intervals as v5). Only the 3 focus lines of a session join the deck. **Rewatch week** = each scene once, one tap to rate (Most / Some / Not much).
+* Old URLs still work: `lesson-N.html`, `speech-1.html`, `rewatch.html?week=N`, `review.html` are the same files on the new engine.
+  Progress carries over (same localStorage key `ivx1`; done/streak/XP/deck/timing nudges kept).
 
-What to build is decided by the **catalog**, not the date:
-* Count the `type:"lesson"` entries after the last `type:"rewatch"` entry in `data/catalog.js`.
-  * **6 or more → rewatch day.** Don't add a new clip. Append
-    `{day, type:"rewatch", week: W, href:"rewatch.html?week=W", title:"Rewatch week W", lessons:[those lesson ids]}` with W = last rewatch week + 1.
-    (Week 1 = day 7, lessons 1–6. Week 2 = lessons 7–12, due the run after Lesson 12 is published. Week 3 = lessons 13–18, day 25, Nov 8. Lesson 19 = day 26, Nov 9. Lesson 20 = day 27, Nov 10. Lesson 21 = day 28, Nov 11. Lesson 22 = day 29, Nov 12. Lesson 23 = day 30, Nov 13. Lesson 24 = day 31, Nov 14. Week 4 = lessons 19–24, day 32, Nov 15. Lesson 25 = day 33, Nov 16. Lesson 26 = day 34, Nov 17. Lesson 27 = day 35, Nov 18. Next: Lesson 28 (new clip), then week 5 after Lesson 30.) Then just announce it.
-  * **Fewer than 6 → add lesson `N = (highest lesson id) + 1`** with `day = today's day`.
-* If the catalog already has an entry with today's `day`, today's run already happened: don't build anything, just re-announce it.
-* Lesson ids don't equal day numbers.
+## 1. Which day is it? What to build today? (rotation across the three tracks)
+`day` = calendar day: Day 1 = 2026-10-15 (America/New_York), `day = days since 2026-10-15 + 1`. It's a label (the home page's **Today** card
+shows the entry whose `day` equals today). Days can skip. **Never back-fill missed days, never build more than one item per run.**
+Decide in this order:
+1. If `data/catalog.js` already has an entry with today's `day` → today's run already happened: build nothing, just re-announce it.
+   (Day 36 = Thu Nov 19 2026 is already taken by Song 1, published with the redesign.)
+2. **Fauda rewatch due?** Count `type:"lesson"` entries after the last `type:"rewatch"` entry. **6 or more → rewatch day**: append
+   `{day, type:"rewatch", week: W, href:"rewatch.html?week=W", title:"Rewatch week W", lessons:[those lesson ids]}` with W = last week + 1.
+   (Week 4 = lessons 19–24, day 32. Lessons 25–27 are done, so week 5 comes after Lesson 30.)
+3. **Sunday → Netanyahu speech** (Israel's week starts Sunday; news day). Build `speech-K` (K = highest speech number + 1) per §8.
+   If no accurate, embeddable, official speech with a Hebrew text source can be built today, fall through to step 5 and say so.
+4. **Wednesday → Omer Adam song.** Build `song-K` per §7. Same fall-through rule.
+5. Otherwise → **Fauda lesson** `N = (highest lesson id) + 1` per §2–§4.
+Default mix per week: ~4–5 Fauda, 1 song, 1 speech; a rewatch about every 1.5 weeks. Speeches and songs never count toward the rewatch.
+Library items (`day: 0`) are on the track pages but were never a daily item (Speech 1–3 and Song 2 at launch).
 
-## 2. Picking the clip (rules)
-1. **Official yes tv / Fauda uploads only** (the yes channel on YouTube). Embeddable (no error 101/150). No reuploads, fan edits or Netflix rips.
+## 2. Fauda: picking the clip (rules)
+1. **Official uploads only:** the yes channel on YouTube, and (since Nov 19 2026, because the yes pool is nearly exhausted) **Netflix’s official channels** (e.g. `@Netflix`, `@NetflixIsrael`, “Fauda | Netflix” clip uploads; verify with oEmbed `author_url`). Embeddable (no error 101/150). No reuploads, fan edits or rips. Netflix clips may have English burned-in subs or English-dubbed audio: use only Hebrew-audio clips, and take the Hebrew from a Hebrew caption track (or say so clearly in `source` if you had to transcribe from audio-matched Hebrew subs). Set `"credit":"Official Netflix clip"` on those.
+   Netflix leads (Nov 18 search, channel “Netflix”, unchecked for embedding/audio): `k-tILBxRiQ4` Season 2 official trailer (1:42), `op_cGQtFgYU` Season 3 official trailer (1:32),
+   `24D2M8Aajxs` Season 2 “Lior’s True Story” (1:25, likely English interview — skip if so). Search `ytsearch40:Fauda Netflix` / `Fauda clip Netflix` and keep only channel “Netflix” / “Netflix Israel”
+   (fan accounts like “fauda TV”, “NBK”, “Showtime Sherpa” are not official). Trailers are montage-heavy: prefer actual scene clips.
 2. **Prefer clips with a YouTube Hebrew caption track and no Hebrew subtitles burned into the video.** Burned-in subtitles undermine the
    ears-first steps, and we're **not allowed to cover them** (see policies below). If you have to use a burned-in clip, set `"burnedIn": true`
    (the engine then tells him to look away while lines play).
@@ -77,7 +97,7 @@ What to build is decided by the **catalog**, not the date:
    With 1280×720 frames (`sed 's/width:854,height:480/width:1280,height:720/g' tools/frames.js`) the “More videos” overlay no longer covers paused subtitles.
    Skip: `UHRvXIjmrPc` (Arabic), `4-SDJiLIi7M` (no speech), `cQFObQ_CDOo` (Arabic), `GwLRP2Uh5hw` (montage, almost no dialogue), `oqqocVtXziE` (Marwa/Samir, likely Arabic audio), `XHVvR6198Zg` (Arabic audio), `GMSUiAMFEIc` (romance scene, no captions/subs), `27vlXpKSfb0` (behind-the-scenes promo), `oWXZOFo7NGk` (mostly Kaddish), `pszLgOWThGM` (trailer monologue over music), `l4oucZa2PT4` (33 s, one long political rant).
 
-## 3. Getting the lines and times
+## 3. Getting the lines and times (every track)
 * Source of truth, in order: YouTube Hebrew caption track (manual > auto) → burned-in subtitles read off frames. Record which one you used in `source`.
 * Pick **exactly 4–5 lines**: short, reusable chunks a 23-year-old would actually say in Israel. Each line should be a quote from the clip, not a paraphrase.
 * `start` = the line's onset **minus ~0.5–1 s**; `end` = the line's end **plus ~0.5 s**. Keep segments ≤ ~6 s. With captions, use cue start/start+dur.
@@ -96,69 +116,110 @@ What to build is decided by the **catalog**, not the date:
 * Crude or sexual lines: don't make them cards. Mention them in `warnings` (see lesson 4). Mild insults are OK as cards with a warning (lesson 5).
 * Don't assign lines to characters unless the subtitle or the yes title names them.
 
-## 4. Data schema (`data/lesson-N.js`)
+## 4. Data schema v7 (all three tracks)
 ```js
 IVX.register({
- "id": 6, "day": 6, "burnedIn": false,
- "title": "“Short English title”",            // shown as H1
- "heTitle": "פאודה: …",                        // yes's own Hebrew video title, verbatim
+ "id": 28, "day": 36, "track": "fauda",          // "fauda" | "speech" | "song"  (ids: lessons N, speeches 100+K, songs 200+K)
+ "burnedIn": false,                              // true if Hebrew subtitles are burned into the video
+ "title": "“Short English title”",               // shown as H1 + on the Today card
+ "heTitle": "…",                                 // the channel's own Hebrew video title, verbatim
+ "credit": "yes tv",                             // e.g. "Official Netflix clip", "Official Prime Minister’s Office clip (IsraeliPM)", "Official music video · Omer Adam’s channel"
  "video": "YouTubeId11c", "duration": "1:12",
- "blurb": "One or two sentences: what happens. Minimal English.",
- "source": "<b>About the Hebrew.</b> Where the lines came from (caption track / burned-in frames), what was NOT checked (no official script, no native-speaker review), whether timings are approximate, names seen in subtitles, transliteration approximate, summary is my reading.",
- "warnings": [],                                // HTML strings, e.g. crude-language heads-up
- "gist": {"q":"…?","o":["correct","wrong","wrong"],"a":0,"f":"why, quoting a line"},   // the only multiple-choice item
- "lines": [ {"he":"…","tr":"…","en":"…","note":"…","start":24.5,"end":28.5}, … ],      // 4–5
- "dictation": [3,4],                            // 2 line indexes (short, clearly audible)
- "shadow": [1,2,4],                             // 3 line indexes (good rhythm/attitude)
- "say": [ {"sit":"English situation, 1 sentence:","he":"model answer (may adapt the line)","en":"meaning","line":2}, … ],  // exactly 3; "line" = which clip line the actor plays
- "chat": "One-sentence prompt for the Hebrew chat challenge."
+ "blurb": "One or two sentences: what happens / why this matters. Minimal English.",
+ "source": "<b>About the Hebrew.</b> Where the lines came from, what was NOT checked, timings approximate, nobody named unless verified, …",
+ "warnings": [],                                 // HTML strings (crude language, heavy subject)
+ "lines": [ {"he":"…","tr":"…","en":"… (to a man)","note":"one line, gender variant","start":24.5,"end":28.5,
+             "alt":["other acceptable spoken form, e.g. numbers as words"],          // optional, for scoring
+             "casual":"…","casualTr":"…"}, … ],                                   // casual/casualTr REQUIRED on speech lines
+ "focus": [0, 2, 3],                             // exactly 3 line indexes = the session (Hear it + Say it each)
+ "quiz": [                                       // exactly one per focus line, vary the types
+   {"line":0,"type":"implies","q":"What is she really saying?","o":["correct","plausible wrong","plausible wrong"],"a":0,"f":"why, quoting the Hebrew"} ],
+ "say": [ {"sit":"English situation from his life:","he":"model answer","alt":["accepted variant", "shorter variant"],"en":"meaning (gender)",
+           "street":"even more casual version (speeches: REQUIRED)","line":2}, … ],  // 2–3; "line" = which clip line it uses; sessions rotate through them
+ "chat": "One-sentence prompt for the Hebrew chat challenge (he replies in chat; we correct there)."
 });
 ```
-Don't add TTS, fill-the-gap, flashcards, or more multiple choice. Each `say` situation doubles as a *Use it* prompt in the daily review, so write
-situations that are fresh, concrete and from his life (Tel Aviv, roommates, gym, army friends, the shuk) — not a restatement of the clip.
+* Quiz types: `meaning` (what did you hear), `implies` (what is the speaker really saying), `vibe` (tone / feeling), `reply` (pick the natural
+  Israeli reply — options in Hebrew), `casual` (pick the casual equivalent of a formal line — options in Hebrew), `when` (which situation fits).
+  Options are rendered as Hebrew (right-aligned) when they're Hebrew-only. Distractors must be plausible to someone who *half* heard it
+  (literal readings of slang, a similar-sounding word, the opposite tone) — never silly. `f` says why in one or two short sentences.
+* `alt`: add the forms a recognizer will produce (numbers as digits/words, ת/ט spellings of loanwords like סחתיין/סחטיין, with/without אחי).
+* Old Fauda lessons (1–27) still have `gist`, `dictation`, `shadow` and no `focus`/`quiz`; the engine uses `shadow` as the focus and generates the quiz.
+  New lessons: add `focus` + `quiz`; `gist`/`dictation`/`shadow` are no longer needed.
+* Write `say` situations that are fresh, concrete and from his life (Tel Aviv, roommates, gym, army friends, the shuk, a date) — not a restatement.
 
 ## 5. Shell + catalog
-* `lesson-N.html`: copy `lesson-5.html` and change the title, `data/lesson-N.js`, and `IVX.lessonPage(N)`. Keep the `?v=` cache-buster equal to the other pages (currently `v=6`).
-* `data/catalog.js`: append `{day, type:"lesson", id:N, video:"<YouTube id>", href:"lesson-N.html", title, clip:"<yes Hebrew title without the פאודה: prefix>", mins:duration}`.
-  `video` is used for the home-page thumbnail (official i.ytimg.com thumbnail, links to the lesson).
-  The home page puts the **Today** marker on the entry whose `day` equals today's day (otherwise the latest past entry). Entries with a future `day` show as "Soon".
-* Spaced review needs no edits: lines join the deck when he finishes the lesson.
+* Shell: copy an existing one of the same track (`lesson-27.html`, `speech-2.html`, `song-1.html`) and change the `<title>`, the data file and the
+  `IVX.lessonPage(id)` call. Keep `?v=` equal to the other pages (currently **`v=7`**) on `assets/app.css`, `assets/app.js` and the data file.
+* `data/catalog.js`: append one entry (keep the array valid JSON-ish, one entry per line):
+  * Fauda: `{day, type:"lesson", id:N, video, href:"lesson-N.html", title, clip:"<Hebrew title without the פאודה: prefix>", mins:duration}`
+  * Speech: `{day, type:"speech", track:"speech", id:100+K, video, href:"speech-K.html", title, clip:"<short Hebrew label>", credit:"Prime Minister’s Office", mins}`
+  * Song: `{day, type:"song", track:"song", id:200+K, video, href:"song-K.html", title, clip:"<song name in Hebrew>", credit:"Omer Adam (official)", mins}`
+  `video` gives the thumbnail. The Today card = entry whose `day` is today; otherwise the newest unfinished item ("Up next").
+* Review needs no edits: the 3 focus lines join the deck when he finishes the session.
 
 ## 6. Policies (YouTube API Services)
 * Use only the official IFrame player and API (`seekTo`, `setPlaybackRate`, `pauseVideo`, `loadVideoById`). **Never cover, overlay, crop, hide or shrink the player
   below 200×200**, never play audio with the video hidden (no audio-only mode), and never download or cache clips.
 * Keep the YouTube Terms / Google Privacy footer (the engine renders it).
-* No browser speechSynthesis/TTS anywhere. The actors are the only Hebrew voice.
+* No browser speechSynthesis/TTS anywhere. The actors / speakers / singers are the only Hebrew voice. Speech *recognition* (he-IL) is fine: it only listens.
 
-## 7. Test before pushing
+## 7. Omer Adam songs
+* **Official, embeddable videos only:** Omer Adam's channel `@OmerAdamOfficial` (channel id `UCo4y7A6EF2tZ1Q2Oxx64HNQ`; verify with oEmbed `author_url`)
+  or his label's official channel. Check `"playableInEmbed":true` on the watch page (curl) or play it once in the IFrame player.
+* **Copyright: quote at most 3 short lines per song** (2–3 cards). Never paste full lyrics anywhere (data, notes, messages).
+* Lyrics source, in order: an uploaded (non-auto) Hebrew caption track on the official video (`yt-dlp --skip-download --write-subs --sub-langs iw --sub-format json3`)
+  → a published lyric page, ideally 2+ lyric sites that agree (shironet blocks curl; nagnu.co.il, mizrahit.co, songish.co work via search) cross-checked
+  with the auto `iw` captions for timing → otherwise **label every card as unverified** in `source` and say so in the message. Name the source in `source`.
+* Times: caption cue times (or auto-caption word offsets `tOffsetMs`) minus ~0.4 s / plus ~0.2 s; songs are tight, check the next cue's start.
+* Pick lines for **slang and young-people expressions** (בדוק, פיצוץ, באיזי, סחתיין, יא חביבי, רג׳אל, מגזים…), explain each in `note`
+  with one usage example, and write `say` situations where he'd actually use them. Skip crude lines (mention in `warnings`). Don't name which
+  singer sings a line unless the video makes it unambiguous.
+* Candidate pool (official, embeddable per Nov 18 check; captions: **subs** = uploaded iw track, **asr** = auto only, **none**):
+  `dFqAtitDNvs` צמוד צמוד (subs — used, Song 1), `nMQw29nfzpg` תל אביב (asr — used, Song 2), `7PE611GuMAk` בן 32 (asr, 2026),
+  `Ld4gUCnsZ4I` משפחה וכבוד (asr), `E39srf6DWU8` וואי לי (asr), `fIPDoLUk5JQ` הופה (asr), `Hq1XJbrXvg4` מאמי זה נגמר (asr),
+  `WLMmX17D2uw` שני משוגעים (none, 69M views), `31DIsGbFVgY` אוהבת אותי אמיתי (none), `XE3hTnD5Kwo` חברות שלך (none), `AwjhMPbeD0Y` חצי דפוק (none),
+  `8krJL1tuRVI` יעשו לנו כבוד (none), `TPs0Fbw1-WY` טקילה (none), `w6vEE4NxlYw` פרצופים (none), `gpHrr-he4vA` בן 30 (none).
+  Skip `fXFLjct5agw` קאקדילה (asr is garbage, mostly vocalizing) and `XLVqaDqMFU4` (crude title). Full list: `yt-dlp --flat-playlist --print "%(id)s|%(title)s" https://www.youtube.com/@OmerAdamOfficial/videos`.
+
+## 8. Netanyahu speeches
+* Hebrew-language statements from **official** channels only (PMO `@IsraeliPM`, `@Netanyahu`, GPO). Verify with oEmbed `author_url`.
+* Prefer the speeches that matter for following Israeli news (war statements, national addresses, holiday addresses) and **short** clips (≤ ~3 min).
+* Text source: the PMO usually uploads a Hebrew caption track and puts the full statement in the description — use both and say so in `source`.
+  Auto captions alone are noisy (see Speech 1 notes); use them only for timing.
+* Every focus line gets a `casual` version (how he'd say it to a friend) and a `casual`-type or `implies` quiz. Keep the blurb neutral
+  (what was said, when, why the phrase matters) — language, not politics. Leave violent lines (killing, destroying) off the cards.
+* Candidates (Nov 18 check, all IsraeliPM, embeddable): `DSOTek88dt4` Rosh Hashana 5786 greeting (2:22, **iw subs**), `jeZJulgUuD8` statement from the Kirya (4:14),
+  `UBHoTORv-KA` June 13 2025 statement (Iran operation, 6:52, asr only), `CRt-v0bLg7o` Nov 1 2023 “a hard war” (0:46, en subs + asr; mentions fallen soldiers),
+  `oRItZJSAuOo` statement to the press (2:57), `a4YNEK3lZMA` May 2021 (0:39, no captions — description text only). Used: `14n0-TbZQnM` (1), `eNbtl_0Q6Rg` (2), `y2IgggCbx-o` (3).
+
+## 9. Test, publish, announce
 ```bash
 cd /workspace/hebrew-game
-node -e "global.window={navigator:{}};global.navigator={};global.document={getElementById:()=>null};global.localStorage={getItem:()=>null,setItem:()=>{}};require('./assets/lesson.js');global.IVX=window.IVX;require('./data/lesson-N.js');const L=IVX._LESSONS[N];if(L.lines.length<4||L.lines.length>5||L.dictation.length!==2||L.shadow.length!==3||L.say.length!==3)throw 'schema';L.lines.forEach(l=>{if(!(l.end>l.start)||l.end-l.start>8)throw 'times '+l.he});console.log('ok')"
-cd /tmp/ytt && NODE_PATH=/tmp/ytt/node_modules node /workspace/hebrew-game/tools/e2e.js N     # N = the new lesson id
+node -e "global.IVX={register:d=>{if(d.focus.length!==3||d.quiz.length!==3)throw 'focus/quiz';d.quiz.forEach(q=>{if(!d.focus.includes(q.line)||q.o.length<3||!(q.a in q.o))throw 'quiz '+q.line});if(!d.say.length)throw 'say';d.lines.forEach(l=>{if(!(l.end>l.start)||l.end-l.start>8)throw 'times '+l.he;if(d.track==='speech'&&!l.casual)throw 'casual'});console.log('ok')}};require('./data/<file>.js')"
+mkdir -p /tmp/ytt && cd /tmp/ytt && [ -d node_modules/playwright-core ] || (npm init -y && npm i playwright-core)
+NODE_PATH=/tmp/ytt/node_modules node /workspace/hebrew-game/tools/e2e.js <new id>        # ~4 min; prints ERRORS: none
 ```
-(needs `mkdir -p /tmp/ytt && cd /tmp/ytt && npm init -y && npm i playwright-core` — /tmp is wiped on box restarts — and /usr/bin/google-chrome.) `e2e.js` serves the repo on an ephemeral port, emulates an iPhone (390×844, touch),
-smoke-tests every lesson + speech page (player ready, every screen renders, primary button present), then **taps through lesson N end-to-end like a user**
-(listen, reveal, dictation, record with a fake mic, compare, say-it, rewatch rating, finish), runs the Scene-recall review and the rewatch page,
-and prints `ERRORS: none` when clean. Screenshots go to `/tmp/ytt/e2e/`. Look at a couple (`lesson-*.png`) — nothing should be cut off or overlapping.
-Also play every segment once and confirm it contains the line (adjust times if not).
+`e2e.js` (iPhone 390×844, fake he-IL recognizer, fake mic) smoke-tests home, the 3 track pages and every session screen, taps through the given
+session(s) like a user (Hear → answer → Say → Real life → Done), runs Quick replay, rewatch weeks 1 and 4, the old URLs, and one session with speech
+recognition removed (record fallback). Screenshots → `/tmp/ytt/e2e/` (`NOW=2026-11-19T07:05:00-05:00` fakes the clock). Look at a couple.
+Also play every new segment once and confirm it contains the whole line.
 
-## 8. Publish
-```bash
-git add -A && git commit -m "Daily Lesson N: Fauda \"…\" (yes tv)" && git push origin main
-```
-Wait about 1 min, then `curl -s https://elliotsp.github.io/hebrew-game/data/lesson-N.js | head` until it returns the new file.
-Message Elliot with: the clip title, 2–3 of the lines, a link to `lesson-N.html`, and honest notes (caption vs burned-in source, untested timings).
+Publish: `git add -A && git commit -m "Daily <Lesson N: Fauda | Speech K: Netanyahu | Song K: Omer Adam> \"…\"" && git push origin main`,
+wait ~1 min, `curl -s https://elliotsp.github.io/hebrew-game/data/<file>.js | head` until it's live.
+Message Elliot: track + title, 2–3 lines (Hebrew, transliteration, meaning), the link (`lesson-N.html` / `speech-K.html` / `song-K.html`), the chat
+challenge, and honest notes (text source, what wasn't verified, approximate timings).
 
-## 9. Speeches track (formal Hebrew) — not part of the daily run
-Separate, on-demand track for formal / news / ceremonial Hebrew (e.g. Netanyahu speeches). **Daily runs don't touch it.**
+## 10. Netanyahu track notes (history)
+Formal / news Hebrew. Since v7 it **is** part of the daily rotation (§1). Still true:
 * Ids start at **101**: speech K = id `100+K`, data in `data/speech-K.js`, shell `speech-K.html` (copy `speech-1.html`, change title, data file, `IVX.lessonPage(100+K)`).
   The engine maps ids > 100 to `data/speech-*.js`, labels them "Speech K", and they share XP, streak and the review deck (keys `l101:i`).
-* Home-page list: `data/speeches.js` (`window.IVX_SPEECHES`), rendered as a "Speeches" section above the daily list. Don't add speeches to `data/catalog.js`.
-* Extra fields: `"track":"speech"`, `"credit"` (shown instead of "Official yes tv clip"), per-line `"reg"` (one-line register note: formal vs street),
-  and optional per-`say` `"street"` (casual equivalent shown after the model answer).
+* v7: `data/speeches.js` is gone. Speeches are `type:"speech"` entries in `data/catalog.js`.
+* Fields: see §4. Every speech line needs `casual` (+ `casualTr`). `reg` (old register note) is only shown when a line has no `casual`.
 * Clip rules: Hebrew-language speech from an **official** channel only (PMO `@IsraeliPM`, `@Netanyahu`, GPO). Verify with oEmbed `author_url`.
   Prefer non-partisan addresses (holiday greetings, ceremonies, national statements); keep the blurb neutral — language, not politics.
 * Getting text when yt-dlp is bot-blocked: load the video in the IFrame player in headless Chrome with `cc_load_policy:1, cc_lang_pref:'iw'` and capture the
   `/api/timedtext` response (json3 with word offsets): `cd /tmp/ytt && NODE_PATH=/tmp/ytt/node_modules node /workspace/hebrew-game/tools/cap.js ID` → `ID.0.json`.
   Read burned-in subtitles off frames: `node /workspace/hebrew-game/tools/frames.js ID 2 6.5 13 …` → `f_ID_T.png`. Same tools work for Fauda clips.
   YouTube rate-limits timedtext after ~10 videos in a row (returns a “Sorry…” HTML page) — wait, don't hammer.
+

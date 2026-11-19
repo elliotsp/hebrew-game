@@ -27,48 +27,58 @@ IVX.register({
  "lines": [
   {
    "he": "אחיי ואחיותיי, אזרחי ישראל",
-   "tr": "akhay ve-akhyotay, ezrekhey Yisra’el",
+   "tr": "akháy ve-akhyotáy, ezrekhéi yisra’él",
    "en": "My brothers and sisters, citizens of Israel",
    "note": "אחיי = אחים שלי, אחיותיי = אחיות שלי (possessive endings, written style; said akháy, akhyotáy). אזרחי ישראל = construct: “the citizens of Israel”.",
    "reg": "Speech/ceremony opener. On the street you’d just say <span class=\"he\">חבר׳ה</span> or <span class=\"he\">אחים שלי</span>.",
    "start": 0,
-   "end": 3.2
+   "end": 3.2,
+   "casual": "חבר׳ה, אחים שלי",
+   "casualTr": "khevré, akhím shelí"
   },
   {
    "he": "אבל השנה, איש לא מפקפק",
-   "tr": "aval ha-shana, ish lo mefakpek",
+   "tr": "avál ha-shaná, ish lo mefakpék",
    "en": "But this year, nobody doubts it",
    "note": "Just before: היו עדיין אלה שפקפקו בעוצמתה של מדינת ישראל = there were still those who doubted Israel’s strength.",
    "reg": "<span class=\"he\">איש לא</span> = nobody (literary). Street: <span class=\"he\">אף אחד לא</span>. Whole line, street: <span class=\"he\">לאף אחד כבר אין ספק</span>.",
    "start": 37.7,
-   "end": 41.2
+   "end": 41.2,
+   "casual": "אבל השנה, לאף אחד כבר אין ספק",
+   "casualTr": "avál ha-shaná, le-af ekhád kvar ein sáfek"
   },
   {
    "he": "אני מתמלא גאווה עצומה",
-   "tr": "ani mitmale ga’ava atsuma",
+   "tr": "aní mitmalé ga’avá atsumá",
    "en": "I am filled with enormous pride",
-   "note": "Woman: אני מתמלאת גאווה. מתמלא = fills up (hitpa’el). Before it: כשאני פוגש אותם בשטח = when I meet them in the field.",
+   "note": "Woman: אני מתמלאת גאווה, and casually מתפוצצת מגאווה. מתמלא = fills up (hitpa’el). Just before: כשאני פוגש אותם בשטח = when I meet them in the field.",
    "reg": "Formal. Street: <span class=\"he\">אני כל כך גאה</span> / <span class=\"he\">אני מתפוצץ מגאווה</span>.",
    "start": 102.3,
-   "end": 105.9
+   "end": 105.9,
+   "casual": "אני מתפוצץ מגאווה",
+   "casualTr": "aní mitpotséts mi-ga’avá"
   },
   {
    "he": "גם כשיש בינינו מחלוקות, ברגע האמת כולנו עומדים יחד",
-   "tr": "gam kshe-yesh beynéynu makhlokot, be-réga ha-emet kulánu omdim yákhad",
+   "tr": "gam kshe-yésh beynéynu makhlokót, be-réga ha-emét kulánu omdím yákhad",
    "en": "Even when we have disagreements, when it really counts we all stand together",
    "note": "בינינו = between us. ברגע האמת = “at the moment of truth”. כולנו = all of us.",
    "reg": "<span class=\"he\">מחלוקות</span> and <span class=\"he\">יחד</span> are formal. Street: <span class=\"he\">גם כשאנחנו רבים, כשזה באמת חשוב כולנו ביחד</span>.",
    "start": 122.7,
-   "end": 129.1
+   "end": 129.1,
+   "casual": "גם כשאנחנו רבים, כשזה באמת חשוב כולנו ביחד",
+   "casualTr": "gam kshe-anákhnu ravím, kshe-ze be-emét khashúv kulánu be-yákhad"
   },
   {
    "he": "ולכן, נמשיך להילחם ונבטיח את חירותנו",
-   "tr": "ve-lakhen, namshikh lehilakhem ve-navtíakh et kherutéynu",
+   "tr": "ve-lakhén, namshíkh lehilakhém ve-navtíakh et kherutéynu",
    "en": "And so, we will keep fighting and secure our freedom",
    "note": "נ־ = “we will”: נמשיך, נבטיח. נמשיך + infinitive = we’ll keep (doing): נמשיך לעבוד.",
    "reg": "<span class=\"he\">ולכן</span> = therefore → street <span class=\"he\">אז</span>. <span class=\"he\">חירות</span> = liberty (lofty) vs everyday <span class=\"he\">חופש</span>.",
    "start": 144.3,
-   "end": 148.6
+   "end": 148.6,
+   "casual": "אז נמשיך להילחם ונשמור על החופש שלנו",
+   "casualTr": "az namshíkh lehilakhém ve-nishmór al ha-khófesh shelánu"
   }
  ],
  "dictation": [
@@ -103,5 +113,48 @@ IVX.register({
    "line": 2
   }
  ],
- "chat": "Write a 2–3 sentence formal “statement” as if you’re addressing your building, your team or your future neighbors in Israel, using at least two of today’s formal lines — then add one line saying the same thing the way you’d say it to a friend."
+ "chat": "Write a 2–3 sentence formal “statement” as if you’re addressing your building, your team or your future neighbors in Israel, using at least two of today’s formal lines — then add one line saying the same thing the way you’d say it to a friend.",
+ "focus": [
+  1,
+  2,
+  3
+ ],
+ "quiz": [
+  {
+   "line": 1,
+   "type": "casual",
+   "q": "Which is the everyday way to say this?",
+   "o": [
+    "אבל השנה, לאף אחד כבר אין ספק",
+    "אבל השנה, אף אחד לא שם לב",
+    "אבל השנה, כולם עדיין בספק"
+   ],
+   "a": 0,
+   "f": "איש לא = nobody (literary) → אף אחד לא. מפקפק = doubts → אין ספק (there’s no doubt)."
+  },
+  {
+   "line": 2,
+   "type": "casual",
+   "q": "Same feeling, said to a friend:",
+   "o": [
+    "אני מתפוצץ מגאווה",
+    "אני ממש עייף מכל זה",
+    "אני קצת מתבייש"
+   ],
+   "a": 0,
+   "f": "מתמלא גאווה עצומה = filled with enormous pride. Casually: אני כל כך גאה, or אני מתפוצץ מגאווה (a woman: מתפוצצת)."
+  },
+  {
+   "line": 3,
+   "type": "meaning",
+   "q": "What is he saying about disagreements?",
+   "o": [
+    "Even when we disagree, when it really counts we stand together",
+    "We have too many disagreements to stand together",
+    "The disagreements are over, so now we can stand together"
+   ],
+   "a": 0,
+   "f": "גם כש… = even when…. ברגע האמת = “at the moment of truth”, when it really counts."
+  }
+ ]
 });
