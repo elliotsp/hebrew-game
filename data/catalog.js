@@ -237,6 +237,7 @@ window.IVX_CATALOG=[
  {"day":33,"type":"lesson","id":25,"video":"bwceW_66UPc","href":"lesson-25.html","title":"“Don’t take it personally”","clip":"תקציר פרק 5","mins":"1:19"},
  {"day":34,"type":"lesson","id":26,"video":"tAO2WLzcR0I","href":"lesson-26.html","title":"“We owe it to ourselves”","clip":"הולכים להרוג בן-אדם מת?","mins":"2:39"},
  {"day":35,"type":"lesson","id":27,"video":"TfAxh8eMD1o","href":"lesson-27.html","title":"“Enough crying”","clip":"ליסה מגיעה לפאודה","mins":"1:24"},
+ {"day":37,"type":"lesson","id":28,"video":"GVTd3ZqvXfo","href":"lesson-28.html","title":"“Nobody blames you”","clip":"תקציר פרק 3","mins":"1:20"},
  {"day":0,"type":"speech","track":"speech","id":101,"video":"14n0-TbZQnM","href":"speech-1.html","title":"“My brothers and sisters, citizens of Israel”","clip":"ברכת ראש הממשלה ליום העצמאות","credit":"Prime Minister’s Office","mins":"3:13"},
  {"day":0,"type":"speech","track":"speech","id":102,"video":"eNbtl_0Q6Rg","href":"speech-2.html","title":"“Citizens of Israel, we are at war”","clip":"הצהרה מהקריה, 7 באוקטובר 2023","credit":"Prime Minister’s Office","mins":"0:49"},
  {"day":0,"type":"speech","track":"speech","id":103,"video":"y2IgggCbx-o","href":"speech-3.html","title":"“Until total victory”","clip":"הצהרת ראש הממשלה, דצמבר 2023","credit":"Prime Minister’s Office","mins":"0:47"},
