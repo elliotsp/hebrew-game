@@ -193,7 +193,8 @@ IVX.register({
   (what was said, when, why the phrase matters) — language, not politics. Leave violent lines (killing, destroying) off the cards.
 * Candidates (Nov 18 check, all IsraeliPM, embeddable): `DSOTek88dt4` Rosh Hashana 5786 greeting (2:22, **iw subs**), `jeZJulgUuD8` statement from the Kirya (4:14),
   `UBHoTORv-KA` June 13 2025 statement (Iran operation, 6:52, asr only), `CRt-v0bLg7o` Nov 1 2023 “a hard war” (0:46, en subs + asr; mentions fallen soldiers),
-  `oRItZJSAuOo` statement to the press (2:57), `a4YNEK3lZMA` May 2021 (0:39, no captions — description text only). Used: `14n0-TbZQnM` (1), `eNbtl_0Q6Rg` (2), `y2IgggCbx-o` (3).
+  `oRItZJSAuOo` statement to the press (2:57), `a4YNEK3lZMA` May 2021 (0:39, no captions — description text only). Used: `14n0-TbZQnM` (1), `eNbtl_0Q6Rg` (2), `y2IgggCbx-o` (3), `DSOTek88dt4` (4, day 39, Nov 22: Rosh Hashana 5786 greeting — uploaded iw caption track via tools/cap.js, matches the description; Hebrew subs show on the video so `burnedIn:true`; yt-dlp bot-blocked, and the first cap.js run returned error 150 but a re-run a few seconds later played fine — retry once before skipping a clip as non-embeddable).
+  Next candidates: `oRItZJSAuOo` statement to the press (2:57), `jeZJulgUuD8` Kirya statement (4:14, long), `CRt-v0bLg7o` (0:46); unchecked from the Nov 22 channel list: `eNberf2OjHE` Sigd greeting (0:43), `zpTFdm7ehR8` Rosh Hashana toast at the cabinet meeting (2:01), `bKS-1mzdZSQ` Rosh Hashana toast with the General Staff (1:46) — `yt-dlp --flat-playlist --print "%(id)s|%(title)s|%(duration)s" https://www.youtube.com/@IsraeliPM/videos` still works.
 
 ## 9. Test, publish, announce
 ```bash
