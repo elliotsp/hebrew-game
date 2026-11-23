@@ -1,0 +1,56 @@
+/* Lesson 30 data (Fauda track) — schema in BUILD.md §4 */
+IVX.register({
+ "id": 30,
+ "track": "fauda",
+ "day": 40,
+ "burnedIn": true,
+ "title": "“Is your passport valid?”",
+ "heTitle": "כשהמשימה קוראת - דורון מתייצב. העונה החמישית של פאודה, עכשיו בסטרימינג.",
+ "credit": "Official Netflix clip",
+ "video": "OFmH2fyAuoE",
+ "duration": "0:27",
+ "blurb": "A 27-second official Netflix Israel clip from Fauda season 5: two men in an office, one says someone has to fly out right now, the other says he’s out. Phrases you’ll use: בתוקף · מה זאת אומרת · סתם היסטרי.",
+ "source": "<b>About the Hebrew.</b> Official Netflix Israel clip (“כשהמשימה קוראת - דורון מתייצב…”, oEmbed author Netflix Israel, @NetflixIsrael, Sept 2026, plays in the embedded player). YouTube has no caption track for it, so the cards are copied from the Hebrew subtitles burned into the video, read off frames captured while it played. <b>I couldn’t confirm by ear that the audio is Hebrew and matches the subtitles word for word</b> (it’s an Israeli office scene, so Hebrew is very likely, but Netflix sometimes subtitles a translation). Nobody checked the cards against the audio, a script, or a native speaker. The subtitles address “Gabi” and “Doron”, but I’m not naming who says each line. Segment times come from when each subtitle was on screen, so they’re approximate. Use ± if a line is clipped. Transliteration is approximate.",
+ "warnings": ["The clip ends with a heavier line (a friend about to do “something that will end his life”). It’s left off the cards."],
+ "lines": [
+  {"he": "תגיד, הדרכון שֶׁלְּךָ בתוקף?", "tr": "tagíd, ha-darkón shelkhá be-tókef?", "en": "Tell me, is your passport valid? (to a man)",
+   "alt": ["תגיד הדרכון שלך בתוקף", "הדרכון שלך בתוקף", "תגיד הדרכון שלך בתוקף?"],
+   "note": "בתוקף = valid, not expired (be-tókef): הוויזה בתוקף? / פג תוקף = expired. To a woman: תגידי, הדרכון שֶׁלָּךְ בתוקף?", "start": 0.2, "end": 3.6},
+  {"he": "אני רוצה לשלוח אותך לקרוז במלדיביים. למה?", "tr": "aní rotsé lishlóakh otkhá le-krúz ba-maldívim. láma?", "en": "I want to send you on a cruise to the Maldives. Why?! (sarcastic: why do you think? — to a man)",
+   "alt": ["אני רוצה לשלוח אותך לקרוז במלדיביים למה", "אני רוצה לשלוח אותך לקרוז במלדיבים"],
+   "note": "Sarcasm answering “למה?”: obviously not a vacation. לשלוח אותך = send you (to a man); to a woman: אותָךְ (otákh).", "start": 5.2, "end": 8.3},
+  {"he": "מישהו צריך לעצור את שני המשוגעים האלה.", "tr": "míshehu tsaríkh la’atsór et shnei ha-meshuga’ím ha-éle.", "en": "Someone has to stop these two lunatics.",
+   "alt": ["מישהו צריך לעצור את שני המשוגעים האלה", "מישהו צריך לעצור את שני המשוגעים האלו"],
+   "note": "מישהו צריך ל… = someone has to …: מישהו צריך להגיד לו. שני המשוגעים האלה = these two crazies.", "start": 7.8, "end": 10.0},
+  {"he": "אני לא שם, גבי.", "tr": "aní lo sham, gábi.", "en": "I’m not there, Gabi. (= I’m out of it, not in that world anymore)",
+   "alt": ["אני לא שם גבי", "אני לא שם"],
+   "note": "אני לא שם = I’m not there / I’m out (of a job, a mindset): אני כבר לא שם.", "start": 9.6, "end": 11.3},
+  {"he": "מה זאת אומרת, אתה לא שם? אז מי שם?", "tr": "ma zot oméret, atá lo sham? az mi sham?", "en": "What do you mean, you’re not there? So who is? (to a man)",
+   "alt": ["מה זאת אומרת אתה לא שם אז מי שם", "מה זאת אומרת אתה לא שם", "מה זאת אומרת את לא שם אז מי שם"],
+   "note": "מה זאת אומרת…? = what do you mean …? (pushing back): מה זאת אומרת אין מקום? To a woman: את לא שם.", "start": 10.9, "end": 12.8},
+  {"he": "גבי, אתה סתם היסטרי.", "tr": "gábi, atá stam histéri.", "en": "Gabi, you’re just being hysterical. (to a man)",
+   "alt": ["גבי אתה סתם היסטרי", "אתה סתם היסטרי"],
+   "note": "סתם = just / for no reason: סתם בדקתי, אתה סתם מגזים. To a woman: את סתם היסטרית (histérit).", "start": 16.3, "end": 18.4},
+  {"he": "דורון, אתה חייב לטוס עכשיו.", "tr": "dorón, atá khayáv latús akhsháv.", "en": "Doron, you have to fly now. (to a man)",
+   "alt": ["דורון אתה חייב לטוס עכשיו", "אתה חייב לטוס עכשיו"],
+   "note": "חייב + infinitive = have to / must: אני חייב לזוז. To a woman: את חייבת (khayévet). לטוס = to fly (on a plane).", "start": 18.0, "end": 20.2}
+ ],
+ "focus": [0, 4, 5],
+ "quiz": [
+  {"line": 0, "type": "meaning", "q": "What did you just hear?", "o": ["Tell me, is your passport valid?", "Tell me, where’s your passport?", "Tell me, did you pack your passport?"], "a": 0,
+   "f": "בתוקף = valid / not expired. He’s checking you can fly, not asking where it is (איפה הדרכון שלך)."},
+  {"line": 4, "type": "vibe", "q": "What’s the tone of this line?", "o": ["Thrown and pushing back: you can’t be out, there’s no one else", "Relieved: fine, someone else will go", "Joking around, teasing him"], "a": 0,
+   "f": "מה זאת אומרת, אתה לא שם? = what do you mean you’re not there?! and אז מי שם? = so who is? He refuses to accept the answer."},
+  {"line": 5, "type": "implies", "q": "What is he really saying?", "o": ["Calm down, you’re overreacting for nothing", "You’re right to be worried", "You’re being really funny right now"], "a": 0,
+   "f": "סתם = for no reason. אתה סתם היסטרי = you’re panicking over nothing, i.e. relax."}
+ ],
+ "say": [
+  {"sit": "You just found cheap flights from Tel Aviv to Athens for Thursday. Ask your friend (a woman): tell me, is your passport valid?", "he": "תגידי, הדרכון שֶׁלָּךְ בתוקף?",
+   "alt": ["תגידי הדרכון שלך בתוקף", "הדרכון שלך בתוקף", "תגידי יש לך דרכון בתוקף"], "en": "Tell me, is your passport valid? (to a woman; to a man: תגיד, הדרכון שֶׁלְּךָ בתוקף?)", "street": "יש לך דרכון בתוקף?", "line": 0},
+  {"sit": "Your roommate (a man) organized Friday’s party at your place, and now he says he’s not coming. Push back: what do you mean you’re not coming? So who is?", "he": "מה זאת אומרת, אתה לא בא? אז מי בא?",
+   "alt": ["מה זאת אומרת אתה לא בא אז מי בא", "מה זאת אומרת אתה לא בא", "מה זאת אומרת לא בא"], "en": "What do you mean you’re not coming? So who is? (to a man; to a woman: את לא באה?)", "street": "מה זאת אומרת לא בא?!", "line": 4},
+  {"sit": "Your friend (a man) is panicking that his landlord will kick him out because he paid rent one day late. Tell him: bro, you’re just being hysterical:", "he": "אחי, אתה סתם היסטרי.",
+   "alt": ["אחי אתה סתם היסטרי", "אתה סתם היסטרי", "תירגע אתה סתם היסטרי"], "en": "Bro, you’re just being hysterical. (to a man; to a woman: את סתם היסטרית)", "street": "תירגע, אתה סתם היסטרי.", "line": 5}
+ ],
+ "chat": "Text a friend (a man) about a last-minute trip: ask תגיד, הדרכון שלך בתוקף?, and when he hesitates, answer מה זאת אומרת…? and tell him he’s just being hysterical (אתה סתם היסטרי)."
+});

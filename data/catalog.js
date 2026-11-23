@@ -240,6 +240,7 @@ window.IVX_CATALOG=[
  {"day":37,"type":"lesson","id":28,"video":"GVTd3ZqvXfo","href":"lesson-28.html","title":"“Nobody blames you”","clip":"תקציר פרק 3","mins":"1:20"},
  {"day":38,"type":"lesson","id":29,"video":"JoEV-aQyA40","href":"lesson-29.html","title":"“Let’s do it quick and get out”","clip":"הם מעולם לא היו קרובים כל כך","mins":"0:35"},
  {"day":39,"type":"speech","track":"speech","id":104,"video":"DSOTek88dt4","href":"speech-4.html","title":"“I’d like to wish you all a good year”","clip":"ברכה לראש השנה תשפ״ו","credit":"Prime Minister’s Office","mins":"2:22"},
+ {"day":40,"type":"lesson","id":30,"video":"OFmH2fyAuoE","href":"lesson-30.html","title":"“Is your passport valid?”","clip":"כשהמשימה קוראת - דורון מתייצב","mins":"0:27"},
  {"day":0,"type":"speech","track":"speech","id":101,"video":"14n0-TbZQnM","href":"speech-1.html","title":"“My brothers and sisters, citizens of Israel”","clip":"ברכת ראש הממשלה ליום העצמאות","credit":"Prime Minister’s Office","mins":"3:13"},
  {"day":0,"type":"speech","track":"speech","id":102,"video":"eNbtl_0Q6Rg","href":"speech-2.html","title":"“Citizens of Israel, we are at war”","clip":"הצהרה מהקריה, 7 באוקטובר 2023","credit":"Prime Minister’s Office","mins":"0:49"},
  {"day":0,"type":"speech","track":"speech","id":103,"video":"y2IgggCbx-o","href":"speech-3.html","title":"“Until total victory”","clip":"הצהרת ראש הממשלה, דצמבר 2023","credit":"Prime Minister’s Office","mins":"0:47"},
