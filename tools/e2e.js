@@ -79,7 +79,7 @@ let rv=0;for(let g=0;g<12;g++){const done=await p.$('.scr .done');if(done)break;
 log('REVIEW items',rv,'done:',!!(await p.$('.scr .done')));await p.close();
 
 /* rewatch weeks + old URLs */
-for(const w of [1,4]){p=await np('rewatch.html?week='+w);await pri(p).tap();await p.waitForTimeout(500);await chk(p,'rewatch '+w);if(w===4)await shot(p,'09-rewatch');
+for(const w of [1,4,5]){p=await np('rewatch.html?week='+w);await pri(p).tap();await p.waitForTimeout(500);await chk(p,'rewatch '+w);if(w===4)await shot(p,'09-rewatch');
   for(let g=0;g<6;g++){await p.locator('.rates .opt').first().tap();await p.waitForTimeout(250)}log('REWATCH',w,'done:',!!(await p.$('.scr .done')));await p.close()}
 for(const u of ['lesson-1.html','speech-1.html','rewatch.html?week=2','review.html','index.html']){p=await np(u);const ok=await p.evaluate(()=>!!document.querySelector('.scr, .hm'));if(!ok)errs.push('old URL '+u+' blank');await p.close()}
 

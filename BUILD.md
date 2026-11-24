@@ -52,7 +52,7 @@ Decide in this order:
    (Day 36 = Thu Nov 19 2026 is already taken by Song 1, published with the redesign.)
 2. **Fauda rewatch due?** Count `type:"lesson"` entries after the last `type:"rewatch"` entry. **6 or more → rewatch day**: append
    `{day, type:"rewatch", week: W, href:"rewatch.html?week=W", title:"Rewatch week W", lessons:[those lesson ids]}` with W = last week + 1.
-   (Week 4 = lessons 19–24, day 32. Lessons 25–30 are done (6), so the next non-catalog day is rewatch week 5 = lessons 25–30.)
+   (Week 4 = lessons 19–24, day 32. Week 5 = lessons 25–30, day 41 (Nov 24). Next rewatch (week 6) after lessons 31–36.)
 3. **Sunday → Netanyahu speech** (Israel's week starts Sunday; news day). Build `speech-K` (K = highest speech number + 1) per §8.
    If no accurate, embeddable, official speech with a Hebrew text source can be built today, fall through to step 5 and say so.
 4. **Wednesday → Omer Adam song.** Build `song-K` per §7. Same fall-through rule.
