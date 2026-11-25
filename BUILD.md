@@ -180,9 +180,10 @@ IVX.register({
   singer sings a line unless the video makes it unambiguous.
 * Candidate pool (official, embeddable per Nov 18 check; captions: **subs** = uploaded iw track, **asr** = auto only, **none**):
   `dFqAtitDNvs` צמוד צמוד (subs — used, Song 1), `nMQw29nfzpg` תל אביב (asr — used, Song 2), `7PE611GuMAk` בן 32 (asr, 2026),
-  `Ld4gUCnsZ4I` משפחה וכבוד (asr), `E39srf6DWU8` וואי לי (asr), `fIPDoLUk5JQ` הופה (asr), `Hq1XJbrXvg4` מאמי זה נגמר (asr),
+  `Ld4gUCnsZ4I` משפחה וכבוד (asr), `E39srf6DWU8` וואי לי (asr — used, Song 3, day 42), `fIPDoLUk5JQ` הופה (asr), `Hq1XJbrXvg4` מאמי זה נגמר (asr),
   `WLMmX17D2uw` שני משוגעים (none, 69M views), `31DIsGbFVgY` אוהבת אותי אמיתי (none), `XE3hTnD5Kwo` חברות שלך (none), `AwjhMPbeD0Y` חצי דפוק (none),
   `8krJL1tuRVI` יעשו לנו כבוד (none), `TPs0Fbw1-WY` טקילה (none), `w6vEE4NxlYw` פרצופים (none), `gpHrr-he4vA` בן 30 (none).
+  Nov 25 (Song 3): `E39srf6DWU8` וואי לי — oEmbed author `@OmerAdamOfficial`, yt-dlp -j `playable_in_embed` True, language iw, no uploaded subs (auto `iw-orig` only; yt-dlp `--write-auto-subs --sub-langs iw-orig` worked, plain `iw` hit a 429). Lyrics from Tab4U + mako’s 2012 article (agree; daletra/songlyrics/hebrewerry match); asr hears חבר for the lyric’s חברה. Video opens with a ~40 s spoken skit (0:15–0:57). Checked, not used: `Hq1XJbrXvg4` מאמי זה נגמר (asr decent, clean everyday lines: ואמרת לי מאמי זה נגמר / זה היה ממש קשה / לא רוצה להתעורר ולחזור למציאות — good next pick), `fIPDoLUk5JQ` הופה (asr messy; lines: הופה איזו מסיבה / כולם יפים, אין אחד שלא רוקד; one ‘body dripping sweat’ line to skip), `7PE611GuMAk` בן 32 (asr messy, heavier themes). Next: `Hq1XJbrXvg4` or `fIPDoLUk5JQ`.
   Skip `fXFLjct5agw` קאקדילה (asr is garbage, mostly vocalizing) and `XLVqaDqMFU4` (crude title). Full list: `yt-dlp --flat-playlist --print "%(id)s|%(title)s" https://www.youtube.com/@OmerAdamOfficial/videos`.
 
 ## 8. Netanyahu speeches
