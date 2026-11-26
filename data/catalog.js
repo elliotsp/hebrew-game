@@ -247,5 +247,6 @@ window.IVX_CATALOG=[
  {"day":0,"type":"speech","track":"speech","id":103,"video":"y2IgggCbx-o","href":"speech-3.html","title":"“Until total victory”","clip":"הצהרת ראש הממשלה, דצמבר 2023","credit":"Prime Minister’s Office","mins":"0:47"},
  {"day":0,"type":"song","track":"song","id":202,"video":"nMQw29nfzpg","href":"song-2.html","title":"“A real man’s man”","clip":"תל אביב","credit":"Omer Adam (official)","mins":"3:41"},
  {"day":36,"type":"song","track":"song","id":201,"video":"dFqAtitDNvs","href":"song-1.html","title":"“It’s gonna be a blast”","clip":"צמוד צמוד","credit":"Omer Adam (official)","mins":"2:43"},
- {"day":42,"type":"song","track":"song","id":203,"video":"E39srf6DWU8","href":"song-3.html","title":"“This mess is on me”","clip":"וואי לי","credit":"Omer Adam (official)","mins":"4:07"}
+ {"day":42,"type":"song","track":"song","id":203,"video":"E39srf6DWU8","href":"song-3.html","title":"“This mess is on me”","clip":"וואי לי","credit":"Omer Adam (official)","mins":"4:07"},
+ {"day":43,"type":"lesson","id":31,"video":"M4zkV0f45Hs","href":"lesson-31.html","title":"“We’ll take the risk”","clip":"פעולה אחת. אפס מקום לטעויות.","mins":"0:48"}
 ];
