@@ -249,5 +249,6 @@ window.IVX_CATALOG=[
  {"day":36,"type":"song","track":"song","id":201,"video":"dFqAtitDNvs","href":"song-1.html","title":"“It’s gonna be a blast”","clip":"צמוד צמוד","credit":"Omer Adam (official)","mins":"2:43"},
  {"day":42,"type":"song","track":"song","id":203,"video":"E39srf6DWU8","href":"song-3.html","title":"“This mess is on me”","clip":"וואי לי","credit":"Omer Adam (official)","mins":"4:07"},
  {"day":43,"type":"lesson","id":31,"video":"M4zkV0f45Hs","href":"lesson-31.html","title":"“We’ll take the risk”","clip":"פעולה אחת. אפס מקום לטעויות.","mins":"0:48"},
- {"day":44,"type":"lesson","id":32,"video":"Uw640jjEQjY","href":"lesson-32.html","title":"“What are you doing here, bro?”","clip":"הרגע שבו הכול השתנה.","mins":"0:35"}
+ {"day":44,"type":"lesson","id":32,"video":"Uw640jjEQjY","href":"lesson-32.html","title":"“What are you doing here, bro?”","clip":"הרגע שבו הכול השתנה.","mins":"0:35"},
+ {"day":45,"type":"lesson","id":33,"video":"qCmD73LLqIo","href":"lesson-33.html","title":"“The unit is working on it”","clip":"עם מי יש להם עסק?","mins":"0:35"}
 ];
